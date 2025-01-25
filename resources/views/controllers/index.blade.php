@@ -53,7 +53,7 @@
             </a>
         </div>
         <table class="min-w-full rounded-lg shadow overflow-hidden" style="box-shadow: 0 1px 3px 0 rgb(175 100 253), 0 1px 2px -1px rgb(208 82 244);">
-            <thead class="bg-gradient-to-r from-[#D350F2] to-[#AB66FF]">
+        <thead class="table-blue-degrade">
                     <tr>
                         <th class="px-4 py-2 text-left text-white font-medium">ID</th>
                         <th class="px-4 py-2 text-left text-white font-medium">Nome</th>

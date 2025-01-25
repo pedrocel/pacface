@@ -50,6 +50,21 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(fu
     Route::delete('users/{user}', [UserController::class, 'destroy'])->name('admin.users.destroy');
 });
 
+Route::get('/controllers', [ControllerController::class, 'index'])->name('controllers.index');
+Route::get('/controllers/create', [ControllerController::class, 'create'])->name('controllers.create');
+Route::post('/controllers', [ControllerController::class, 'store'])->name('controllers.store');
+Route::get('/controllers/{controller}/edit', [ControllerController::class, 'edit'])->name('controllers.edit');
+Route::put('/controllers/{controller}', [ControllerController::class, 'updateController'])->name('controllers.update');
+Route::delete('/controllers/{controllers}', [ControllerController::class, 'destroyController'])->name('controllers.destroy');
+
+Route::get('/groups', [GroupController::class, 'index'])->name('groups');
+Route::get('/groups/create', [GroupController::class, 'create'])->name('groups.create');
+Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
+Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
+Route::post('/groups/{group}', [GroupController::class, 'updates'])->name('groups.update');
+Route::delete('/groups/{group}', [GroupController::class, 'destroys'])->name('groups.destroy');
+
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

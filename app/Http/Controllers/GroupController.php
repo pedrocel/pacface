@@ -7,8 +7,6 @@ use App\Models\Group;
 use App\Models\GroupAcess;
 use App\Models\GroupAcessGroupControllator;
 use App\Models\GroupControlator;
-use App\Services\PacFace\ControlId\GroupService;
-use App\Services\PacFace\ControlId\Login;
 use Illuminate\Http\Request;
 
 class GroupController extends Controller
@@ -72,10 +70,10 @@ class GroupController extends Controller
             }
 
             // Exibe uma mensagem de sucesso na view
-            return redirect()->route('groups.index')->with('success', 'Group created successfully!');
+            return redirect()->route('groups')->with('success', 'Group created successfully!');
         } catch (\Exception $e) {
             // Exibe uma mensagem de erro na view
-            return redirect()->route('groups.index')->with('error', 'Group Error created! - '.$e->getMessage());
+            return redirect()->route('groups')->with('error', 'Group Error created! - '.$e->getMessage());
         }
     }
 
@@ -106,7 +104,7 @@ class GroupController extends Controller
     {
         $group->delete();
 
-        return redirect()->route('groups.index')->with('success', 'Grupo excluido com sucesso!');
+        return redirect()->route('groups')->with('success', 'Grupo excluido com sucesso!');
     }
 
     public function viculeGroupUser(Request $request)
@@ -128,10 +126,10 @@ class GroupController extends Controller
             }
 
             // Exibe uma mensagem de sucesso na view
-            return redirect()->route('groups.index')->with('success', 'Group created successfully!');
+            return redirect()->route('groups')->with('success', 'Group created successfully!');
         } catch (\Exception $e) {
             // Exibe uma mensagem de erro na view
-            return redirect()->route('groups.index')->with('error', 'Group Error created! - '.$e->getMessage());
+            return redirect()->route('groups')->with('error', 'Group Error created! - '.$e->getMessage());
         }
     }
 }

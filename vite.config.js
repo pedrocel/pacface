@@ -8,4 +8,11 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+    server: {
+        host: '192.168.1.11', // IP onde o Vite será servido
+        port: 5173,           // Porta do Vite
+        watch: {
+            usePolling: true, // Garante que alterações sejam detectadas
+        },
+    },
 });

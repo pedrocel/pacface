@@ -75,4 +75,36 @@ class User extends Authenticatable
             ->where('status', 1)->where('perfil_id', 3)
             ->where('is_atual', 1);
     }
+
+    public function addresses()
+    {
+        return $this->belongsToMany(Address::class, 'user_address', 'id_user', 'id_address')
+                    ->withPivot('in_use', 'status');
+    }
+
+    public function phones()
+    {
+        return $this->belongsToMany(Phone::class, 'user_phone', 'id_user', 'id_phone')
+                    ->withPivot('status');
+    }
+
+      /**
+     * Get the identifier that will be stored in the JWT.
+     *
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    /**
+     * Return a key-value array, containing any custom claims to be added to the JWT.
+     *
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }

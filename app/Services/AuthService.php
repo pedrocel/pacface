@@ -4,10 +4,12 @@ namespace App\Services;
 
 use App\Models\Address;
 use App\Models\Institution;
+use App\Models\PerfilModel;
 use App\Models\Phone;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\UserAddress;
+use App\Models\UserPerfilModel;
 use App\Models\UserPhone;
 use App\Models\UserProfile;
 use Illuminate\Support\Facades\Hash;
@@ -101,14 +103,14 @@ class AuthService
     {
         if (!$profileId) return null;
 
-        UserProfile::create([
+        UserPerfilModel::create([
             'id_user' => $userId,
             'id_profile' => $profileId,
             'in_use' => 1,
             'status' => 1,
         ]);
 
-        return Profile::find($profileId);
+        return PerfilModel::find($profileId);
     }
 
     /**
