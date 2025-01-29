@@ -4,19 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Organization;
 use App\Models\OrganizationModel;
+use App\Models\PerfilModel;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
+    public function show($id){
+        $profiles = PerfilModel::all();
+        $organization = OrganizationModel::where('id', $id)->first();
+        return view('admin.organizations.show', compact('organization', 'profiles'));
+    }
+    
     public function index()
     {
         $organizacoes = OrganizationModel::all();
-        return view('organizations.index', compact('organizacoes'));
+        return view('admin.organizations.index', compact('organizacoes'));
     }
 
     public function create()
     {
-        return view('organizations.create');
+        return view('admin.organizations.create');
     }
     
     public function store(Request $request)
@@ -27,13 +34,12 @@ class OrganizationController extends Controller
             'status' => 1,
         ]);
     
-        return redirect()->route('organizacoes.index')->with('success', 'Organização criada com sucesso!');
+        return redirect()->route('admin.organizacoes.index')->with('success', 'Organização criada com sucesso!');
     }
-    
 
     public function edit(OrganizationModel $organizacao)
     {
-        return view('organizations.edit', compact('organizacao'));
+        return view('admin. organizations.edit', compact('organizacao'));
     }
 
     public function update(Request $request, OrganizationModel $organizacao)

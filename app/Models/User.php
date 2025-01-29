@@ -14,6 +14,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'facial_image_base64',
     ];
 
     protected $hidden = [
@@ -88,7 +89,25 @@ class User extends Authenticatable
                     ->withPivot('status');
     }
 
-      /**
+    /**
+     * Relacionamento com a tabela intermediária user_organizations
+     */
+    public function organizations()
+    {
+        return $this->belongsToMany(OrganizationModel::class, 'user_organizations', 'user_id', 'organization_id')
+                    ->withTimestamps();
+    }
+
+    public function responsibles()
+    {
+        return $this->hasMany(StudentResponsible::class, 'id_student');
+    }
+    
+    public function students()
+    {
+        return $this->hasMany(StudentResponsible::class, 'id_responsible');
+    }
+    /**
      * Get the identifier that will be stored in the JWT.
      *
      * @return mixed

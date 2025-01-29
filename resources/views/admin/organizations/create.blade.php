@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="container mx-auto p-6">
+    <div class="container mx-4">
         <form action="{{ route('admin.organizacoes.store') }}" method="POST" class="bg-white dark:bg-gray-800 p-6 shadow rounded-lg">
             @csrf
 

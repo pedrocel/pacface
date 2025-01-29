@@ -27,6 +27,6 @@ class OrganizationModel extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'user_organizations')->withTimestamps();
+        return $this->belongsToMany(User::class, 'user_organizations', 'organization_id', 'user_id')->withTimestamps();
     }
 }

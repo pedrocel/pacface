@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('perfis', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->longText('facial_image_base64')->nullable();
             $table->integer('status')->nullable();
-            $table->timestamps();
         });
     }
 
@@ -24,6 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('perfis');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('facial_image_base64');
+            $table->dropColumn('status');
+        });
     }
 };

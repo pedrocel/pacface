@@ -6,6 +6,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- SweetAlert -->
+    <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
@@ -106,7 +107,32 @@
         {{ $slot }}
     </div>
 </main>
+
     </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tabs = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                tabs.forEach(t => t.classList.remove('border-blue-500', 'text-blue-500'));
+                tab.classList.add('border-blue-500', 'text-blue-500');
+
+                tabContents.forEach(content => content.classList.add('hidden'));
+                document.querySelector(tab.getAttribute('href')).classList.remove('hidden');
+            });
+        });
+
+        // Ativar a primeira aba por padrão
+        if (tabs.length > 0) {
+            tabs[0].classList.add('border-blue-500', 'text-blue-500');
+            tabContents[0].classList.remove('hidden');
+        }
+    });
+</script>
     <script>
     // Alternar Sidebar
     const toggleSidebar = document.getElementById('toggleSidebar');
@@ -181,6 +207,7 @@
             themeToggle2.addEventListener('click', toggleTheme);
         });
     </script>
+    
     <script>
         // SweetAlert Mensagens
         const successMessage = "{{ session('success') ?? '' }}";

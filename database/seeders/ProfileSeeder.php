@@ -27,6 +27,6 @@ class ProfileSeeder extends Seeder
         ];
 
         // Inserir os perfis na tabela profiles
-        DB::table('profiles')->insert($profiles);
+        DB::table('perfis')->insert($profiles);
     }
 }

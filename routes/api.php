@@ -8,6 +8,7 @@ use App\Http\Controllers\FacialImageController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentTypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FaceEventController;
 
 Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login'])->name('login'); // Nome da rota adicionado aqui
@@ -58,3 +59,5 @@ Route::group(['middleware' => ['auth:jwt']], function () {
         Route::get('/user/{id}', [UserController::class, 'show']);
     });
 });
+
+Route::post('/webhook/face-event', [FaceEventController::class, 'handleWebhook']);

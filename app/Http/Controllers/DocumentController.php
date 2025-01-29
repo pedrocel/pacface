@@ -5,26 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Document; // Certifique-se de importar o modelo
 use App\Models\DocumentType;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
-    public function store(Request $request, $id_type)
+    public function store(Request $request, $id_type, User $user)
     {
-        $filePath = $request->file('file')->store('documents');
 
+        // Armazenar o arquivo
+        $filePath = $request->file('file')->store('/documents');
+
+        // Criar o documento no banco de dados
         $document = Document::create([
             'document_type_id' => $id_type,
-            'student_id' => Auth::user()->id,
+            'student_id' => $user->id, // Certifique-se de usar o ID do usuário autenticado
             'file_path' => $filePath,
-            'status' => 1, // 1 enviado aguardando validação 2 aprovado 3 reprovado
+            'status' => 1, // 1 enviado aguardando validação, 2 aprovado, 3 reprovado
         ]);
 
-        return response()->json([
-            'message' => 'Documento enviado com sucesso',
-            'document' => $document,
-        ], 201);
+        return redirect()->back()->with('success', 'Documento enviado com sucesso');
     }
 
     public function listDocuments()
@@ -65,5 +66,16 @@ class DocumentController extends Controller
         return response()->json([
             'documents' => $allDocuments
         ]);
+    }
+
+    public function download($id)
+    {
+        $document = Document::findOrFail($id);
+
+        if (Storage::exists($document->file_path)) {
+            return Storage::download($document->file_path);
+        }
+
+        return redirect()->back()->with('error', 'Arquivo não encontrado.');
     }
 }
