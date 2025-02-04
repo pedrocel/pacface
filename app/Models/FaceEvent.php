@@ -3,24 +3,30 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class FaceEvent extends Model
 {
+    use HasFactory, HasUuids;
+    protected $keyType = 'string';
+    public $incrementing = false;
+
     protected $fillable = [
-        'name', 'image', 'event', 'timestamp', 'user_id', 'external_id', 'organization_id', 'group_id'
+        'id',
+        'name',
+        'image',
+        'event',
+        'timestamp',
+        'user_id',
+        'external_id',
+        'organization_id',
+        'group_id',
+        'data',
     ];
 
-    public static function createFaceEvent($name, $image, $event, $timestamp, $user_id, $external_id, $organization_id, $group_id)
-    {
-        return self::create([
-            'name' => $name,
-            'image' => $image,
-            'event' => $event,
-            'timestamp' => $timestamp,
-            'user_id' => $user_id,
-            'external_id' => $external_id,
-            'organization_id' => $organization_id,
-            'group_id' => $group_id
-        ]);
-    }
+    protected $casts = [
+        'data' => 'array',
+    ];
+
 }

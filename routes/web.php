@@ -11,6 +11,7 @@ use App\Http\Controllers\PerfilController;
 use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\FaceEventController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -81,4 +82,7 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 require __DIR__.'/auth.php';
+Route::post('/webhook/face-event', action: [FaceEventController::class, 'handleWebhook']);
