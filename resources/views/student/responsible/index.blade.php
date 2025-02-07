@@ -33,7 +33,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6 bg-white rounded-tl-3xl relative">
       <header class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-blue-500">Bem-vindo!</h1>
+        <h1 class="text-2xl font-bold text-blue-500">Responsáveis</h1>
         <div class="flex items-center gap-4">
           <!-- Notification Icon -->
           <div class="relative">
@@ -71,14 +71,95 @@
           </div>
         </div>
       </header>
-
-      <div id="createResponsibleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+      @if(session('success'))
+            <div class="bg-green-100 text-green-800 p-4 rounded mb-4">
+                {{ session('success') }}
+            </div>
+        @endif
+      <!-- Modal -->
+<div id="createResponsibleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-xl font-semibold mb-4">Cadastrar Responsável</h2>
-        <p>Formulário aqui...</p>
-        <button onclick="closeModal()" class="mt-4 bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
+
+        <form id="responsibleForm" action="{{ route('student.responsible.store') }}" method="POST">
+            @csrf
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+                <input type="text" name="name" id="name" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" name="email" id="email" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                <input type="password" name="password" id="password" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="responsible_type_id" class="block text-sm font-medium text-gray-700">Tipo de Responsável</label>
+                <select name="responsible_type_id" id="responsible_type_id" required class="mt-1 p-2 border rounded-lg w-full">
+                    <option value="" disabled selected>Selecione um tipo</option>
+                    @foreach (\App\Models\ResponsibleType::all() as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar</button>
+                <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
+            </div>
+        </form>
     </div>
 </div>
+<!-- Modal de Edição -->
+<div id="editResponsibleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-xl font-semibold mb-4">Editar Responsável</h2>
+
+        <form id="editResponsibleForm" action="" method="POST">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" name="responsible_id" id="edit_responsible_id">
+
+            <div class="mb-4">
+                <label for="edit_name" class="block text-sm font-medium text-gray-700">Nome</label>
+                <input type="text" name="name" id="edit_name" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="edit_email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" name="email" id="edit_email" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="edit_password" class="block text-sm font-medium text-gray-700">Nova Senha (opcional)</label>
+                <input type="password" name="password" id="edit_password" class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="edit_responsible_type_id" class="block text-sm font-medium text-gray-700">Tipo de Responsável</label>
+                <select name="responsible_type_id" id="edit_responsible_type_id" required class="mt-1 p-2 border rounded-lg w-full">
+                    @foreach (\App\Models\ResponsibleType::all() as $type)
+                        <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+            <div class="flex justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Salvar</button>
+                <button type="button" onclick="closeEditModal()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
 
 <!-- Lista de Responsáveis -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -100,7 +181,9 @@
             <h3 class="text-lg font-semibold text-gray-900">{{ $responsavel->responsible->name }}</h3>
             <p class="text-gray-700 mb-4">{{ $responsavel->responsible->email }}</p>
             <div class="flex space-x-3">
-                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Editar</button>
+            <button onclick="openEditModal('{{ $responsavel->responsible->id }}', '{{ $responsavel->responsible->name }}', '{{ $responsavel->responsible->email }}', '{{ $responsavel->responsible_type_id }}')" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">
+                Editar
+            </button>
                 <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg">Excluir</button>
             </div>
         </div>
@@ -131,6 +214,21 @@
 
     function closeModal() {
         document.getElementById('createResponsibleModal').classList.add('hidden');
+    }
+</script>
+<script>
+    function openEditModal(id, name, email, responsibleTypeId) {
+        document.getElementById('edit_responsible_id').value = id;
+        document.getElementById('edit_name').value = name;
+        document.getElementById('edit_email').value = email;
+        document.getElementById('edit_responsible_type_id').value = responsibleTypeId;
+
+        document.getElementById('editResponsibleForm').action = `/aluno/responsavel/${id}`;
+        document.getElementById('editResponsibleModal').classList.remove('hidden');
+    }
+
+    function closeEditModal() {
+        document.getElementById('editResponsibleModal').classList.add('hidden');
     }
 </script>
 </body>

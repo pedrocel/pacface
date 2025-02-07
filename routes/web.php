@@ -73,7 +73,8 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('aluno')->group(fu
     Route::get('/perfil/detalhes', [StudentProfileController::class, 'index'])->name('student.profile.index');
 
     Route::get('/responsaveis', [ResponsibleController::class, 'index'])->name('student.responsible.index');
-    Route::get('/responsavel/criar', [ResponsibleController::class, 'store'])->name('student.responsible.store');
+    Route::post('/responsavel/criar', [ResponsibleController::class, 'store'])->name('student.responsible.store');
+    Route::put('/responsavel/{id}', [ResponsibleController::class, 'update'])->name('student.responsible.update');
 
 
 });

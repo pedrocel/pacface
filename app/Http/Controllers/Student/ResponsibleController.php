@@ -48,4 +48,26 @@ class ResponsibleController extends Controller
         return redirect()->route('student.responsible.index')->with('success', 'Responsável adicionado com sucesso!');
     }
 
+    public function update(Request $request, $id)
+    {
+        $responsible = User::findOrFail($id);
+
+        $responsible->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password ? Hash::make($request->password) : $responsible->password,
+        ]);
+
+        // Atualiza o tipo de responsável
+        $studentResponsible = StudentResponsible::where('id_responsible', $id)->first();
+        if ($studentResponsible) {
+            $studentResponsible->update([
+                'responsible_type_id' => $request->responsible_type_id,
+            ]);
+        }
+
+        return redirect()->route('student.responsible.index')->with('success', 'Responsável atualizado com sucesso!');
+}
+
+
 }
