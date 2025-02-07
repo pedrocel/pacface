@@ -4,14 +4,17 @@ use App\Http\Controllers\ControllerController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Student\ResponsibleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Student\DashboardController as StudentDashboardController;
 use App\Http\Controllers\PerfilController;
 use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
+use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -59,6 +62,19 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(fu
 
     Route::post('/documents/{id_type}/{user}', [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
+
+});
+
+Route::middleware(['auth', RedirectByProfile::class])->prefix('aluno')->group(function () {
+    Route::get('/dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+
+    Route::post('/perfil/update-facial-image', [StudentProfileController::class, 'updateImage'])->name('student.updateImage');
+
+    Route::get('/perfil/detalhes', [StudentProfileController::class, 'index'])->name('student.profile.index');
+
+    Route::get('/responsaveis', [ResponsibleController::class, 'index'])->name('student.responsible.index');
+    Route::get('/responsavel/criar', [ResponsibleController::class, 'store'])->name('student.responsible.store');
+
 
 });
 

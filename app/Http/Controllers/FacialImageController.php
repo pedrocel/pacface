@@ -34,7 +34,7 @@ class FacialImageController extends Controller
             'message' => 'Imagem facial e status atualizados com sucesso.',
             'user' => $user
         ], 200);
-    }i
+    }
 
     public function updateFacialImageAdm(Request $request, $userId)
     {
