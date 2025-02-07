@@ -4,6 +4,8 @@ use App\Http\Controllers\ControllerController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Responsible\DashboardController;
+use App\Http\Controllers\Responsible\StudentsController;
 use App\Http\Controllers\Student\ResponsibleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -14,6 +16,7 @@ use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
+use App\Http\Controllers\Responsible\ProfileController as ResponsibleProfileController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 
 Route::get('/', function () {
@@ -75,8 +78,18 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('aluno')->group(fu
     Route::get('/responsaveis', [ResponsibleController::class, 'index'])->name('student.responsible.index');
     Route::post('/responsavel/criar', [ResponsibleController::class, 'store'])->name('student.responsible.store');
     Route::put('/responsavel/{id}', [ResponsibleController::class, 'update'])->name('student.responsible.update');
+});
 
+Route::middleware(['auth', RedirectByProfile::class])->prefix('responsavel')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('responsible.dashboard');
 
+    Route::post('/perfil/update-facial-image', [ResponsibleProfileController::class, 'updateImage'])->name('responsible.updateImage');
+
+    Route::get('/perfil/detalhes', [ResponsibleProfileController::class, 'index'])->name('responsible.profile.index');
+
+    Route::get('/alunos', [StudentsController::class, 'index'])->name('responsible.students.index');
+    Route::post('/aluno/criar', [StudentsController::class, 'store'])->name('responsible.students.store');
+    Route::put('/responsavel/{id}', [StudentsController::class, 'update'])->name('responsible.students.update');
 });
 
 Route::get('/controllers', [ControllerController::class, 'index'])->name('controllers.index');

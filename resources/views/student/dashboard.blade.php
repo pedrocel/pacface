@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Gradient Sidebar Layout</title>
+  <title>PacFace - Aluno</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Gradient background utility */
@@ -45,9 +45,6 @@
             <div id="notificationModal" class="absolute right-0 mt-2 w-64 bg-white shadow-xl rounded-xl p-4 hidden">
               <h2 class="text-lg font-semibold mb-2">Notificações</h2>
               <ul>
-                <li class="py-1 border-b">Nova venda registrada</li>
-                <li class="py-1 border-b">Atualização de inventário</li>
-                <li class="py-1">Mensagem de cliente</li>
               </ul>
             </div>
           </div>
@@ -68,6 +65,12 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
+        <form method="POST" action="/logout">
+              @csrf
+              <button type="submit" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+                  Sair
+              </button>
+          </form>
               </ul>
             </div>
           </div>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PacFace - Student</title>
+  <title>PacFace - Responsável</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
@@ -19,13 +19,13 @@
     <aside class="w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
       <h1 class="text-xl font-bold text-center mb-6">Menu</h1>
       <nav class="flex flex-col gap-4">
-        <a href="{{ route('student.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium  hover:bg-blue-200 transition">
+        <a href="{{ route('responsible.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
           Dashboard
         </a>
-        <a href="{{ route('student.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
+        <a href="{{ route('responsible.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Meu Perfil
         </a>
-        <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+        <a href="{{ route('responsible.students.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Alunos
         </a>
       </nav>

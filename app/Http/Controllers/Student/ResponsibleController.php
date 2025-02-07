@@ -23,6 +23,11 @@ class ResponsibleController extends Controller
 
     public function store(Request $request)
     {
+        $userId = Auth::user()->id;
+        $user = User::findOrFail($userId);
+        $organization = $user->organizations()->first();
+        dd($organization);
+
         // Criação do responsável
         $responsible = User::create([
             'name' => $request->name,
@@ -31,9 +36,6 @@ class ResponsibleController extends Controller
         ]);
 
         // Relacionamento com o perfil de responsável
-        $responsible->perfis()->attach(6, ['is_atual' => true, 'status' => 1]);
-        $userId = Auth::user()->id;
-        $user = User::findOrFail($userId);
         $organization = $user->organizations()->first();
         $responsible->organizations()->attach($organization->id);
 

@@ -38,6 +38,12 @@ class RedirectByProfile
                     }
                     break;
 
+                case 'Responsável':
+                    if (!$request->is('responsavel/*')) { // Evita redirecionar para a própria rota
+                        return redirect('/responsavel/dashboard');
+                    }
+                    break;
+
                 default:
                     return redirect('/login'); // Redireciona para login se o perfil for inválido
             }

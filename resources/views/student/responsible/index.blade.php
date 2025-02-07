@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Gradient Sidebar Layout</title>
+  <title>PacFace - Aluno</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     /* Gradient background utility */
@@ -66,6 +66,12 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
+        <form method="POST" action="/logout">
+              @csrf
+              <button type="submit" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+                  Sair
+              </button>
+          </form>
               </ul>
             </div>
           </div>
@@ -175,8 +181,12 @@
 
     @forelse ($responsibles as $responsavel)
         <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
-            <div class="w-24 h-24 mb-4">
-                <img src="data:image/png;base64,<?= htmlspecialchars($responsavel->responsible->facial_image_base64) ?>" class="rounded-full object-cover w-full h-full">
+        <div class="w-24 h-24 mb-4">
+              @if ($responsavel->student->facial_image_base64)
+              <img src="data:image/png;base64,<?= htmlspecialchars($responsavel->responsible->facial_image_base64) ?>" class="rounded-full object-cover w-full h-full">
+              @else
+              <img src="https://img.freepik.com/psd-gratuitas/ilustracao-de-icone-de-contacto-isolada_23-2151903337.jpg" class="rounded-full object-cover w-full h-full">
+              @endif
             </div>
             <h3 class="text-lg font-semibold text-gray-900">{{ $responsavel->responsible->name }}</h3>
             <p class="text-gray-700 mb-4">{{ $responsavel->responsible->email }}</p>
