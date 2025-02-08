@@ -14,7 +14,7 @@
                 </div>
                 <div>
                     <h3 class="text-2xl block text-gray-700 font-medium">{{ $organization->name }}</h3>
-                    <p class="text-gray-600">Quantidade de Usuários: {{ $organization->users->count() }}</p>
+                    <p class="text-gray-600">Quantidade de Usuários: #</p>
                 </div> 
             </div>
         </div>
@@ -27,7 +27,7 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                @foreach($organization->users as $user)
+                @foreach($userOrganization as $userOrg)
                     <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4 flex flex-col items-center">
                         <div class="bg-blue-100 text-blue-500 p-3 rounded-full mb-4">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -35,10 +35,10 @@
                             </svg>
                         </div>
                         <div class="text-center">
-                            <p class="text-lg block text-gray-700 dark:text-gray-200 font-medium">{{ $user->name }}</p>
-                            <p class="text-gray-600 dark:text-gray-400">{{ $user->email }}</p>
+                            <p class="text-lg block text-gray-700 dark:text-gray-200 font-medium">{{ $userOrg->user->name }}</p>
+                            <p class="text-gray-600 dark:text-gray-400">{{ $userOrg->user->email }}</p>
                         </div>
-                        <a href="{{ route('admin.users.show', $user) }}" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                        <a href="{{ route('admin.users.show', $userOrg->user) }}" class="mt-4 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
                             Ver Detalhes
                         </a>
                     </div>
@@ -59,32 +59,36 @@
                 </button>
             </div>
             <form action="{{ route('admin.users.store', $organization->id) }}" method="POST">
-                @csrf
-                <div class="mb-4">
-                    <label for="name" class="block text-gray-700 dark:text-gray-200 font-medium">Nome</label>
-                    <input type="text" name="name" id="name" class="border border-gray-300 dark:border-gray-700 rounded w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring focus:ring-blue-500 focus:border-blue-500" value="{{ old('name') }}" required>
-                    @error('name')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="email" class="block text-gray-700 dark:text-gray-200 font-medium">Email</label>
-                    <input type="email" name="email" id="email" class="border border-gray-300 dark:border-gray-700 rounded w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring focus:ring-blue-500 focus:border-blue-500" value="{{ old('email') }}" required>
-                    @error('email')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="password" class="block text-gray-700 dark:text-gray-200 font-medium">Senha</label>
-                    <input type="password" name="password" id="password" class="border border-gray-300 dark:border-gray-700 rounded w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring focus:ring-blue-500 focus:border-blue-500" required>
-                    @error('password')
-                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-                    @enderror
-                </div>
-                <div class="mb-4">
-                    <label for="password_confirmation" class="block text-gray-700 dark:text-gray-200 font-medium">Confirme a Senha</label>
-                    <input type="password" name="password_confirmation" id="password_confirmation" class="border border-gray-300 dark:border-gray-700 rounded w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring focus:ring-blue-500 focus:border-blue-500" required>
-                </div>
+            @csrf
+            <div class="mb-4">
+                <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
+                <input type="text" name="name" id="name" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                <input type="email" name="email" id="email" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+                <input type="password" name="password" id="password" class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
+            <div class="mb-4">
+                <label for="whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
+                <input type="text" name="whatsapp" id="whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
+            </div>
+
+            <div class="mb-4">
+                <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+                <input type="text" name="cpf" id="cpf" required class="mt-1 p-2 border rounded-lg w-full" placeholder="000.000.000-00">
+            </div>
+
+            <div class="mb-4">
+                <label for="birthdate" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                <input type="date" name="birthdate" id="birthdate" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
                 <div class="mb-4">
                     <label for="profile_id" class="block text-gray-700 dark:text-gray-200 font-medium">Perfil</label>
                     <select name="profile_id" id="profile_id" class="border border-gray-300 dark:border-gray-700 rounded w-full px-4 py-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 focus:ring focus:ring-blue-500 focus:border-blue-500" required>
@@ -108,7 +112,48 @@
         </div>
     </div>
 </x-app-layout>
+<script>
+    function openModal(isEdit = false, user = null) {
+        const modal = document.getElementById('createUserModal');
+        const form = document.getElementById('userForm');
+        const modalTitle = document.getElementById('modalTitle');
+        const formMethod = document.getElementById('formMethod');
+        
+        if (isEdit && user) {
+            modalTitle.textContent = "Editar Usuário";
+            form.action = `/admin/users/${user.id}`; // Ajuste a rota para a edição do usuário
+            formMethod.value = "PUT"; // Para Laravel usar método PUT
 
+            // Preenche os campos com os dados do usuário
+            document.getElementById('name').value = user.name;
+            document.getElementById('email').value = user.email;
+            document.getElementById('whatsapp').value = user.whatsapp;
+            document.getElementById('cpf').value = user.cpf;
+            document.getElementById('birthdate').value = user.birthdate;
+            document.getElementById('profile_id').value = user.profile_id;
+        } else {
+            modalTitle.textContent = "Cadastrar Usuário";
+            form.action = "{{ route('admin.users.store', $organization->id) }}"; // Rota de criação
+            formMethod.value = "POST";
+
+            // Limpa os campos
+            form.reset();
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('createUserModal').classList.add('hidden');
+    }
+
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('edit-user')) {
+            const user = JSON.parse(event.target.getAttribute('data-user'));
+            openModal(true, user);
+        }
+    });
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const openModalButton = document.getElementById('openModalButton');

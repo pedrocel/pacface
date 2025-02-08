@@ -31,6 +31,10 @@ class StudentsController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'whatsapp'       => $request->whatsapp,
+            'cpf'            => $request->cpf,
+            'birth_date'     => $request->birth_date,
+            'is_emancipated' => $request->has('is_emancipated'),
         ]);
 
         // Relacionamento com o perfil de aluno

@@ -10,6 +10,37 @@
     .bg-gradient-custom {
       background: linear-gradient(to bottom, #58c5ed, #61e3e8);
     }
+    .event-day:hover {
+        background-color: #f472b6;
+        color: white;
+      }
+
+      .course-card {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+      }
+      .course-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .course-card .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+      .course-card:hover .overlay {
+        opacity: 1;
+      }
   </style>
 </head>
 <body class="h-screen bg-gradient-custom text-gray-800">
@@ -27,9 +58,6 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
-        <a href="{{ route('student.document.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Documentos
-        </a>
         <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Calendário
         </a>
@@ -41,15 +69,14 @@
           <!-- Texto do botão -->
           <span class="text-white font-semibold">PacSchool - Play</span>
         </a>
-
       </nav>
     </aside>
 
     <!-- Main Content -->
     <main class="flex-1 p-6 bg-white rounded-tl-3xl relative">
       <header class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-blue-500">{{$organizacao['organization']['name']}},Seja Bem-vindo(a),</h1>
-      <div class="flex items-center gap-4">
+        <h1 class="text-2xl font-bold text-black">PacSchool - Play</h1>
+        <div class="flex items-center gap-4">
           <!-- Notification Icon -->
           <div class="relative">
             <button id="notificationButton" class="relative p-2 bg-blue-100 rounded-full hover:bg-blue-200">
@@ -95,57 +122,49 @@
         </div>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-6">
        
-        <!-- Facial Biometrics Card -->
-        
-        @if ($user->status == 0 || $user->status == null)
-        <div class="p-6 bg-white rounded-2xl shadow-xl border-t-4 border-blue-500">
-          <h2 class="text-xl font-semibold mb-2 text-blue-500">Cadastro de Biometria Facial</h2>
-          <p class="text-gray-700 mb-4">Realize o cadastro da sua biometria facial para aumentar a segurança de sua conta.</p>
-          <button class="w-full py-2 px-4 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition font-medium">
-            Cadastrar Biometria Facial
-          </button>
+            <div class="w-full  mx-auto p-4 bg-white shadow-lg rounded-xl">
+                <h1 class="text-3xl font-bold text-center mb-6">Biblioteca</h1>
+
+                <div class="grid grid-cols-4 gap-4">
+                    <!-- Card de Curso -->
+                    <div class="course-card relative">
+                    <img src="https://i.pinimg.com/736x/cc/08/01/cc0801541e8db072f919ec03f1d858c4.jpg" alt="Curso 1" />
+                    <div class="overlay">
+                        <button onclick="openCourseModal('Curso 1', 'Descrição do curso 1', 4, 75, 5, 20, 5, 'Professor 1')" class="bg-pink-500 text-white font-bold py-2 px-4 rounded">Detalhes</button>
+                    </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
-        @elseif ($user->status == 2)
-        <div class="p-6 bg-yellow-100 rounded-2xl shadow-xl border-t-4 border-yellow-500">
-          <h2 class="text-xl font-semibold mb-2 text-yellow-600">Aguardando Análise</h2>
-          <p class="text-gray-700 mb-4">Sua biometria facial está em processo de análise.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1 4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
-            </svg>
-            <span class="text-yellow-600 font-medium">Em Análise</span>
-          </div>
-        </div>
-        @elseif ($user->status == 3)
-        <div class="p-6 bg-red-100 rounded-2xl shadow-xl border-t-4 border-red-500">
-          <h2 class="text-xl font-semibold mb-2 text-red-600">Biometria Recusada</h2>
-          <p class="text-gray-700 mb-4">Houve um problema com a verificação da sua biometria facial.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            <span class="text-red-600 font-medium">Recusado</span>
-          </div>
-        </div>
-        @elseif ($user->status == 4)
-        <!-- Verified Biometrics Card -->
-        <div class="p-6 bg-green-100 rounded-2xl shadow-xl border-t-4 border-green-500">
-          <h2 class="text-xl font-semibold mb-2 text-green-600">Biometria Verificada</h2>
-          <p class="text-gray-700 mb-4">Sua biometria facial foi verificada com sucesso.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span class="text-green-600 font-medium">Verificado</span>
-          </div>
-        </div>
-        @endif
+
       </div>
     </main>
   </div>
-
+  <div id="courseModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+      <div class="bg-white p-6 rounded-lg max-w-md w-full">
+        <h2 id="courseName" class="text-xl font-bold mb-4"></h2>
+        <img id="courseImage" src="" alt="Curso" class="w-full h-48 object-cover rounded-lg mb-4" />
+        <p id="courseDescription" class="text-gray-700 mb-4"></p>
+        <div class="flex items-center mb-4">
+          <span id="courseRating" class="text-yellow-400">⭐⭐⭐⭐</span>
+          <span class="ml-2">Avaliação</span>
+        </div>
+        <div class="mb-4">
+          <label class="block font-semibold">Progresso</label>
+          <div class="w-full bg-gray-300 h-2 rounded-full">
+            <div id="progressBar" class="h-2 bg-pink-500 rounded-full" style="width: 50%"></div>
+          </div>
+        </div>
+        <p id="courseModules" class="mb-4"></p>
+        <p id="courseLessons" class="mb-4"></p>
+        <p id="courseInstructor" class="mb-4"></p>
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Assistir</button>
+        <button onclick="closeCourseModal()" class="bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded mt-4">Fechar</button>
+      </div>
+    </div>
   <script>
     // Toggle notification modal
     document.getElementById('notificationButton').addEventListener('click', function () {
@@ -159,5 +178,24 @@
       dropdown.classList.toggle('hidden');
     });
   </script>
+   <script>
+      function openCourseModal(name, description, rating, progress, modules, lessons, instructor) {
+        document.getElementById('courseName').textContent = name;
+        document.getElementById('courseImage').src = 'https://via.placeholder.com/300x200'; // Use a real image URL here
+        document.getElementById('courseDescription').textContent = description;
+        document.getElementById('courseRating').textContent = '⭐⭐⭐⭐'.slice(0, rating * 2);
+        document.getElementById('progressBar').style.width = progress + '%';
+        document.getElementById('courseModules').textContent = `Módulos: ${modules}`;
+        document.getElementById('courseLessons').textContent = `Aulas: ${lessons}`;
+        document.getElementById('courseInstructor').textContent = `Professor: ${instructor}`;
+        document.getElementById('courseModal').classList.remove('hidden');
+        document.getElementById('courseModal').classList.add('flex');
+      }
+
+      function closeCourseModal() {
+        document.getElementById('courseModal').classList.add('hidden');
+        document.getElementById('courseModal').classList.remove('flex');
+      }
+    </script>
 </body>
 </html>

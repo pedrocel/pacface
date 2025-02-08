@@ -10,6 +10,7 @@ use App\Models\PerfilModel;
 use App\Models\ResponsibleType;
 use App\Models\StudentResponsible;
 use App\Models\User;
+use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -58,28 +59,25 @@ class UserController extends Controller
 
     public function store(Request $request, $organization_id)
     {
-        // Validação dos dados
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:8|confirmed',
-            'profile_id' => 'required|exists:perfis,id',
-        ]);
-
-        // Criação do usuário
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'whatsapp'       => $request->whatsapp,
+            'cpf'            => $request->cpf,
+            'birthdate'     => $request->birth_date,
+            'is_emancipated' => false, // Retorna true se o checkbox estiver marcado
         ]);
 
         // Relacionamento com o perfil
         $user->perfis()->attach($request->profile_id, ['is_atual' => true, 'status' => 1]);
         $user->save();
 
-        // Relacionamento com a organização
-        $organization = OrganizationModel::findOrFail($organization_id);
-        $user->organizations()->attach($organization->id);
+        UserOrganizationModel::create([
+            'user_id' => $user->id,
+            'organization_id' => $organization_id, 
+            'status' => 1
+        ]);
 
         return redirect()->route('admin.organizacoes.show', $organization_id)->with('success', 'Usuário criado e associado com sucesso!');
     }

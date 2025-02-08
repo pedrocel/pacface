@@ -56,4 +56,32 @@ class FacialImageController extends Controller
             'user' => $user
         ], 200);
     }
+
+    public function approveFacial($id)
+    {
+        $user = User::where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não autenticado'], 401);
+        }
+
+        $user->status = 4; //Status Aprovado = Ativo
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user)->with('success', 'Biometria Facial aprovada com sucesso!');
+    }
+
+    public function reprove($id)
+    {
+        $user = User::where('id', $id)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não autenticado'], 401);
+        }
+
+        $user->status = 3; //Status reprovado = Cadastro de Biometria Facial Pendente
+        $user->save();
+
+        return redirect()->route('admin.users.show', $user)->with('success', 'Biometria Facial reprovada com sucesso!');
+    }
 }

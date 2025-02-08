@@ -7,7 +7,7 @@
 
     <div class="container mx-auto px-4">
         <div class="flex flex-col md:flex-row justify-between items-center mb-4 space-y-4 md:space-y-0 md:space-x-4">
-            <a href="{{ route('admin.users.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full md:w-auto">
+            <a href="#" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-full md:w-auto">
             Adicionar Novo Usuário
             </a>
         </div>
@@ -26,7 +26,7 @@
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $user->name }}</td>
                             <td class="px-4 py-2 text-sm text-gray-700">{{ $user->email }}</td>
                             <td class="px-4 py-2 text-sm">
-                                <a href="{{ route('admin.users.edit', $user) }}" class="text-blue-500 hover:text-blue-600">Editar</a> |
+                                <a href="{{ route('admin.users.edit', $user->id) }}" class="text-blue-500 hover:text-blue-600">Editar</a> |
                                 <form action="{{ route('admin.users.destroy', $user) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')

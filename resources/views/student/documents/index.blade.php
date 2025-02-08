@@ -27,7 +27,7 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
-        <a href="{{ route('student.document.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+        <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Documentos
         </a>
         <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
@@ -48,7 +48,7 @@
     <!-- Main Content -->
     <main class="flex-1 p-6 bg-white rounded-tl-3xl relative">
       <header class="flex justify-between items-center mb-6">
-      <h1 class="text-2xl font-bold text-blue-500">{{$organizacao['organization']['name']}},Seja Bem-vindo(a),</h1>
+      <h1 class="text-2xl font-bold text-blue-500">Documentos</h1>
       <div class="flex items-center gap-4">
           <!-- Notification Icon -->
           <div class="relative">
@@ -95,54 +95,67 @@
         </div>
       </header>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-       
-        <!-- Facial Biometrics Card -->
-        
-        @if ($user->status == 0 || $user->status == null)
-        <div class="p-6 bg-white rounded-2xl shadow-xl border-t-4 border-blue-500">
-          <h2 class="text-xl font-semibold mb-2 text-blue-500">Cadastro de Biometria Facial</h2>
-          <p class="text-gray-700 mb-4">Realize o cadastro da sua biometria facial para aumentar a segurança de sua conta.</p>
-          <button class="w-full py-2 px-4 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition font-medium">
-            Cadastrar Biometria Facial
-          </button>
+      <div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-1 gap-6">
+    <div id="documentos" class="tab-content p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            @foreach($documents as $document)
+                @php
+                    // Definir as cores da borda e do título baseado no status do documento
+                    $borderColor = '';
+                    $titleColor = '';
+                    $statusText = '';
+                    $statusClass = '';
+                    
+                    if ($document['status'] == 1) {
+                        $borderColor = 'border-yellow-500';
+                        $titleColor = 'text-yellow-500';
+                        $statusText = 'Aguardando aprovação';
+                        $statusClass = 'text-yellow-500';
+                    } elseif ($document['status'] == 2) {
+                        $borderColor = 'border-green-500';
+                        $titleColor = 'text-green-500';
+                        $statusText = 'Aprovado';
+                        $statusClass = 'text-green-500';
+                    } elseif ($document['status'] == 3) {
+                        $borderColor = 'border-red-500';
+                        $titleColor = 'text-red-500';
+                        $statusText = 'Reprovado';
+                        $statusClass = 'text-red-500';
+                    } else {
+                        $borderColor = 'border-blue-500'; // Para quando o status for 'not_env' ou não for encontrado
+                        $titleColor = 'text-blue-500';
+                        $statusText = 'Realize o upload do seu documento para análise.';
+                        $statusClass = 'text-gray-600 dark:text-gray-400';
+                    }
+                @endphp
+
+                <div class="p-6 bg-white rounded-2xl shadow-xl border-t-4 {{ $borderColor }}">
+                    <h2 class="text-xl font-semibold mb-2 {{ $titleColor }}">{{ $document['document_type']->name }}</h2>
+                    
+                    @if($document['status'] === 'not_env')
+                        <p class="text-gray-700 mb-4">{{ $statusText }}</p>
+                        <form action="{{ route('student.documents.store', [$document['document_type']->id, $user]) }}" method="POST" enctype="multipart/form-data" class="w-full">
+                            @csrf
+                            <label for="file" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Escolher Arquivo</label>
+                            <input type="file" name="file" id="file" class="block w-full text-sm text-gray-800 border border-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 mb-4">
+                            <button type="submit" class="w-full py-2 px-4 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition font-medium">
+                                Enviar
+                            </button>
+                        </form>
+                    @else
+                        <p class="text-gray-600 dark:text-gray-400 mt-2 {{ $statusClass }}">
+                            {{ $statusText }}
+                        </p>
+                        <a href="{{ route('student.documents.download', $document['id']) }}" class="mt-4 text-blue-500 hover:underline">Baixar Documento</a>
+                    @endif
+                </div>
+            @endforeach
         </div>
-        @elseif ($user->status == 2)
-        <div class="p-6 bg-yellow-100 rounded-2xl shadow-xl border-t-4 border-yellow-500">
-          <h2 class="text-xl font-semibold mb-2 text-yellow-600">Aguardando Análise</h2>
-          <p class="text-gray-700 mb-4">Sua biometria facial está em processo de análise.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1 4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
-            </svg>
-            <span class="text-yellow-600 font-medium">Em Análise</span>
-          </div>
-        </div>
-        @elseif ($user->status == 3)
-        <div class="p-6 bg-red-100 rounded-2xl shadow-xl border-t-4 border-red-500">
-          <h2 class="text-xl font-semibold mb-2 text-red-600">Biometria Recusada</h2>
-          <p class="text-gray-700 mb-4">Houve um problema com a verificação da sua biometria facial.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            <span class="text-red-600 font-medium">Recusado</span>
-          </div>
-        </div>
-        @elseif ($user->status == 4)
-        <!-- Verified Biometrics Card -->
-        <div class="p-6 bg-green-100 rounded-2xl shadow-xl border-t-4 border-green-500">
-          <h2 class="text-xl font-semibold mb-2 text-green-600">Biometria Verificada</h2>
-          <p class="text-gray-700 mb-4">Sua biometria facial foi verificada com sucesso.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-            <span class="text-green-600 font-medium">Verificado</span>
-          </div>
-        </div>
-        @endif
-      </div>
+    </div>
+</div>
+
+
+
     </main>
   </div>
 

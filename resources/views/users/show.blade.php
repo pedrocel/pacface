@@ -33,6 +33,9 @@
                     <li class="mr-2">
                         <a href="#frequencia" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Frequência</a>
                     </li>
+                    <li class="mr-2">
+                        <a href="#configuracoes" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Opções avançadas</a>
+                    </li>
                     @endif
                     <li class="mr-2">
                         <a href="#biometria-facial" class="tab-link inline-block p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300">Biometria Facial</a>
@@ -58,7 +61,7 @@
                                 @endif
                             </button>
                         </div>
-                        <div class="w-full lg:w-4/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <!-- <div class="w-full lg:w-4/5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                             <div class="bg-white dark:bg-gray-700 rounded-lg shadow p-4">
                                 <h4 class="text-lg font-medium text-gray-900 dark:text-gray-200">Média Bimestral</h4>
                                 <p class="text-gray-700 dark:text-gray-300">8.5</p>
@@ -98,11 +101,11 @@
                                     @endif
                                 </p>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
-                    <div class="mt-4">
+                    <!-- <div class="mt-4">
                         <canvas id="bimestreChart" width="400" height="200"></canvas>
-                    </div>
+                    </div> -->
                 </div>
             @endif
             @if($user->perfis->contains('id', 7))
@@ -262,6 +265,34 @@
                         </div>
                     </div>
                 </div>
+            @endif
+            @if($user->perfis->contains('id', 7))
+            <div id="configuracoes" class="tab-content p-4 hidden">
+    <h3 class="text-lg font-medium text-gray-900 dark:text-gray-200 text-center">Opções Avançadas</h3>
+
+    @if($user->facial_image_base64 !== null) <!-- Verifica se a imagem facial existe -->
+        <div class="text-center mt-4">
+        <div class="mb-4">
+                @if($user->status == 4)
+                    <p class="text-green-600 font-medium">Imagem facial aprovada</p>
+                @elseif($user->status == 3)
+                    <p class="text-red-600 font-medium">Imagem facial reprovada</p>
+                @else
+                    <p class="text-yellow-600 font-medium">Imagem facial aguardando análise</p>
+                @endif
+            </div>
+                <form action="{{ route('facial.reprove', $user->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg">Reprovar Facial</button>
+                </form>
+                <form action="{{ route('facial.aprove', $user->id) }}" method="POST">
+                    @csrf
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg">Aprovar Facial</button>
+                </form>
+        </div>
+    @endif
+</div>
+
             @endif
         </div>
     </div>

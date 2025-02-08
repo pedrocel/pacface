@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Organization;
 use App\Models\OrganizationModel;
 use App\Models\PerfilModel;
+use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 
 class OrganizationController extends Controller
 {
     public function show($id){
         $profiles = PerfilModel::all();
-        $organization = OrganizationModel::where('id', $id)->first();
-        return view('admin.organizations.show', compact('organization', 'profiles'));
+        $userOrganization = UserOrganizationModel::where('organization_id', $id)->with('user')->get();
+        $organization = OrganizationModel::find($id);
+        return view('admin.organizations.show', compact('userOrganization', 'profiles', 'organization'));
     }
     
     public function index()

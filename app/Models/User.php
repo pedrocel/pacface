@@ -15,8 +15,12 @@ class User extends Authenticatable
         'email',
         'password',
         'facial_image_base64',
+        'whatsapp',
+        'cpf',
+        'birth_date',
+        'is_emancipated',
     ];
-
+    
     protected $hidden = [
         'password',
         'remember_token',

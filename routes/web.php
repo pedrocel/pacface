@@ -16,7 +16,11 @@ use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
+use App\Http\Controllers\FacialImageController;
 use App\Http\Controllers\Responsible\ProfileController as ResponsibleProfileController;
+use App\Http\Controllers\Student\CalendarController;
+use App\Http\Controllers\Student\CourseController;
+use App\Http\Controllers\Student\DocumentController as StudentDocumentController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 
 Route::get('/', function () {
@@ -66,6 +70,9 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('admin')->group(fu
     Route::post('/documents/{id_type}/{user}', [DocumentController::class, 'store'])->name('documents.store');
     Route::get('/documents/download/{id}', [DocumentController::class, 'download'])->name('documents.download');
 
+    Route::post('/aprove/{id_user}', [FacialImageController::class, 'approveFacial'])->name('facial.aprove');
+    Route::post('/reprove/{id_user}', [FacialImageController::class, 'reprove'])->name('facial.reprove');
+
 });
 
 Route::middleware(['auth', RedirectByProfile::class])->prefix('aluno')->group(function () {
@@ -75,9 +82,17 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('aluno')->group(fu
 
     Route::get('/perfil/detalhes', [StudentProfileController::class, 'index'])->name('student.profile.index');
 
+    Route::get('/calendar', [CalendarController::class, 'index'])->name('student.calendar.index');
+    Route::get('/cursos', [CourseController::class, 'index'])->name('student.courses.index');
+    Route::get('/documentos', [StudentDocumentController::class, 'index'])->name('student.document.index');
+
     Route::get('/responsaveis', [ResponsibleController::class, 'index'])->name('student.responsible.index');
     Route::post('/responsavel/criar', [ResponsibleController::class, 'store'])->name('student.responsible.store');
     Route::put('/responsavel/{id}', [ResponsibleController::class, 'update'])->name('student.responsible.update');
+
+    
+    Route::post('/documents/{id_type}/{user}', [StudentDocumentController::class, 'store'])->name('student.documents.store');
+    Route::get('/documents/download/{id}', [StudentDocumentController::class, 'download'])->name('student.documents.download');
 });
 
 Route::middleware(['auth', RedirectByProfile::class])->prefix('responsavel')->group(function () {
@@ -90,6 +105,8 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('responsavel')->gr
     Route::get('/alunos', [StudentsController::class, 'index'])->name('responsible.students.index');
     Route::post('/aluno/criar', [StudentsController::class, 'store'])->name('responsible.students.store');
     Route::put('/responsavel/{id}', [StudentsController::class, 'update'])->name('responsible.students.update');
+
+    
 });
 
 Route::get('/controllers', [ControllerController::class, 'index'])->name('controllers.index');
@@ -105,13 +122,6 @@ Route::post('/groups', [GroupController::class, 'store'])->name('groups.store');
 Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('groups.edit');
 Route::post('/groups/{group}', [GroupController::class, 'updates'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroys'])->name('groups.destroy');
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
 
 require __DIR__.'/auth.php';

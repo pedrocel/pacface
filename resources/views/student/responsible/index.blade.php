@@ -27,6 +27,17 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
           Responsáveis
         </a>
+        <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+          Calendário
+        </a>
+        <a href="{{ route('student.courses.index') }}" class="block py-2 px-5 rounded-xl text-lg font-medium bg-red-600 hover:bg-red-500 transition flex items-center justify-center space-x-3 border border-gray-300 shadow-md hover:shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" style="width: 1.5em; height: 1.5em; vertical-align: middle; fill: currentColor; overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
+            <path d="M852.727563 392.447107C956.997809 458.473635 956.941389 565.559517 852.727563 631.55032L281.888889 993.019655C177.618644 1059.046186 93.090909 1016.054114 93.090909 897.137364L93.090909 126.860063C93.090909 7.879206 177.675064-35.013033 281.888889 30.977769L852.727563 392.447107 852.727563 392.447107Z"/>
+          </svg>
+          
+          <!-- Texto do botão -->
+          <span class="text-white font-semibold">PacSchool - Play</span>
+        </a>
       </nav>
     </aside>
 
@@ -82,13 +93,16 @@
                 {{ session('success') }}
             </div>
         @endif
-      <!-- Modal -->
-<div id="createResponsibleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+<!-- Modal -->
+<div id="createResponsibleModal" class="z-50 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 class="text-xl font-semibold mb-4">Cadastrar Responsável</h2>
+        <h2 id="modalTitle" class="text-xl font-semibold mb-4">Cadastrar Responsável</h2>
 
         <form id="responsibleForm" action="{{ route('student.responsible.store') }}" method="POST">
             @csrf
+            <input type="hidden" name="_method" id="formMethod" value="POST">
+            <input type="hidden" name="id" id="responsibleId">
+
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Nome</label>
                 <input type="text" name="name" id="name" required class="mt-1 p-2 border rounded-lg w-full">
@@ -101,7 +115,7 @@
 
             <div class="mb-4">
                 <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
-                <input type="password" name="password" id="password" required class="mt-1 p-2 border rounded-lg w-full">
+                <input type="password" name="password" id="password" class="mt-1 p-2 border rounded-lg w-full">
             </div>
 
             <div class="mb-4">
@@ -114,6 +128,21 @@
                 </select>
             </div>
 
+            <div class="mb-4">
+                <label for="whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
+                <input type="text" name="whatsapp" id="whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
+            </div>
+
+            <div class="mb-4">
+                <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+                <input type="text" name="cpf" id="cpf" required class="mt-1 p-2 border rounded-lg w-full" placeholder="000.000.000-00">
+            </div>
+
+            <div class="mb-4">
+                <label for="birthdate" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                <input type="date" name="birthdate" id="birthdate" required class="mt-1 p-2 border rounded-lg w-full">
+            </div>
+
             <div class="flex justify-between">
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar</button>
                 <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
@@ -121,6 +150,52 @@
         </form>
     </div>
 </div>
+
+<script>
+    function openModal(isEdit = false, responsible = null) {
+        const modal = document.getElementById('createResponsibleModal');
+        const form = document.getElementById('responsibleForm');
+        const modalTitle = document.getElementById('modalTitle');
+        const formMethod = document.getElementById('formMethod');
+
+        if (isEdit && responsible) {
+            modalTitle.textContent = "Editar Responsável";
+            form.action = `/student/responsible/${responsible.id}`; // Ajuste a rota para sua API
+            formMethod.value = "PUT"; // Para Laravel usar método PUT
+
+            // Preenche os campos
+            document.getElementById('responsibleId').value = responsible.id;
+            document.getElementById('name').value = responsible.name;
+            document.getElementById('email').value = responsible.email;
+            document.getElementById('responsible_type_id').value = responsible.responsible_type_id;
+            document.getElementById('whatsapp').value = responsible.whatsapp;
+            document.getElementById('cpf').value = responsible.cpf;
+            document.getElementById('birthdate').value = responsible.birthdate;
+        } else {
+            modalTitle.textContent = "Cadastrar Responsável";
+            form.action = "{{ route('student.responsible.store') }}";
+            formMethod.value = "POST";
+
+            // Limpa os campos
+            form.reset();
+            document.getElementById('responsibleId').value = '';
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('createResponsibleModal').classList.add('hidden');
+    }
+
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('edit-responsible')) {
+            const responsible = JSON.parse(event.target.getAttribute('data-responsible'));
+            openModal(true, responsible);
+        }
+    });
+</script>
+
 <!-- Modal de Edição -->
 <div id="editResponsibleModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
@@ -180,30 +255,126 @@
     </div>
 
     @forelse ($responsibles as $responsavel)
-        <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition">
+    <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition relative">
         <div class="w-24 h-24 mb-4">
-              @if ($responsavel->student->facial_image_base64)
-              <img src="data:image/png;base64,<?= htmlspecialchars($responsavel->responsible->facial_image_base64) ?>" class="rounded-full object-cover w-full h-full">
-              @else
-              <img src="https://img.freepik.com/psd-gratuitas/ilustracao-de-icone-de-contacto-isolada_23-2151903337.jpg" class="rounded-full object-cover w-full h-full">
-              @endif
-            </div>
-            <h3 class="text-lg font-semibold text-gray-900">{{ $responsavel->responsible->name }}</h3>
-            <p class="text-gray-700 mb-4">{{ $responsavel->responsible->email }}</p>
-            <div class="flex space-x-3">
-            <button onclick="openEditModal('{{ $responsavel->responsible->id }}', '{{ $responsavel->responsible->name }}', '{{ $responsavel->responsible->email }}', '{{ $responsavel->responsible_type_id }}')" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">
-                Editar
+            @if ($responsavel->student->facial_image_base64)
+                <img src="data:image/png;base64,<?= htmlspecialchars($responsavel->responsible->facial_image_base64) ?>" class="rounded-full object-cover w-full h-full">
+            @else
+                <img src="https://img.freepik.com/psd-gratuitas/ilustracao-de-icone-de-contacto-isolada_23-2151903337.jpg" class="rounded-full object-cover w-full h-full">
+            @endif
+        </div>
+        <h3 class="text-lg font-semibold text-gray-900">{{ $responsavel->responsible->name }}</h3>
+        <p class="text-gray-700 mb-4">{{ $responsavel->responsible->email }}</p>
+        
+        <!-- Botão de ações -->
+        <div class="absolute top-2 right-2">
+            <button onclick="toggleDropdown(this)" class="p-2 border border-gray-400 text-gray-700 rounded-full hover:bg-blue-200 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                    <circle cx="12" cy="6" r="2"/>
+                    <circle cx="12" cy="12" r="2"/>
+                    <circle cx="12" cy="18" r="2"/>
+                </svg>
             </button>
-                <button class="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-lg">Excluir</button>
+
+            <!-- Dropdown -->
+            <div class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
+            <button class="edit-responsible" data-responsible='{"id":1,"name":"João Silva","email":"joao@email.com","responsible_type_id":2,"whatsapp":"(99) 99999-9999","cpf":"000.000.000-00","birthdate":"1990-01-01"}'>
+    Editar
+</button>
+                <button class="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 transition">Excluir</button>
             </div>
         </div>
-    @empty
-        <p class="text-gray-700 text-center col-span-full">Nenhum responsável encontrado.</p>
-    @endforelse
+    </div>
+@empty
+    <p class="text-gray-700 text-center col-span-full">Nenhum responsável encontrado.</p>
+@endforelse 
 </div>
     </main>
   </div>
+  <script>
+    function toggleDropdown(button) {
+        let dropdown = button.nextElementSibling;
+        dropdown.classList.toggle('hidden');
+    }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const modal = document.getElementById("createResponsibleModal");
+    const form = document.getElementById("responsibleForm");
+    const nameInput = document.getElementById("name");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const typeInput = document.getElementById("responsible_type_id");
+    const whatsappInput = document.getElementById("whatsapp");
+    const cpfInput = document.getElementById("cpf");
+    const birthdateInput = document.getElementById("birthdate");
 
+    // Verifica todos os botões de edição e adiciona evento de clique
+    document.querySelectorAll(".edit-responsible").forEach(button => {
+        button.addEventListener("click", function () {
+            const responsible = JSON.parse(this.getAttribute("data-responsible"));
+
+            // Preencher os campos do formulário
+            nameInput.value = responsible.name || "";
+            emailInput.value = responsible.email || "";
+            passwordInput.value = ""; // Não carregar senha por segurança
+            passwordInput.required = false; // Senha não é obrigatória ao editar
+            typeInput.value = responsible.responsible_type_id || "";
+            whatsappInput.value = responsible.whatsapp || "";
+            cpfInput.value = responsible.cpf || "";
+            birthdateInput.value = responsible.birthdate || "";
+
+            // Atualizar a action do formulário para a edição
+            form.action = `/responsible/update/${responsible.id}`;
+            form.method = "POST";
+
+            // Exibir a modal
+            modal.classList.remove("hidden");
+        });
+    });
+
+    // Função para abrir modal de criação (nova entrada)
+    window.openCreateModal = function () {
+        // Resetar os campos
+        form.reset();
+        passwordInput.required = true; // Senha obrigatória na criação
+        form.action = "/responsible/store";
+        form.method = "POST";
+
+        // Exibir a modal
+        modal.classList.remove("hidden");
+    };
+
+    // Função para fechar a modal
+    window.closeModal = function () {
+        modal.classList.add("hidden");
+    };
+});
+</script>
+
+  <script>
+    function maskCPF(value) {
+        return value.replace(/\D/g, '') // Remove tudo que não é número
+                    .replace(/(\d{3})(\d)/, '$1.$2') // Coloca ponto após os 3 primeiros dígitos
+                    .replace(/(\d{3})(\d)/, '$1.$2') // Coloca ponto após os 3 seguintes
+                    .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Coloca hífen antes dos 2 últimos
+    }
+
+    function maskWhatsapp(value) {
+        return value.replace(/\D/g, '') // Remove tudo que não é número
+                    .replace(/(\d{2})(\d)/, '($1) $2') // Coloca parênteses no DDD
+                    .replace(/(\d{5})(\d)/, '$1-$2') // Coloca hífen no número
+                    .slice(0, 15); // Limita o tamanho
+    }
+
+    document.getElementById('cpf').addEventListener('input', function (e) {
+        e.target.value = maskCPF(e.target.value);
+    });
+
+    document.getElementById('whatsapp').addEventListener('input', function (e) {
+        e.target.value = maskWhatsapp(e.target.value);
+    });
+</script>
   <script>
     // Toggle notification modal
     document.getElementById('notificationButton').addEventListener('click', function () {
@@ -240,6 +411,51 @@
     function closeEditModal() {
         document.getElementById('editResponsibleModal').classList.add('hidden');
     }
+</script>
+
+<script>
+    function openModal(isEdit = false, responsible = null) {
+        const modal = document.getElementById('createResponsibleModal');
+        const form = document.getElementById('responsibleForm');
+        const modalTitle = document.getElementById('modalTitle');
+        const formMethod = document.getElementById('formMethod');
+
+        if (isEdit && responsible) {
+            modalTitle.textContent = "Editar Responsável";
+            form.action = `/student/responsible/${responsible.id}`; // Ajuste a rota para sua API
+            formMethod.value = "PUT"; // Para Laravel usar método PUT
+
+            // Preenche os campos
+            document.getElementById('responsibleId').value = responsible.id;
+            document.getElementById('name').value = responsible.name;
+            document.getElementById('email').value = responsible.email;
+            document.getElementById('responsible_type_id').value = responsible.responsible_type_id;
+            document.getElementById('whatsapp').value = responsible.whatsapp;
+            document.getElementById('cpf').value = responsible.cpf;
+            document.getElementById('birthdate').value = responsible.birthdate;
+        } else {
+            modalTitle.textContent = "Cadastrar Responsável";
+            form.action = "{{ route('student.responsible.store') }}";
+            formMethod.value = "POST";
+
+            // Limpa os campos
+            form.reset();
+            document.getElementById('responsibleId').value = '';
+        }
+
+        modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('createResponsibleModal').classList.add('hidden');
+    }
+
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('edit-responsible')) {
+            const responsible = JSON.parse(event.target.getAttribute('data-responsible'));
+            openModal(true, responsible);
+        }
+    });
 </script>
 </body>
 </html>

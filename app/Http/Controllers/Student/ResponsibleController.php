@@ -26,13 +26,15 @@ class ResponsibleController extends Controller
         $userId = Auth::user()->id;
         $user = User::findOrFail($userId);
         $organization = $user->organizations()->first();
-        dd($organization);
-
         // Criação do responsável
         $responsible = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'name'           => $request->name,
+            'email'          => $request->email,
+            'password'       => Hash::make($request->password),
+            'whatsapp'       => $request->whatsapp,
+            'cpf'            => $request->cpf,
+            'birthdate'     => $request->birth_date,
+            'is_emancipated' => false, // Retorna true se o checkbox estiver marcado
         ]);
 
         // Relacionamento com o perfil de responsável
@@ -58,6 +60,9 @@ class ResponsibleController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => $request->password ? Hash::make($request->password) : $responsible->password,
+            'whatsapp'       => $request->whatsapp,
+            'cpf'            => $request->cpf,
+            'birth_date'     => $request->birth_date,
         ]);
 
         // Atualiza o tipo de responsável
