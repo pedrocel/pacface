@@ -65,9 +65,6 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
-        <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Calendário
-        </a>
         <form method="POST" action="/logout">
               @csrf
               <button type="submit" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">

@@ -28,22 +28,6 @@
         <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
           Responsáveis
         </a>
-        <a href="{{ route('student.document.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Documentos
-        </a>
-        <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Calendário
-        </a>
-        <a href="{{ route('student.calendar.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Frequência
-        </a>
-        <a href="{{ route('student.courses.index') }}" class="block py-2 px-5 rounded-xl text-lg font-medium bg-red-600 hover:bg-red-500 transition flex items-center justify-center space-x-3 border border-gray-300 shadow-md hover:shadow-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-white" style="width: 1.5em; height: 1.5em; vertical-align: middle; fill: currentColor; overflow: hidden;" viewBox="0 0 1024 1024" version="1.1">
-            <path d="M852.727563 392.447107C956.997809 458.473635 956.941389 565.559517 852.727563 631.55032L281.888889 993.019655C177.618644 1059.046186 93.090909 1016.054114 93.090909 897.137364L93.090909 126.860063C93.090909 7.879206 177.675064-35.013033 281.888889 30.977769L852.727563 392.447107 852.727563 392.447107Z"/>
-          </svg>
-          <!-- Texto do botão -->
-          <span class="text-white font-semibold">PacSchool - Play</span>
-        </a>
       </nav>
     </aside>
 
@@ -69,11 +53,11 @@
           </div>
 
           <!-- Profile Icon -->
-          <div class="relative  right-4">
-            <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200 right-0">
-              <img id="profileImage" src="data:image/png;base64,<?= htmlspecialchars($user->facial_image_base64 ) ?>" alt="Profile" class="h-10 w-10 rounded-full">
+          <div class="relative">
+            <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200">
+              <img id="profileImage" src="data:image/png;base64,<?= htmlspecialchars($user->facial_image_base64) ?>" alt="Profile" class="h-10 w-10 rounded-full">
             </button>
-            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden z-50">
+            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden">
               <ul>
               <a href="{{ route('student.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
           Dashboard
