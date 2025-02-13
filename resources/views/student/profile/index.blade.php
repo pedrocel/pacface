@@ -203,6 +203,8 @@
                   </div>
                  
               </div>
+                
+
             </div>
             <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4">
                 <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Ux Research</a>
@@ -220,6 +222,8 @@
             <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
             <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
             <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
+            <img id="facialImagePreview" 
+                >
             <p id="statusMessage" class="text-gray-700 mb-4">
                 -
             </p>
