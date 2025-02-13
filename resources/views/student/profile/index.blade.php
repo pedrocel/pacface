@@ -203,13 +203,6 @@
                   </div>
                  
               </div>
-                
-
-            </div>
-            <div class="flex max-sm:flex-wrap max-sm:justify-center items-center gap-4">
-                <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Ux Research</a>
-                <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">CX Strategy</a>
-                <a href="javascript:;" class="rounded-full py-3 px-6 bg-stone-100 text-gray-700 font-semibold text-sm leading-6 transition-all duration-500 hover:bg-stone-200 hover:text-gray-900">Project Manager</a>
             </div>
         </div>
     </section>
@@ -221,16 +214,18 @@
         <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
             <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
             <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
-            <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
-            <img id="facialImagePreview" 
-                 src="https://via.placeholder.com/128" 
-                 alt="Imagem Facial" class="mx-auto mb-4 rounded-full w-32 h-32 object-cover">
+            @if ($user->facial_image_base64)
+              <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+                  Atualizar Biometria facial
+              </button>
+            @else 
             <p id="statusMessage" class="text-gray-700 mb-4">
                 Nenhuma biometria cadastrada. Faça o upload ou capture uma nova imagem.
             </p>
             <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
                 Tirar Foto com a Câmera
             </button>
+            @endif
         </div>
     </div>
 
