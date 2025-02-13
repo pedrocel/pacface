@@ -260,7 +260,7 @@
     });
     </script>
     <script>
-      // Abrir modal de captura
+    // Abrir modal de captura
 document.getElementById('captureButton').addEventListener('click', () => {
     const captureModal = document.getElementById('captureModal');
     const video = document.getElementById('video');
@@ -288,14 +288,58 @@ document.getElementById('snap').addEventListener('click', () => {
     const canvas = document.getElementById('canvas');
     const video = document.getElementById('video');
     const saveButton = document.getElementById('save');
+    const snapButton = document.getElementById('snap');
+    const retakeButton = document.getElementById('retake');
 
     // Captura a imagem do vídeo e desenha no canvas
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
     canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    canvas.classList.remove('hidden');
+    // Ocultar o vídeo (desativar câmera)
+    const stream = video.srcObject;
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+    video.srcObject = null;
+    video.classList.add('hidden');
+
+    // Exibir o botão "Salvar" e "Tirar outra foto"
     saveButton.classList.remove('hidden');
+    retakeButton.classList.remove('hidden');
+    snapButton.classList.add('hidden');
+
+    canvas.classList.remove('hidden');
+});
+
+// Reativar câmera para tirar outra foto
+document.getElementById('retake').addEventListener('click', () => {
+    const video = document.getElementById('video');
+    const canvas = document.getElementById('canvas');
+    const saveButton = document.getElementById('save');
+    const snapButton = document.getElementById('snap');
+    const retakeButton = document.getElementById('retake');
+
+    // Limpar canvas e ocultar novamente
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.classList.add('hidden');
+
+    // Ocultar botões de salvar e refazer, exibir "Tirar foto"
+    saveButton.classList.add('hidden');
+    retakeButton.classList.add('hidden');
+    snapButton.classList.remove('hidden');
+
+    // Reativar câmera
+    video.classList.remove('hidden');
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+        })
+        .catch(error => {
+            console.error('Erro ao acessar a câmera:', error);
+            Swal.fire('Erro!', 'Não foi possível acessar a câmera. Verifique as permissões.', 'error');
+        });
 });
 
 // Salvar a imagem capturada em Base64
@@ -311,15 +355,8 @@ document.getElementById('save').addEventListener('click', () => {
     const facialImagePreview = document.getElementById('facialImagePreview');
     facialImagePreview.src = `data:image/png;base64,${base64Image}`;
 
-    // Fechar modal e parar o vídeo
+    // Fechar modal
     const captureModal = document.getElementById('captureModal');
-    const video = document.getElementById('video');
-    const stream = video.srcObject;
-
-    if (stream) {
-        stream.getTracks().forEach(track => track.stop());
-    }
-    video.srcObject = null;
     captureModal.classList.add('hidden');
 
     Swal.fire('Sucesso!', 'Imagem capturada com sucesso!', 'success');
