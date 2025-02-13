@@ -263,13 +263,17 @@ document.getElementById('captureButton').addEventListener('click', () => {
     const captureModal = document.getElementById('captureModal');
     const video = document.getElementById('video');
 
+    // Remover controles e configurar autoplay
+    video.removeAttribute('controls');
+    video.setAttribute('autoplay', true);
+    video.setAttribute('playsinline', true); // Evita tela cheia em dispositivos móveis
+
     captureModal.classList.remove('hidden');
 
     // Ativar a câmera
     navigator.mediaDevices.getUserMedia({ video: true })
         .then(stream => {
             video.srcObject = stream;
-            video.play();
         })
         .catch(error => {
             console.error('Erro ao acessar a câmera:', error);
