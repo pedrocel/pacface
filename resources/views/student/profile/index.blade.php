@@ -236,14 +236,14 @@
         </div>
     </div>
 
-    <!-- Modal de captura de imagem -->
+<!-- Modal de captura de imagem -->
 <div id="captureModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
     <div class="bg-white p-4 rounded-md w-96">
         <div class="relative">
             <!-- Vídeo de captura -->
-            <video id="video" class="w-full hidden" autoplay playsinline></video>
+            <video id="video" class="rounded w-full mb-4" autoplay></video>
             <!-- Canvas para exibir a imagem capturada -->
-            <canvas id="canvas" class="w-full hidden"></canvas>
+            <canvas id="canvas" class="hidden rounded w-full mb-4"></canvas>
             
             <!-- Botões de controle -->
             <div class="flex justify-center space-x-4">
@@ -277,6 +277,10 @@
         </button>
     </div>
 </div>
+
+<!-- Pré-visualização da imagem capturada -->
+<img id="facialImagePreview" class="mt-4 w-32 h-32 object-cover rounded-full border" src="" alt="Imagem Capturada">
+
 
   </div>
    <script>
