@@ -245,7 +245,13 @@
             <canvas id="canvas" class="hidden rounded w-full mb-4"></canvas>
             <div class="flex justify-center space-x-4">
                 <button id="snap" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Capturar</button>
-                <button id="save" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded hidden">Salvar</button>
+                <form id="uploadForm" action="{{ route('student.updateImage') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" id="facialImageBase64" name="facial_image_base64">
+                <button type="submit" id="uploadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    Enviar para Análise
+                </button>
+            </form>
             </div>
         </div>
     </div>
@@ -260,7 +266,7 @@
     });
     </script>
     <script>
-    // Abrir modal de captura
+ // Abrir modal de captura
 document.getElementById('captureButton').addEventListener('click', () => {
     const captureModal = document.getElementById('captureModal');
     const video = document.getElementById('video');
@@ -342,7 +348,7 @@ document.getElementById('retake').addEventListener('click', () => {
         });
 });
 
-// Salvar a imagem capturada em Base64
+// Salvar a imagem capturada em Base64 e enviar o formulário
 document.getElementById('save').addEventListener('click', () => {
     const canvas = document.getElementById('canvas');
     const base64Image = canvas.toDataURL('image/png').split(',')[1];
@@ -355,11 +361,15 @@ document.getElementById('save').addEventListener('click', () => {
     const facialImagePreview = document.getElementById('facialImagePreview');
     facialImagePreview.src = `data:image/png;base64,${base64Image}`;
 
+    // Enviar o formulário de upload
+    const uploadForm = document.getElementById('uploadForm');
+    uploadForm.submit();
+
     // Fechar modal
     const captureModal = document.getElementById('captureModal');
     captureModal.classList.add('hidden');
 
-    Swal.fire('Sucesso!', 'Imagem capturada com sucesso!', 'success');
+    Swal.fire('Sucesso!', 'Imagem capturada e enviada com sucesso!', 'success');
 });
 
 // Fechar o modal de captura
