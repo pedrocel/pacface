@@ -110,7 +110,7 @@
       <main class="p-6 flex-1">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <!-- Card: Quantidade de Alunos -->
-          @if ($user->status == 0 || $user->status == null)
+          @if (!$user->facial_image_base64)
         <div class="p-6 bg-white rounded-2xl shadow-xl border-t-4 border-blue-500">
           <h2 class="text-xl font-semibold mb-2 text-blue-500">Cadastro de Biometria Facial</h2>
           <p class="text-gray-700 mb-4">Realize o cadastro da sua biometria facial para aumentar a segurança de sua conta.</p>
@@ -118,18 +118,6 @@
             Cadastrar Biometria Facial
           </button>
         </div>
-        @elseif ($user->status == 2)
-        <div class="p-6 bg-yellow-100 rounded-2xl shadow-xl border-t-4 border-yellow-500">
-          <h2 class="text-xl font-semibold mb-2 text-yellow-600">Aguardando Análise</h2>
-          <p class="text-gray-700 mb-4">Sua biometria facial está em processo de análise.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1 4h.01M12 18a9 9 0 110-18 9 9 0 010 18z" />
-            </svg>
-            <span class="text-yellow-600 font-medium">Em Análise</span>
-          </div>
-        </div>
-        @elseif ($user->status == 3)
         <div class="p-6 bg-red-100 rounded-2xl shadow-xl border-t-4 border-red-500">
           <h2 class="text-xl font-semibold mb-2 text-red-600">Biometria Recusada</h2>
           <p class="text-gray-700 mb-4">Houve um problema com a verificação da sua biometria facial.</p>
@@ -140,7 +128,7 @@
             <span class="text-red-600 font-medium">Recusado</span>
           </div>
         </div>
-        @elseif ($user->status == 4)
+        @elseif ($user->facial_image_base64)
         <!-- Verified Biometrics Card -->
         <div class="p-6 bg-green-100 rounded-2xl shadow-xl border-t-4 border-green-500">
           <h2 class="text-xl font-semibold mb-2 text-green-600">Biometria Verificada</h2>
