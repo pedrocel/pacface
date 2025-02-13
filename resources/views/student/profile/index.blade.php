@@ -216,40 +216,37 @@
 
     </main>
 
+    <!-- Modal Principal -->
     <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
-    <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
-        <!-- Botão para fechar a modal -->
-        <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
-        <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
-        <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
-        <!-- Verifica se a imagem facial existe -->
-        <div class="text-center mb-4">
+        <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
+            <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
+            <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
+            <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
             <img id="facialImagePreview" 
-                src="{{ $user->facial_image_base64 ? 'data:image/png;base64,' . $user->facial_image_base64 : 'https://via.placeholder.com/128' }}" 
-                alt="Imagem Facial" class="mx-auto mb-4 rounded-full w-32 h-32 object-cover">
-            
+                 src="https://via.placeholder.com/128" 
+                 alt="Imagem Facial" class="mx-auto mb-4 rounded-full w-32 h-32 object-cover">
             <p id="statusMessage" class="text-gray-700 mb-4">
-                {{ $user->facial_image_base64 ? 'O usuário já possui uma biometria facial cadastrada.' : 'Nenhuma biometria cadastrada. Faça o upload ou capture uma nova imagem.' }}
+                Nenhuma biometria cadastrada. Faça o upload ou capture uma nova imagem.
             </p>
-
-            <div class="flex justify-center items-center space-x-4">
-                <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-green-300">
-                    Tirar Foto com a Câmera
-                </button>
-            </div><!-- Seção de Upload -->
-            <div id="uploadSection" class="hidden mt-4">
-            <form id="uploadForm" action="{{ route('student.updateImage') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="file" id="facialImageFile" name="facial_image_file" class="mb-2">
-                <input type="hidden" id="facialImageBase64" name="facial_image_base64">
-                <button type="submit" id="uploadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                    Enviar para Análise
-                </button>
-            </form>
-        </div>
+            <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+                Tirar Foto com a Câmera
+            </button>
         </div>
     </div>
-</div>
+
+    <!-- Modal de Captura -->
+    <div id="captureModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
+            <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
+            <h2 class="text-lg font-bold text-gray-700 mb-4 text-center">Captura de Imagem</h2>
+            <video id="video" class="rounded w-full mb-4" autoplay></video>
+            <canvas id="canvas" class="hidden rounded w-full mb-4"></canvas>
+            <div class="flex justify-center space-x-4">
+                <button id="snap" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Capturar</button>
+                <button id="save" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded hidden">Salvar</button>
+            </div>
+        </div>
+    </div>
 
 
   </div>
@@ -260,7 +257,82 @@
       dropdown.classList.toggle('hidden');
     });
     </script>
-    
+    <script>
+      // Abrir modal de captura
+document.getElementById('captureButton').addEventListener('click', () => {
+    const captureModal = document.getElementById('captureModal');
+    const video = document.getElementById('video');
+
+    captureModal.classList.remove('hidden');
+
+    // Ativar a câmera
+    navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+            video.srcObject = stream;
+            video.play();
+        })
+        .catch(error => {
+            console.error('Erro ao acessar a câmera:', error);
+            Swal.fire('Erro!', 'Não foi possível acessar a câmera. Verifique as permissões.', 'error');
+        });
+});
+
+// Capturar imagem da câmera
+document.getElementById('snap').addEventListener('click', () => {
+    const canvas = document.getElementById('canvas');
+    const video = document.getElementById('video');
+    const saveButton = document.getElementById('save');
+
+    // Captura a imagem do vídeo e desenha no canvas
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    canvas.classList.remove('hidden');
+    saveButton.classList.remove('hidden');
+});
+
+// Salvar a imagem capturada em Base64
+document.getElementById('save').addEventListener('click', () => {
+    const canvas = document.getElementById('canvas');
+    const base64Image = canvas.toDataURL('image/png').split(',')[1];
+
+    // Preencher o campo hidden com a imagem em Base64
+    const facialImageBase64Input = document.getElementById('facialImageBase64');
+    facialImageBase64Input.value = base64Image;
+
+    // Atualizar a visualização da imagem
+    const facialImagePreview = document.getElementById('facialImagePreview');
+    facialImagePreview.src = `data:image/png;base64,${base64Image}`;
+
+    // Fechar modal e parar o vídeo
+    const captureModal = document.getElementById('captureModal');
+    const video = document.getElementById('video');
+    const stream = video.srcObject;
+
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+    video.srcObject = null;
+    captureModal.classList.add('hidden');
+
+    Swal.fire('Sucesso!', 'Imagem capturada com sucesso!', 'success');
+});
+
+// Fechar o modal de captura
+document.getElementById('closeModal').addEventListener('click', () => {
+    const captureModal = document.getElementById('captureModal');
+    const video = document.getElementById('video');
+    const stream = video.srcObject;
+
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+    }
+    video.srcObject = null;
+    captureModal.classList.add('hidden');
+});
+
+    </script>
   <script>
     // Toggle notification modal
     document.getElementById('notificationButton').addEventListener('click', function () {
