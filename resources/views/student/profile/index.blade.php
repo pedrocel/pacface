@@ -217,44 +217,47 @@
     </section>
 
     </main>
-
-    <!-- Modal Principal -->
-    <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
-            <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
-            <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
-            <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
-            <img id="facialImagePreview" 
-                 src="https://via.placeholder.com/128" 
-                 alt="Imagem Facial" class="mx-auto mb-4 rounded-full w-32 h-32 object-cover">
-            <p id="statusMessage" class="text-gray-700 mb-4">
-                Nenhuma biometria cadastrada. Faça o upload ou capture uma nova imagem.
-            </p>
-            <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
-                Tirar Foto com a Câmera
-            </button>
-        </div>
-    </div>
-
-    <!-- Modal de Captura -->
-    <div id="captureModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
-        <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
-            <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
-            <h2 class="text-lg font-bold text-gray-700 mb-4 text-center">Captura de Imagem</h2>
-            <video id="video" class="rounded w-full mb-4" autoplay></video>
-            <canvas id="canvas" class="hidden rounded w-full mb-4"></canvas>
+<!-- Modal de captura de imagem -->
+<div id="captureModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white p-4 rounded-md w-96">
+        <div class="relative">
+            <!-- Vídeo de captura -->
+            <video id="video" class="w-full hidden" autoplay playsinline></video>
+            <!-- Canvas para exibir a imagem capturada -->
+            <canvas id="canvas" class="w-full hidden"></canvas>
+            
+            <!-- Botões de controle -->
             <div class="flex justify-center space-x-4">
-                <button id="snap" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded">Capturar</button>
-                <form id="uploadForm" action="{{ route('student.updateImage') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" id="facialImageBase64" name="facial_image_base64">
-                <button type="submit" id="uploadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                    Enviar para Análise
+                <button id="snap" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
+                    Tirar Foto
                 </button>
-            </form>
+                <button id="retake" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-yellow-300 hidden">
+                    Tirar Outra Foto
+                </button>
+                <button id="save" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-green-300 hidden">
+                    Salvar
+                </button>
             </div>
         </div>
+
+        <!-- Formulário de envio -->
+        <form id="uploadForm" action="{{ route('student.updateImage') }}" method="POST" enctype="multipart/form-data" class="mt-4">
+            @csrf
+            <input type="file" id="facialImageFile" name="facial_image_file" class="mb-2 hidden">
+            <input type="hidden" id="facialImageBase64" name="facial_image_base64">
+            <button type="submit" id="uploadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300 hidden">
+                Enviar para Análise
+            </button>
+        </form>
+
+        <!-- Fechar Modal -->
+        <button id="closeModal" class="absolute top-2 right-2 text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
     </div>
+</div>
 
 
   </div>
