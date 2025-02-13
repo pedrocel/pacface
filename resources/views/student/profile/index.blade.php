@@ -221,16 +221,20 @@
         <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
             <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
             <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
-            <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
-            <img id="facialImagePreview" 
-                 src="https://via.placeholder.com/128" 
-                 alt="Imagem Facial" class="mx-auto mb-4 rounded-full w-32 h-32 object-cover">
+
+            @if ($user->facial_image_base64)
+            <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
+                Atualizar biometria facial existente
+            </button>
+            @else
             <p id="statusMessage" class="text-gray-700 mb-4">
                 Nenhuma biometria cadastrada. Faça o upload ou capture uma nova imagem.
             </p>
             <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
-                Tirar Foto com a Câmera
+                Enviar nova biometria facial
             </button>
+            @endif
+            
         </div>
     </div>
 
