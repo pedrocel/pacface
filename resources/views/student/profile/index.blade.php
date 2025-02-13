@@ -225,10 +225,10 @@
             <img id="facialImagePreview" 
                 >
             <p id="statusMessage" class="text-gray-700 mb-4">
-                -
+                
             </p>
-            <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded">
-                Tirar Foto com a Câmera
+            <button id="captureButton" class="bg-green-500 text-center hover:bg-green-600 text-white py-2 px-4 rounded">
+                Tirar Foto com a Câmera do dispositivo
             </button>
         </div>
     </div>
