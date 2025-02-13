@@ -78,9 +78,9 @@
         <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60 object-cover">
         <header class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-blue-500 "></h1>
-        <div class="flex items-center gap-4 z-15">
+        <div class="flex items-center gap-4 z-20">
           <!-- Profile Icon -->
-          <div class="relative">
+          <div class="relative z-15">
             <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200">
               <img id="profileImage" src="data:image/png;base64,<?= htmlspecialchars($user->facial_image_base64) ?>" alt="Profile" class="h-10 w-10 rounded-full">
             </button>
