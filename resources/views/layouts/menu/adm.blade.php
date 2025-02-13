@@ -10,17 +10,17 @@
             <i class="fas fa-tachometer-alt mr-2 "></i><span class="menu-label">Dashboard</span> 
         </a>
         <a href="/controllers" id="menuButton" class="block px-4 py-2 text-gray-200 
-            @unless(Route::is('controllers.index')) 
+            @unless(Route::is('controllers.index'))
                 bg-[#1E1E1E] text-gradient hover:bg-gradient-to-r hover:from-[#1E1E1E] hover:to-[#6affe2]  
             @endunless
             rounded-[10px] text-sm
-            @if(Route::is('controllers.index')) 
-                bg-gradient-to-r from-[#50a8f2] to-[#6affe2] text-white 
+            @if(Route::is('controllers.index'))
+                bg-gradient-to-r from-[#50a8f2] to-[#6affe2] text-white
             @endif">
             <i class="fas fa-cogs mr-2"></i> <span class="menu-label">Gestão de Controladoras</span>
         </a>
-        <a href="/groups" id="menuButton" class="block px-4 py-2 text-gray-200 
-            @unless(Route::is('groups')) 
+        <a href="/groups" id="menuButton" class="block px-4 py-2 text-gray-200
+            @unless(Route::is('groups'))
                 bg-[#1E1E1E] text-gradient hover:bg-gradient-to-r hover:from-[#1E1E1E] hover:to-[#6affe2]  
             @endunless
             rounded-[10px] text-sm

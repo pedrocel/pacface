@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->unique()->nullable();
             $table->string('cpf')->unique()->nullable();
-            $table->text('facial_image_base64')->unique()->nullable();
+            $table->text('facial_image_base64')->nullable();
             $table->string('user_control_id')->nullable();
             $table->string('user_intelbras_id')->nullable();
             $table->string('user_hakvision_id')->nullable();

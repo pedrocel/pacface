@@ -1,57 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PacFace - Student</title>
+  <title>Pacsafe - Aluno</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <style>
-    /* Gradient background utility */
-    .bg-gradient-custom {
-      background: linear-gradient(to bottom, #58c5ed, #61e3e8);
-    }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+<body class="h-screen bg-gradient-custom text-gray-800">
 <body class="h-screen bg-gradient-custom text-gray-800">
   <div class="flex h-full">
     <!-- Sidebar -->
-    <aside class="w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
-      <h1 class="text-xl font-bold text-center mb-6">Menu</h1>
-      <nav class="flex flex-col gap-4">
-        <a href="{{ route('student.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
-          Dashboard
-        </a>
-        <a href="{{ route('student.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Meu Perfil
-        </a>
-        <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Responsáveis
-        </a>
+    <aside class="bg-[url('https://wallpapers.com/images/hd/green-gradient-background-1080-x-1920-1d34ljvp9yi0en92.jpg')] w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
+      <h2 class="text-xl text-white font-bold mb-8">Escola Municipal Zumbi dos Palmares</h2>
+      <nav>
+
+        <ul>
+          <li class="mb-4">
+            <a href="{{ route('student.dashboard') }}" class="flex items-center p-2 rounded transition-all duration-300 
+                @unless(Route::is('student.dashboard'))
+                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
+                @endunless
+                      hover:text-white hover:shadow-lg
+                @if(Route::is('student.dashboard'))
+                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
+                @endif">
+                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Dashboard
+            </a>
+          </li>
+          <li class="mb-4">
+            <a href="{{ route('student.profile.index') }}" class="flex items-center p-2 rounded transition-all duration-300 
+                @unless(Route::is('student.profile.index'))
+                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
+                @endunless
+                      hover:text-white hover:shadow-lg
+                @if(Route::is('student.profile.index'))
+                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
+                @endif">
+                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Meu Perfil
+            </a>
+          </li>
+          <li class="mb-4">
+            <a href="{{ route('student.responsible.index') }}" class="flex items-center p-2 rounded transition-all duration-300 
+                @unless(Route::is('student.responsible.index'))
+                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
+                @endunless
+                      hover:text-white hover:shadow-lg
+                @if(Route::is('student.responsible.index'))
+                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
+                @endif">
+                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Responsaveis
+            </a>
+          </li>
+        </ul>
+
+        <div class="absolute bottom-0 left-0 w-full bg-black p-4 flex justify-center">
+        <img src="https://api-eventos.pacsafe.com.br/logo-branca-1024x500.png" alt="Logo Pacsafe" class="h-12">
+      </div>
       </nav>
     </aside>
 
     <!-- Main Content -->
-    <main class="flex-1 bg-white rounded-tl-3xl relative">
+    <div class="flex-1 flex flex-col">
         <section class="relative pt-8  pb-24">
         <img src="https://pagedone.io/asset/uploads/1705473908.png" alt="cover-image" class="w-full absolute top-0 left-0 z-0 h-60 object-cover">
         <header class="flex justify-between items-center mb-6">
         <h1 class="text-2xl font-bold text-blue-500 "></h1>
         <div class="flex items-center gap-4 ">
-          <!-- Notification Icon -->
-          <div class="relative right-2">
-            <button id="notificationButton" class="relative p-2 bg-blue-100 rounded-full hover:bg-blue-200">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-5-5.917V4a1 1 0 00-2 0v1.083A6.002 6.002 0 006 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0a3 3 0 11-6 0h6z" />
-              </svg>
-            </button>
-            <div id="notificationModal" class="absolute  mt-2 w-64 bg-white shadow-xl rounded-xl p-4 hidden right-8 ">
-              <h2 class="text-lg font-semibold mb-2">Notificações</h2>
-              <ul>
-              </ul>
-            </div>
-          </div>
-
           <!-- Profile Icon -->
           <div class="relative">
             <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200">
@@ -61,13 +88,13 @@
               <ul>
               <a href="{{ route('student.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
           Dashboard
-        </a>
-        <a href="{{ route('student.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Meu Perfil
-        </a>
-        <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-          Responsáveis
-        </a>
+              </a>
+              <a href="{{ route('student.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+                Meu Perfil
+              </a>
+              <a href="{{ route('student.responsible.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+                Responsáveis
+              </a>
         <form method="POST" action="/logout">
               @csrf
               <button type="submit" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
@@ -187,15 +214,14 @@
         </div>
     </section>
 
-    <!-- modal  -->
+    </main>
+
     <div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
     <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow-lg relative">
         <!-- Botão para fechar a modal -->
         <button id="closeModal" class="absolute top-2 right-2 text-gray-600 hover:text-red-500 text-lg font-bold">&times;</button>
-
         <h1 class="text-2xl text-center font-bold text-blue-600 mb-4">Atualizar Biometria Facial</h1>
         <h3 class="text-lg font-medium text-gray-900 text-center">Biometria Facial</h3>
-
         <!-- Verifica se a imagem facial existe -->
         <div class="text-center mb-4">
             <img id="facialImagePreview" 
@@ -207,9 +233,6 @@
             </p>
 
             <div class="flex justify-center items-center space-x-4">
-                <button id="uploadButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-blue-300">
-                    Fazer Upload da Imagem
-                </button>
                 <button id="captureButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded focus:outline-none focus:ring focus:ring-green-300">
                     Tirar Foto com a Câmera
                 </button>
@@ -227,9 +250,17 @@
         </div>
     </div>
 </div>
-    </main>
-  </div>
 
+
+  </div>
+   <script>
+    // Toggle profile dropdown
+    document.getElementById('profileButton').addEventListener('click', function () {
+      const dropdown = document.getElementById('profileDropdown');
+      dropdown.classList.toggle('hidden');
+    });
+    </script>
+    
   <script>
     // Toggle notification modal
     document.getElementById('notificationButton').addEventListener('click', function () {
@@ -403,5 +434,4 @@ facialImageForm.addEventListener('submit', function (event) {
     });
 </script>
 </body>
-
 </html>
