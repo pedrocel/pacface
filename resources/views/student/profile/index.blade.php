@@ -108,8 +108,10 @@
       </header>
         <div class="w-full max-w-7xl mx-auto px-6 md:px-8">
             <div class="flex items-center justify-center sm:justify-start relative z-10 mb-5">
-                <img src="{{ $user->facial_image_base64 ? 'data:image/png;base64,' . $user->facial_image_base64 : 'https://via.placeholder.com/128' }}" alt="Imagem Facial"
+              @if ($user->facial_image_base64)
+              <img src="{{ $user->facial_image_base64 ? 'data:image/png;base64,' . $user->facial_image_base64 : 'https://via.placeholder.com/128' }}" alt="Imagem Facial"
                     class="border-4 border-solid border-white rounded-full object-cover rounded-full w-40 h-40">
+              @endif
             </div>
             <div class="flex items-center justify-center flex-col sm:flex-row max-sm:gap-5 sm:justify-between mb-5">
             <div class="grid grid-cols-1 gap-3 text-sm">
