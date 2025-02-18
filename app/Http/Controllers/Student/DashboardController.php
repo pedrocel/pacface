@@ -13,6 +13,11 @@ class DashboardController extends Controller
     {
         $organizacao = UserOrganizationModel::where('user_id', Auth::user()->id)->with('organization')->first();
         $user = Auth::user();
-        return view('student.dashboard', compact('user', 'organizacao'));
+
+        if(!$user->facial_image_base64){
+            return view('student.profile.index', compact('user', 'organizacao'));
+        }else{
+            return view('student.dashboard', compact('user', 'organizacao'));
+        }
     }
 }
