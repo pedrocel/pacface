@@ -11,7 +11,7 @@
   <div class="flex h-full">
     <!-- Sidebar -->
     <aside class="bg-[url('https://wallpapers.com/images/hd/green-gradient-background-1080-x-1920-1d34ljvp9yi0en92.jpg')] w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
-      <h2 class="text-xl text-white font-bold mb-8">Escola Municipal Zumbi dos Palmares</h2>
+      <h2 class="text-xl text-white font-bold mb-8">{{ $org->organization->name }}</h2>
       <nav>
 
         <ul>
