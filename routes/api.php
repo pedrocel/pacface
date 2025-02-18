@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/webhook/face-event', action: [FaceEventController::class, 'handleWebhook']);
+Route::get('/crawler/user-face', action: [FaceEventController::class, 'getUsers']);

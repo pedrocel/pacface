@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
+use App\Models\FaceEvent;
+use App\Models\UserFaceModel;
+use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +35,23 @@ class ProfileController extends Controller
         //Status 3 = Biometria facial recusada.
         //Status 4 = Biometria facial verificada.
         $user->save();
+
+        $this->createUserFace($user, $request);
+
         return redirect()->route('student.profile.index')->with('success', 'Imagem enviada para análise!');
+    }
+
+    private function createUserFace($user, $request)
+    {
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+        UserFaceModel::create([
+            'user_id' => Auth::user()->id,
+            'facial_image_base64' => $request['facial_image_base64'],
+            'status' => 1,
+            'organization_id' => $org->organization->id,
+            'name' => $user->name,
+        ]);
     }
 }

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FaceEvent;
+use App\Models\UserFaceModel;
+use App\Models\UserFacial;
 
 class FaceEventController extends Controller
 {
@@ -23,5 +25,9 @@ class FaceEventController extends Controller
         ]);
 
         return response()->json(['message' => 'Face event created successfully'], 201);
+    }
+
+    public function getUsers(){
+        return response()->json(UserFaceModel::all());
     }
 }
