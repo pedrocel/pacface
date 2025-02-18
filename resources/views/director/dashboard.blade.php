@@ -134,7 +134,7 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <!-- <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
             <h3 class="text-lg font-semibold text-[#2C3E50]">Entradas Faciais - Turno Matutino</h3>
             <div class="mt-4">
@@ -147,7 +147,7 @@
               <canvas id="entradasChartVespetino"></canvas>
             </div>
           </div>
-        </div>
+        </div> -->
           <!-- Gráfico de Entradas Faciais -->
           
       </main>
