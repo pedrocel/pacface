@@ -30,7 +30,7 @@ class StudentsController extends Controller
         ->with('user')
         ->get();
         
-        return view('director.students.index', compact('user', 'userOrganization', 'profiles'));
+        return view('director.students.index', compact('user', 'userOrganization', 'profiles', 'org'));
     }
 
     public function create()
