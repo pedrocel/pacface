@@ -27,6 +27,6 @@ class DashboardController extends Controller
         ->get();
         
 
-        return view('director.dashboard', compact('user', 'userOrganization', 'profiles'));   
+        return view('director.dashboard', compact('user', 'userOrganization', 'profiles', 'org'));   
     }
 }

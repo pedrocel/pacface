@@ -65,7 +65,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
             'whatsapp'       => $request->whatsapp,
             'cpf'            => $request->cpf,
-            'birthdate'     => $request->birth_date,
+            'birthdate'     => $request->birthdate,
             'is_emancipated' => false, // Retorna true se o checkbox estiver marcado
         ]);
 
@@ -120,7 +120,8 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-        ]);
+            'birthdate' => $request->birthdate,
+            ]);
 
         // Relacionamento com o perfil de responsável
         $responsible->perfis()->attach(6, ['is_atual' => true, 'status' => 1]);
@@ -154,6 +155,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'birthdate' => $request->birthdate,
         ]);
 
         // Relacionamento com o perfil de aluno
