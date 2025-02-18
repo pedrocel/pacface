@@ -44,6 +44,18 @@ class RedirectByProfile
                     }
                     break;
 
+                case 'Diretor Escola':
+                    if (!$request->is('diretor/*')) { // Evita redirecionar para a própria rota
+                        return redirect('/diretor/dashboard');
+                    }
+                    break;
+
+                case 'Secretaria':
+                    if (!$request->is('secretaria/*')) { // Evita redirecionar para a própria rota
+                        return redirect('/secretaria/dashboard');
+                    }
+                    break;
+
                 default:
                     return redirect('/login'); // Redireciona para login se o perfil for inválido
             }

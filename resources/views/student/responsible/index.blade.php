@@ -145,8 +145,8 @@
                     <!-- Dropdown -->
                     <div class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
                     <button class="edit-responsible" data-responsible='{"id":1,"name":"João Silva","email":"joao@email.com","responsible_type_id":2,"whatsapp":"(99) 99999-9999","cpf":"000.000.000-00","birthdate":"1990-01-01"}'>
-            Editar
-        </button>
+                        Editar
+                    </button>
                         <button class="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 transition">Excluir</button>
                     </div>
                 </div>

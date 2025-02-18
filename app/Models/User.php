@@ -17,7 +17,7 @@ class User extends Authenticatable
         'facial_image_base64',
         'whatsapp',
         'cpf',
-        'birth_date',
+        'birthdate',
         'is_emancipated',
     ];
     

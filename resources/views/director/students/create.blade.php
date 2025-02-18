@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pacsafe - Diretor Escolar</title>
+  <title>Pacsafe - Aluno</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
@@ -13,6 +13,7 @@
     <aside class="bg-[url('https://wallpapers.com/images/hd/green-gradient-background-1080-x-1920-1d34ljvp9yi0en92.jpg')] w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
       <h2 class="text-xl text-white font-bold mb-8">Escola Municipal Zumbi dos Palmares</h2>
       <nav>
+
         <ul>
           <li class="mb-4">
             <a href="{{ route('director.dashboard') }}" class="flex items-center p-2 rounded transition-all duration-300 
@@ -75,14 +76,14 @@
       <!-- Header -->
       <header class="bg-white p-6 shadow-md">
         <div class="flex justify-between items-center">
-          <h2 class="text-2xl font-bold text-[#2C3E50]">Dashboard</h2>
+          <h2 class="text-2xl font-bold text-[#2C3E50]">Alunos</h2>
           <div class="flex items-center">
             <div class="relative">
             <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200">
               <img id="profileImage" src="data:image/png;base64,<?= htmlspecialchars($user->facial_image_base64) ?>" alt="Profile" class="h-10 w-10 rounded-full">
             </button>
-            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden">
-              <ul>
+            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden z-50">
+              <ul>  
                 <a href="{{ route('director.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
                   Dashboard
                 </a>
@@ -105,134 +106,72 @@
         </div>
       </header>
 
+      <!-- Cards e Métricas -->
       <main class="p-6 flex-1">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <!-- Card: Quantidade de Alunos -->
-          <div class="card">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold text-[#2C3E50]">Alunos Cadastrados</h3>
-              <svg class="w-8 h-8 text-[#2ECC71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <p class="text-3xl font-bold text-[#2ECC71]">{{ count($userOrganization) }}</p>
-            <div class="mt-4 progress-container">  <div class="progress-bar" id="progress-bar"></div> </div>
-          </div>
-          <div class="card">
-            <div class="flex justify-between items-center">
-              <h3 class="text-lg font-semibold text-[#2C3E50]">Biometrias Faciais Coletadas</h3>
-              <svg class="w-8 h-8 text-[#2ECC71]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-              </svg>
-            </div>
-            <p class="text-3xl font-bold text-[#2ECC71]">{{ count($userOrganization) }}</p>
-            <div class="mt-4 progress-container">  
-              <div class="progress-bar" id="progress-bar">
 
-              </div> 
-            </div>
-          </div>
-        </div>
+            <form id="responsibleForm" action="{{ route('director.students.store') }}"  method="POST">
+                <input type="hidden" id="formMethod" name="_method" value="POST">
+                
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+                
+                <label for="responsible_type_id">Tipo de Responsável:</label>
+                <select id="responsible_type_id" name="responsible_type_id" required>
+                    <option value="1">Pai</option>
+                    <option value="2">Mãe</option>
+                    <option value="3">Outro</option>
+                </select>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-          <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold text-[#2C3E50]">Entradas Faciais - Turno Matutino</h3>
-            <div class="mt-4">
-              <canvas id="entradasChart"></canvas>
+                <label for="whatsapp">WhatsApp:</label>
+                <input type="text" id="whatsapp" name="whatsapp" required>
+
+                <label for="cpf">CPF:</label>
+                <input type="text" id="cpf" name="cpf" required>
+
+                <label for="student_birthdate">Data de Nascimento:</label>
+                <input type="date" id="student_birthdate" name="student_birthdate" required>
+
+                <label for="emancipated">Emancipado:</label>
+                <input type="checkbox" id="emancipated" name="emancipated">
+
+                <button type="button" onclick="nextStep()">Próximo</button>
+            </form>
+
+            <div id="step2" class="hidden bg-gray-500">
+                <h2>Dados do Responsável</h2>
+
+                <label for="responsible_name">Nome do Responsável:</label>
+                <input type="text" id="responsible_name" name="responsible_name" required>
+
+                <label for="responsible_phone">Telefone do Responsável:</label>
+                <input type="text" id="responsible_phone" name="responsible_phone" required>
+
+                <button type="button" onclick="prevStep()">Voltar</button>
+                <button type="submit" form="responsibleForm">Finalizar Cadastro</button>
             </div>
-          </div>
-          <div class="mt-8 bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold text-[#2C3E50]">Entradas Faciais - Turno Vespetino</h3>
-            <div class="mt-4">
-              <canvas id="entradasChartVespetino"></canvas>
-            </div>
-          </div>
-        </div>
-          <!-- Gráfico de Entradas Faciais -->
-          
-      </main>
-    </div>
-  </div>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const progressBar = document.getElementById('progress-bar');
-      const targetWidth = 80; // Largura final da barra (80% no seu exemplo)
-  
-      let currentWidth = 0;
-      const interval = setInterval(() => {
-        currentWidth++;
-        progressBar.style.width = currentWidth + '%';
-        if (currentWidth >= targetWidth) {
-          clearInterval(interval);
+
+    </main>
+
+    <script>
+        function nextStep() {
+            const emancipated = document.getElementById('emancipated').checked;
+
+            if (emancipated) {
+                document.getElementById("responsibleForm").submit();
+            } else {
+                document.getElementById("responsibleForm").classList.add("hidden");
+                document.getElementById("step2").classList.remove("hidden");
+            }
         }
-      }, 15); // Ajuste o valor 15 para controlar a velocidade da animação
-    });
-  </script>
-   <script>
-    // Toggle notification modal
-    document.getElementById('notificationButton').addEventListener('click', function () {
-      const modal = document.getElementById('notificationModal');
-      modal.classList.toggle('hidden');
-    });
 
-    // Toggle profile dropdown
-    document.getElementById('profileButton').addEventListener('click', function () {
-      const dropdown = document.getElementById('profileDropdown');
-      dropdown.classList.toggle('hidden');
-    });
+        function prevStep() {
+            document.getElementById("step2").classList.add("hidden");
+            document.getElementById("responsibleForm").classList.remove("hidden");
+        }
     </script>
-  <script>
-    // Gráfico de Entradas Faciais
-    const ctx = document.getElementById('entradasChart').getContext('2d');
-    const entradasChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-        datasets: [{
-          label: 'Entradas Faciais - Turno Matutino',
-          data: [150, 250, 350, 200, 450, 800],
-          borderColor: '#2ECC71',
-          backgroundColor: 'rgba(46, 204, 113, 0.2)',
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
 
-    const ctx1 = document.getElementById('entradasChartVespetino').getContext('2d');
-    const entradasChartVespetino = new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'],
-        datasets: [{
-          label: 'Entradas Faciais - Turno Matutino',
-          data: [150, 250, 350, 200, 450, 800],
-          borderColor: '#0097FF',
-          backgroundColor: 'rgba(46, 204, 113, 0.2)',
-          borderWidth: 2
-        }]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    });
-    
-  </script>
-  <script>
-    document.getElementById('profileButton').addEventListener('click', function () {
-      const dropdown = document.getElementById('profileDropdown');
-      dropdown.classList.toggle('hidden');
-    });
-</script>
 </body>
 </html>

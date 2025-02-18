@@ -14,6 +14,8 @@ use App\Http\Controllers\Student\DashboardController as StudentDashboardControll
 use App\Http\Controllers\PerfilController;
 use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Director\DashboardController as DirectorDashboardController;
+use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
 use App\Http\Controllers\FacialImageController;
@@ -105,6 +107,21 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('responsavel')->gr
     Route::get('/alunos', [StudentsController::class, 'index'])->name('responsible.students.index');
     Route::post('/aluno/criar', [StudentsController::class, 'store'])->name('responsible.students.store');
     Route::put('/responsavel/{id}', [StudentsController::class, 'update'])->name('responsible.students.update');
+
+    
+});
+
+Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(function () {
+    Route::get('/dashboard', [DirectorDashboardController::class, 'index'])->name('director.dashboard');
+
+    Route::post('/perfil/update-facial-image', [ResponsibleProfileController::class, 'updateImage'])->name('director.updateImage');
+
+    Route::get('/perfil/detalhes', [ResponsibleProfileController::class, 'index'])->name('director.profile.index');
+
+    Route::get('/alunos', [DirectorStudentsController::class, 'index'])->name('director.students.index');
+    Route::get('/aluno/criar', [DirectorStudentsController::class, 'create'])->name('director.students.create');
+    Route::post('/aluno/criar', [DirectorStudentsController::class, 'store'])->name('director.students.store');
+    Route::put('/aluno/{id}', [DirectorStudentsController::class, 'update'])->name('director.students.update');
 
     
 });

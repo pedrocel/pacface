@@ -118,16 +118,6 @@
             Cadastrar Biometria Facial
           </button>
         </div>
-        <div class="p-6 bg-red-100 rounded-2xl shadow-xl border-t-4 border-red-500">
-          <h2 class="text-xl font-semibold mb-2 text-red-600">Biometria Recusada</h2>
-          <p class="text-gray-700 mb-4">Houve um problema com a verificação da sua biometria facial.</p>
-          <div class="flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            <span class="text-red-600 font-medium">Recusado</span>
-          </div>
-        </div>
         @elseif ($user->facial_image_base64)
         <!-- Verified Biometrics Card -->
         <div class="p-6 bg-green-100 rounded-2xl shadow-xl border-t-4 border-green-500">
