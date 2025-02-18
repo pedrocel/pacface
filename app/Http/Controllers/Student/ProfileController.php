@@ -13,8 +13,9 @@ class ProfileController extends Controller
 {
     public function index()
     {
+        $organizacao = UserOrganizationModel::where('user_id', Auth::user()->id)->with('organization')->first();
         $user = Auth::user();
-        return view('student.profile.index', compact('user'));
+        return view('student.profile.index', compact('user', 'organizacao'));
     }
 
     public function updateImage(Request $request){
