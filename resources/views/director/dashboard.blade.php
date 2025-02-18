@@ -126,11 +126,11 @@
               </svg>
             </div>
             <p class="text-3xl font-bold text-[#2ECC71]">{{ count($userOrganization) }}</p>
-            <div class="mt-4 progress-container">  
+            <!-- <div class="mt-4 progress-container">  
               <div class="progress-bar" id="progress-bar">
 
               </div> 
-            </div>
+            </div> -->
           </div>
         </div>
 
