@@ -174,6 +174,7 @@
         <thead class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
             <tr>
                 <th class="px-6 py-3 text-left text-sm font-semibold">CPF</th>
+                <th class="px-6 py-3 text-left text-sm font-semibold">Organização</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold">Status</th>
                 <th class="px-6 py-3 text-left text-sm font-semibold">Ações</th>
             </tr>
