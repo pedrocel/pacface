@@ -14,6 +14,7 @@ use App\Http\Controllers\Student\DashboardController as StudentDashboardControll
 use App\Http\Controllers\PerfilController;
 use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Director\DashboardController as DirectorDashboardController;
 use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
 use App\Http\Controllers\DocumentController;
@@ -118,6 +119,13 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
 
     Route::get('/perfil/detalhes', [ResponsibleProfileController::class, 'index'])->name('director.profile.index');
 
+    Route::get('/pre-cadastro', [DirectorStudentsController::class, 'getPreRegister'])->name('director.pre-register.get');
+    Route::post('/pre-cadastro', [DirectorStudentsController::class, 'postPreRegister'])->name('director.pre-register.post');
+    Route::put('/pre-cadastro/excluir/{id}', [DirectorStudentsController::class, 'deletePreRegister'])->name('director.pre-register.delete');
+    Route::post('/upload-cpf', [DirectorStudentsController::class, 'uploadCpf'])->name('upload.cpf');
+
+
+
     Route::get('/alunos', [DirectorStudentsController::class, 'index'])->name('director.students.index');
     Route::get('/aluno/criar', [DirectorStudentsController::class, 'create'])->name('director.students.create');
     Route::post('/aluno/criar', [DirectorStudentsController::class, 'store'])->name('director.students.store');
@@ -140,6 +148,10 @@ Route::get('/groups/{group}/edit', [GroupController::class, 'edit'])->name('grou
 Route::post('/groups/{group}', [GroupController::class, 'updates'])->name('groups.update');
 Route::delete('/groups/{group}', [GroupController::class, 'destroys'])->name('groups.destroy');
 
+Route::get('/student/login', [CustomLoginController::class, 'showLoginForm'])->name('student.login');
+Route::post('/student/login', [CustomLoginController::class, 'login'])->name('student.login');
+Route::get('/student/register/{student}', [CustomLoginController::class, 'showRegisterForm'])->name('student.register.get');
+Route::post('/student/register', [CustomLoginController::class, 'register'])->name('pre-register-student.register');
 
 require __DIR__.'/auth.php';
 Route::post('/webhook/face-event', action: [FaceEventController::class, 'handleWebhook']);

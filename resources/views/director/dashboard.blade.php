@@ -62,6 +62,22 @@
                 Alunos
             </a>
           </li>
+          <li class="mb-4">
+            <a href="{{ route('director.pre-register.get') }}" class="flex items-center p-2 rounded transition-all duration-300 
+                @unless(Route::is('director.pre-register.get'))
+                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
+                @endunless
+                      hover:text-white hover:shadow-lg
+                @if(Route::is('director.pre-register.get'))
+                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
+                @endif">
+                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Pré cadastro
+            </a>
+          </li>
         </ul>
 
         <div class="absolute bottom-0 left-0 w-full bg-black p-4 flex justify-center">
@@ -91,6 +107,9 @@
                 </a>
                 <a href="{{ route('director.students.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
                   Alunos
+                </a>
+                <a href="{{ route('director.pre-register.get') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
+                  Pré Cadastro
                 </a>
                 <form method="POST" action="/logout">
                     @csrf

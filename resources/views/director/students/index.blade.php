@@ -63,6 +63,22 @@
                 Alunos
             </a>
           </li>
+          <li class="mb-4">
+            <a href="{{ route('director.pre-register.get') }}" class="flex items-center p-2 rounded transition-all duration-300 
+                @unless(Route::is('director.pre-register.get'))
+                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
+                @endunless
+                      hover:text-white hover:shadow-lg
+                @if(Route::is('director.pre-register.get'))
+                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
+                @endif">
+                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
+                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                </svg>
+                Pré cadastro
+            </a>
+          </li>
         </ul>
 
         <div class="absolute bottom-0 left-0 w-full bg-black p-4 flex justify-center">
@@ -158,137 +174,137 @@
         </div>
 
         <div id="createResponsibleModal" class="z-50 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
-        <h2 id="modalTitle" class="text-xl font-semibold mb-4">Cadastrar Aluno</h2>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 id="modalTitle" class="text-xl font-semibold mb-4">Cadastrar Aluno</h2>
 
-        <form id="responsibleForm" action="{{ route('student.responsible.store') }}" method="POST">
-            @csrf
-            <input type="hidden" name="_method" id="formMethod" value="POST">
-            <input type="hidden" name="id" id="responsibleId">
+            <form id="responsibleForm" action="{{ route('student.responsible.store') }}" method="POST">
+                @csrf
+                <input type="hidden" name="_method" id="formMethod" value="POST">
+                <input type="hidden" name="id" id="responsibleId">
 
-            <!-- Etapa 1: Dados do Aluno -->
-            <div id="step1">
-                <div class="mb-4">
-                    <label for="student_name" class="block text-sm font-medium text-gray-700">Nome do Aluno</label>
-                    <input type="text" name="student_name" id="student_name" required class="mt-1 p-2 border rounded-lg w-full">
+                <!-- Etapa 1: Dados do Aluno -->
+                <div id="step1">
+                    <div class="mb-4">
+                        <label for="student_name" class="block text-sm font-medium text-gray-700">Nome do Aluno</label>
+                        <input type="text" name="student_name" id="student_name" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="student_email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                        <input type="email" name="student_email" id="student_email" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="student_password" class="block text-sm font-medium text-gray-700">Senha</label>
+                        <input type="password" name="student_password" id="student_password" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="student_whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
+                        <input type="text" name="student_whatsapp" id="student_whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
+                        <input type="text" name="cpf" id="cpf" required class="mt-1 p-2 border rounded-lg w-full" >
+                    </div>
+
+                    <div class="mb-4">
+                    <label for="student_birthdate" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
+                    <input type="date" name="student_birthdate" id="student_birthdate" required class="mt-1 p-2 border rounded-lg w-full">
                 </div>
 
-                <div class="mb-4">
-                    <label for="student_email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                    <input type="email" name="student_email" id="student_email" required class="mt-1 p-2 border rounded-lg w-full">
-                </div>
+                    <div class="mb-4">
+                        <label for="student_cep" class="block text-sm font-medium text-gray-700">CEP</label>
+                        <input type="text" name="student_cep" id="student_cep" required class="mt-1 p-2 border rounded-lg w-full" placeholder="00000-000" onblur="fetchAddress('student')">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="student_address" class="block text-sm font-medium text-gray-700">Endereço</label>
+                        <input type="text" name="student_address" id="student_address" required class="mt-1 p-2 border rounded-lg w-full" placeholder="Logradouro">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="student_password" class="block text-sm font-medium text-gray-700">Senha</label>
-                    <input type="password" name="student_password" id="student_password" required class="mt-1 p-2 border rounded-lg w-full">
-                </div>
-
-                <div class="mb-4">
-                    <label for="student_whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
-                    <input type="text" name="student_whatsapp" id="student_whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
-                </div>
-
-                <div class="mb-4">
-                    <label for="cpf" class="block text-sm font-medium text-gray-700">CPF</label>
-                    <input type="text" name="cpf" id="cpf" required class="mt-1 p-2 border rounded-lg w-full" >
-                </div>
-
-                <div class="mb-4">
-                  <label for="student_birthdate" class="block text-sm font-medium text-gray-700">Data de Nascimento</label>
-                  <input type="date" name="student_birthdate" id="student_birthdate" required class="mt-1 p-2 border rounded-lg w-full">
-              </div>
-
-                <div class="mb-4">
-                    <label for="student_cep" class="block text-sm font-medium text-gray-700">CEP</label>
-                    <input type="text" name="student_cep" id="student_cep" required class="mt-1 p-2 border rounded-lg w-full" placeholder="00000-000" onblur="fetchAddress('student')">
-                </div>
-                
-                <div class="mb-4">
-                    <label for="student_address" class="block text-sm font-medium text-gray-700">Endereço</label>
-                    <input type="text" name="student_address" id="student_address" required class="mt-1 p-2 border rounded-lg w-full" placeholder="Logradouro">
-                </div>
-
-                <div class="flex mb-4">
-    <div class="mr-4 w-1/3">
-        <label for="student_city" class="block text-sm font-medium text-gray-700">Cidade</label>
-        <input type="text" name="student_city" id="student_city" required class="mt-1 p-2 border rounded-lg w-full">
+                    <div class="flex mb-4">
+        <div class="mr-4 w-1/3">
+            <label for="student_city" class="block text-sm font-medium text-gray-700">Cidade</label>
+            <input type="text" name="student_city" id="student_city" required class="mt-1 p-2 border rounded-lg w-full">
+        </div>
+        <div class="mr-4 w-1/3">
+            <label for="student_state" class="block text-sm font-medium text-gray-700">Estado</label>
+            <input type="text" name="student_state" id="student_state" required class="mt-1 p-2 border rounded-lg w-full">
+        </div>
+        <div class="w-1/3">
+            <label for="student_number" class="block text-sm font-medium text-gray-700">Número</label>
+            <input type="text" name="student_number" id="student_number" required class="mt-1 p-2 border rounded-lg w-full">
+        </div>
     </div>
-    <div class="mr-4 w-1/3">
-        <label for="student_state" class="block text-sm font-medium text-gray-700">Estado</label>
-        <input type="text" name="student_state" id="student_state" required class="mt-1 p-2 border rounded-lg w-full">
-    </div>
-    <div class="w-1/3">
-        <label for="student_number" class="block text-sm font-medium text-gray-700">Número</label>
-        <input type="text" name="student_number" id="student_number" required class="mt-1 p-2 border rounded-lg w-full">
-    </div>
-</div>
 
 
-                <div class="flex items-center">
-                    <label class="mr-2">Emancipado:</label>
-                    <label class="flex items-center mr-4">
-                        <input type="radio" name="emancipated" id="emancipated" value="yes" class="mr-2"> Sim
-                    </label>
-                    <label class="flex items-center">
-                        <input type="radio" name="emancipated" id="emancipated_no" value="no" class="mr-2" checked> Não
-                    </label>
+                    <div class="flex items-center">
+                        <label class="mr-2">Emancipado:</label>
+                        <label class="flex items-center mr-4">
+                            <input type="radio" name="emancipated" id="emancipated" value="yes" class="mr-2"> Sim
+                        </label>
+                        <label class="flex items-center">
+                            <input type="radio" name="emancipated" id="emancipated_no" value="no" class="mr-2" checked> Não
+                        </label>
+                    </div>
+
+                    <div>
+                        <button type="button" onclick="nextStep()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Próximo</button>
+                    </div>
+                    
                 </div>
 
-                <div>
-                    <button type="button" onclick="nextStep()" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Próximo</button>
-                </div>
-                
-            </div>
+                <br>
+                <!-- Seção de Emancipado e Botões -->
+                <div class="mb-4  justify-between items-center ">
+        
+        
+                <!-- Etapa 2: Dados do Responsável -->
+                <div id="step2" class="hidden ">
+                    <div class="mb-4">
+                        <label for="name" class="block text-sm font-medium text-gray-700">Nome do Responsável</label>
+                        <input type="text" name="name" id="name" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
 
-              <br>
-            <!-- Seção de Emancipado e Botões -->
-            <div class="mb-4  justify-between items-center ">
-    
-    
-            <!-- Etapa 2: Dados do Responsável -->
-            <div id="step2" class="hidden ">
-                <div class="mb-4">
-                    <label for="name" class="block text-sm font-medium text-gray-700">Nome do Responsável</label>
-                    <input type="text" name="name" id="name" required class="mt-1 p-2 border rounded-lg w-full">
-                </div>
+                    <div class="mb-4">
+                        <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
+                        <input type="email" name="email" id="email" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                    <input type="email" name="email" id="email" required class="mt-1 p-2 border rounded-lg w-full">
-                </div>
+                    <div class="mb-4">
+                        <label for="whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
+                        <input type="text" name="whatsapp" id="whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="whatsapp" class="block text-sm font-medium text-gray-700">WhatsApp</label>
-                    <input type="text" name="whatsapp" id="whatsapp" required class="mt-1 p-2 border rounded-lg w-full" placeholder="(99) 99999-9999">
-                </div>
+                    <div class="mb-4">
+                        <label for="responsible_cep" class="block text-sm font-medium text-gray-700">CEP</label>
+                        <input type="text" name="responsible_cep" id="responsible_cep" required class="mt-1 p-2 border rounded-lg w-full" placeholder="00000-000" onblur="fetchAddress('responsible')">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="responsible_address" class="block text-sm font-medium text-gray-700">Endereço</label>
+                        <input type="text" name="responsible_address" id="responsible_address" required class="mt-1 p-2 border rounded-lg w-full" placeholder="Logradouro">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="responsible_cep" class="block text-sm font-medium text-gray-700">CEP</label>
-                    <input type="text" name="responsible_cep" id="responsible_cep" required class="mt-1 p-2 border rounded-lg w-full" placeholder="00000-000" onblur="fetchAddress('responsible')">
-                </div>
-                
-                <div class="mb-4">
-                    <label for="responsible_address" class="block text-sm font-medium text-gray-700">Endereço</label>
-                    <input type="text" name="responsible_address" id="responsible_address" required class="mt-1 p-2 border rounded-lg w-full" placeholder="Logradouro">
-                </div>
+                    <div class="mb-4">
+                        <label for="responsible_city" class="block text-sm font-medium text-gray-700">Cidade</label>
+                        <input type="text" name="responsible_city" id="responsible_city" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
 
-                <div class="mb-4">
-                    <label for="responsible_city" class="block text-sm font-medium text-gray-700">Cidade</label>
-                    <input type="text" name="responsible_city" id="responsible_city" required class="mt-1 p-2 border rounded-lg w-full">
+                    <div class="mb-4">
+                        <label for="responsible_state" class="block text-sm font-medium text-gray-700">Estado</label>
+                        <input type="text" name="responsible_state" id="responsible_state" required class="mt-1 p-2 border rounded-lg w-full">
+                    </div>
+                    
+                    <div class="flex justify-between">
+                        <button type="button" onclick="prevStep()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Voltar</button>
+                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar</button>
+                    </div>
                 </div>
-
-                <div class="mb-4">
-                    <label for="responsible_state" class="block text-sm font-medium text-gray-700">Estado</label>
-                    <input type="text" name="responsible_state" id="responsible_state" required class="mt-1 p-2 border rounded-lg w-full">
-                </div>
-                
-                <div class="flex justify-between">
-                    <button type="button" onclick="prevStep()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Voltar</button>
-                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar</button>
-                </div>
-            </div>
-        </form>
-    </div>
+            </form>
+        </div>
 </div>
 
 <script>
