@@ -182,6 +182,7 @@
             @foreach($students as $student)
             <tr class="border-b hover:bg-gray-100 transition duration-300">
                 <td class="px-6 py-4 text-sm text-gray-700">{{ $student->cpf }}</td>
+                <td class="px-6 py-4 text-sm text-gray-700">{{ $student->organization_id }}</td>
                 <td class="px-6 py-4">
                     @if($student->status == 1)
                         <button class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300">Pendente</button>
