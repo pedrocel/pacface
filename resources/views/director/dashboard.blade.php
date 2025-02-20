@@ -151,20 +151,20 @@
                             <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Atual</span>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-900">847</span>
-                            <span class="text-purple-500 text-sm ml-2">67%</span>
+                            <span class="text-3xl font-bold text-gray-900">{{ count($acessosHoje) }}</span>
+                            <span class="text-purple-500 text-sm ml-2">Representa {{ number_format($percentualAcessosHoje, 2) }}% do total de alunos </span>
                         </div>
                     </div>
 
                     <!-- Recognition Success Rate -->
                     <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                         <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-gray-600 text-sm font-medium">Taxa de Sucesso</h3>
-                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Média</span>
+                            <h3 class="text-gray-600 text-sm font-medium">Média de presença</h3>
+                            <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Ultimos 30 dias</span>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-3xl font-bold text-gray-900">99.8%</span>
-                            <span class="text-yellow-500 text-sm ml-2">↑ 0.2%</span>
+                            <span class="text-3xl font-bold text-gray-900">{{ number_format($mediaPresenca30Dias, 2) }}%</span>
+                            <span class="text-yellow-500 text-sm ml-2">Dados confirmados</span>
                         </div>
                     </div>
                 </div>
