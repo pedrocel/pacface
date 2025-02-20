@@ -25,8 +25,27 @@ class DashboardController extends Controller
         })
         ->with('user')
         ->get();
+
+        $biometrias = UserOrganizationModel::where('organization_id', $org->organization_id)
+        ->whereHas('user', function ($query) {
+            // Filtro para obter apenas os usuários com perfilAtual igual a 7
+            $query->whereHas('perfis', function ($subQuery) {
+                $subQuery->where('is_atual', true)
+                        ->where('perfil_id', 7); // Ajuste para o perfil desejado
+            })
+            ->whereNotNull('facial_image_base64'); // Filtra usuários com facial_image_base64 diferente de null
+        })
+        ->with('user')
+        ->get();
+
+        // Calcula a porcentagem de usuários com biometria cadastrada
+        $totalUsuarios = $userOrganization->count();
+        $totalBiometria = $biometrias->count();
+        
+        $percentualBiometria = $totalUsuarios > 0 ? ($totalBiometria / $totalUsuarios) * 100 : 0;
+
         
 
-        return view('director.dashboard', compact('user', 'userOrganization', 'profiles', 'org'));   
+        return view('director.dashboard', compact('user', 'userOrganization', 'profiles', 'org', 'biometrias', 'percentualBiometria'));   
     }
 }
