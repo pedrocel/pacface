@@ -19,7 +19,7 @@
                 <div class="absolute -top-1 -right-1 w-3 h-3 bg-emerald-400 rounded-full"></div>
                 <div class="absolute -bottom-1 -left-1 w-3 h-3 bg-emerald-400 rounded-full"></div>
             </div>
-            <h1 class="text-3xl font-bold text-white">Reconhecimento Facial</h1>
+            <h1 class="text-3xl font-bold text-white">PACSAFE</h1>
             <p class="text-emerald-200 mt-2">Acesse sua conta com segurança</p>
         </div>
 
@@ -39,7 +39,7 @@
                         class="block w-full pl-10 pr-3 py-2 border border-emerald-600 rounded-lg
                         bg-emerald-900/30 text-white placeholder-emerald-400/70
                         focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                        placeholder="000.000.000-00">
+                        placeholder="Digite seu Email">
                 </div>
             </div>
 
