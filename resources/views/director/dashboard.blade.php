@@ -134,21 +134,5 @@
         </div>
     </div>
   </div>
-  <script>
-      // Mobile menu functionality
-      const mobileMenuButton = document.getElementById('mobile-menu-button');
-      const sidebar = document.getElementById('sidebar');
-      let isSidebarOpen = false;
-
-      mobileMenuButton.addEventListener('click', () => {
-          isSidebarOpen = !isSidebarOpen;
-          if (isSidebarOpen) {
-              sidebar.classList.remove('-translate-x-full');
-              sidebar.classList.add('translate-x-0');
-          } else {
-              sidebar.classList.remove('translate-x-0');
-              sidebar.classList.add('-translate-x-full');
-          }
-      });
-  </script>
+ 
 @endsection
