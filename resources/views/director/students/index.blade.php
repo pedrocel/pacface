@@ -1,179 +1,146 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pacsafe - Aluno</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-</head>
-<body class="h-screen bg-gradient-custom text-gray-800">
-  <div class="flex h-full">
-    <!-- Sidebar -->
-    <aside class="bg-[url('https://wallpapers.com/images/hd/green-gradient-background-1080-x-1920-1d34ljvp9yi0en92.jpg')] w-64 bg-white shadow-2xl flex flex-col p-4 hidden md:block">
-      <h2 class="text-xl text-white font-bold mb-8">{{ $org->organization->name }}</h2>
-      <nav>
+@extends('director.layout')
 
-        <ul>
-          <li class="mb-4">
-            <a href="{{ route('director.dashboard') }}" class="flex items-center p-2 rounded transition-all duration-300 
-                @unless(Route::is('director.dashboard'))
-                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
-                @endunless
-                      hover:text-white hover:shadow-lg
-                @if(Route::is('director.dashboard'))
-                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
-                @endif">
-                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                Dashboard
-            </a>
-          </li>
-          <li class="mb-4">
-            <a href="{{ route('director.profile.index') }}" class="flex items-center p-2 rounded transition-all duration-300 
-                @unless(Route::is('director.profile.index'))
-                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
-                @endunless
-                      hover:text-white hover:shadow-lg
-                @if(Route::is('director.profile.index'))
-                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
-                @endif">
-                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                Meu Perfil
-            </a>
-          </li>
-          <li class="mb-4">
-            <a href="{{ route('director.students.index') }}" class="flex items-center p-2 rounded transition-all duration-300 
-                @unless(Route::is('director.students.index'))
-                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
-                @endunless
-                      hover:text-white hover:shadow-lg
-                @if(Route::is('director.students.index'))
-                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
-                @endif">
-                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                Alunos
-            </a>
-          </li>
-          <li class="mb-4">
-            <a href="{{ route('director.pre-register.get') }}" class="flex items-center p-2 rounded transition-all duration-300 
-                @unless(Route::is('director.pre-register.get'))
-                      text-black bg-white hover:bg-gradient-to-r hover:from-[#a0f0c5] hover:to-[#00c800] 
-                @endunless
-                      hover:text-white hover:shadow-lg
-                @if(Route::is('director.pre-register.get'))
-                      bg-gradient-to-r from-[#a0f0c5] to-[#00c800] text-white
-                @endif">
-                <svg class="w-5 h-5 mr-2 transition-all duration-300 text-black hover:text-white" 
-                     fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                </svg>
-                Pré cadastro
-            </a>
-          </li>
-        </ul>
+@section('title', 'Dashboard')
 
-        <div class="absolute bottom-0 left-0 w-full bg-black p-4 flex justify-center">
-        <img src="https://api-eventos.pacsafe.com.br/logo-branca-1024x500.png" alt="Logo Pacsafe" class="h-12">
-      </div>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <div class="flex-1 flex flex-col">
-      <!-- Header -->
-      <header class="bg-white p-6 shadow-md">
-        <div class="flex justify-between items-center">
-          <h2 class="text-2xl font-bold text-[#2C3E50]">Alunos</h2>
-          <div class="flex items-center">
-            <div class="relative">
-            <button id="profileButton" class="flex items-center gap-2 p-2 bg-blue-100 rounded-full hover:bg-blue-200">
-              <img id="profileImage" src="data:image/png;base64,<?= htmlspecialchars($user->facial_image_base64) ?>" alt="Profile" class="h-10 w-10 rounded-full">
-            </button>
-            <div id="profileDropdown" class="absolute right-0 mt-2 w-48 bg-white shadow-xl rounded-xl p-4 hidden z-50">
-              <ul>  
-                <a href="{{ route('director.dashboard') }}" class="block py-2 px-4 rounded-xl text-lg font-medium bg-blue-100 hover:bg-blue-200 transition">
-                  Dashboard
-                </a>
-                <a href="{{ route('director.profile.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-                  Meu Perfil
-                </a>
-                <a href="{{ route('director.students.index') }}" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-                  Alunos
-                </a>
-                <form method="POST" action="/logout">
-                    @csrf
-                    <button type="submit" class="block py-2 px-4 rounded-xl text-lg font-medium hover:bg-blue-200 transition">
-                        Sair
-                    </button>
-                </form>
-              </ul>
-            </div>
-          </div>
-          </div>
-        </div>
-      </header>
-
-      <!-- Cards e Métricas -->
-      <main class="p-6 flex-1">
-          <!-- Card: Quantidade de Alunos -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2">
-            <!-- Card de Criar Novo Aluno -->
-            <div onclick="openModal()" class="bg-blue-100 rounded-2xl shadow-lg p-6 flex flex-col items-center justify-center hover:bg-blue-200 transition cursor-pointer">
-                <div class="w-16 h-16 bg-blue-500 text-white flex items-center justify-center rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m-8-8h16" />
-                    </svg>
+@section('content')
+    <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-3xl font-bold text-gray-800">Alunos</h2>
+                    <div class="flex items-center space-x-4">
+                        <div class="relative">
+                            <input type="text" placeholder="Buscar aluno..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500">
+                            <svg class="w-5 h-5 text-gray-400 absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                            </svg>
+                        </div>
+                        <button onclick="openModal()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                            Adicionar Aluno
+                        </button>
+                    </div>
                 </div>
-                <h3 class="text-lg font-semibold text-blue-700 mt-4">Cadastrar novo estudante</h3>
-            </div>
 
-            @forelse ($userOrganization as $student)
-            <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center hover:shadow-2xl transition relative">
-                <div class="w-24 h-24 mb-4">
-                    @if ($student->user->facial_image_base64)
-                        <img src="data:image/png;base64,<?= htmlspecialchars($student->user->facial_image_base64) ?>" class="rounded-full object-cover w-full h-full">
-                    @else
-                        <img src="https://img.freepik.com/psd-gratuitas/ilustracao-de-icone-de-contacto-isolada_23-2151903337.jpg" class="rounded-full object-cover w-full h-full">
-                    @endif
+                <!-- Filters -->
+                <div class="bg-white p-4 rounded-lg shadow-sm mb-6 flex items-center space-x-4">
+                    <span class="text-gray-700 font-medium">Filtrar por:</span>
+                    <select class="border border-gray-300 rounded-md px-3 py-1.5">
+                        <option>Todas as Turmas</option>
+                        <option>1º Ano A</option>
+                        <option>1º Ano B</option>
+                        <option>2º Ano A</option>
+                    </select>
+                    <select class="border border-gray-300 rounded-md px-3 py-1.5">
+                        <option>Status Biometria</option>
+                        <option>Cadastrada</option>
+                        <option>Pendente</option>
+                    </select>
+                    <select class="border border-gray-300 rounded-md px-3 py-1.5">
+                        <option>Status Matrícula</option>
+                        <option>Ativo</option>
+                        <option>Inativo</option>
+                    </select>
                 </div>
-                <h3 class="text-lg font-semibold text-gray-900 text-center">{{ $student->user->name }}</h3>
-                <p class="text-gray-700 mb-4">{{ $student->user->email }}</p>
-                
-                <!-- Botão de ações -->
-                <div class="absolute top-2 right-2">
-                    <button onclick="toggleDropdown(this)" class="p-2 border border-gray-400 text-gray-700 rounded-full hover:bg-blue-200 transition">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                            <circle cx="12" cy="6" r="2"/>
-                            <circle cx="12" cy="12" r="2"/>
-                            <circle cx="12" cy="18" r="2"/>
-                        </svg>
-                    </button>
 
-                    <!-- Dropdown -->
-                    <div class="hidden absolute right-0 mt-2 w-40 bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-                    <button class="edit-responsible" data-responsible='{"id":1,"name":"João Silva","email":"joao@email.com","responsible_type_id":2,"whatsapp":"(99) 99999-9999","cpf":"000.000.000-00","birthdate":"1990-01-01"}'>
-            Editar
-        </button>
-                        <button class="w-full px-4 py-2 text-left text-gray-700 hover:bg-gray-100 transition">Excluir</button>
+                <!-- Students Table -->
+                <div class="bg-white rounded-lg shadow-sm">
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aluno</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Matrícula</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Turma</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Biometria</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Última Entrada</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                            @forelse ($userOrganization as $student)
+                                <tr>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                        <img class="h-10 w-10 rounded-full" src="data:image/jpeg;base64,{{ $student->user->facial_image_base64 }}" alt="Foto do usuário">
+
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900">{{ $student->user->name }}</div>
+                                                <div class="text-sm text-gray-500">{{ $student->user->email }}</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2024001</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">1º Ano A</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                            Cadastrada
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Hoje, 08:15</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                        <button class="text-green-600 hover:text-green-900 mr-3">Editar</button>
+                                        <button class="text-red-600 hover:text-red-900">Remover</button>
+                                    </td>
+                                </tr>
+                                @empty
+                                <p class="text-gray-700 text-center col-span-full">Nenhum aluno encontrado.</p>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="bg-white px-4 py-3 border-t border-gray-200 sm:px-6">
+                        <div class="flex items-center justify-between">
+                            <div class="flex-1 flex justify-between sm:hidden">
+                                <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Anterior
+                                </a>
+                                <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                                    Próximo
+                                </a>
+                            </div>
+                            <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                                <div>
+                                    <p class="text-sm text-gray-700">
+                                        Mostrando <span class="font-medium">1</span> a <span class="font-medium">10</span> de <span class="font-medium">97</span> resultados
+                                    </p>
+                                </div>
+                                <div>
+                                    <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Anterior</span>
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                            1
+                                        </a>
+                                        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                            2
+                                        </a>
+                                        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                            3
+                                        </a>
+                                        <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-gray-50 text-sm font-medium text-gray-700">
+                                            ...
+                                        </span>
+                                        <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+                                            10
+                                        </a>
+                                        <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                                            <span class="sr-only">Próximo</span>
+                                            <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                                                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                                            </svg>
+                                        </a>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            
-        @empty
-            <p class="text-gray-700 text-center col-span-full">Nenhum aluno encontrado.</p>
-        @endforelse 
-        </div>
 
-        <div id="createResponsibleModal" class="z-50 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+  <!-- modals -->
+  <div id="createResponsibleModal" class="z-50 fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
         <div class="bg-white p-6 rounded-lg shadow-lg w-96">
             <h2 id="modalTitle" class="text-xl font-semibold mb-4">Cadastrar Aluno</h2>
 
@@ -307,7 +274,9 @@
         </div>
 </div>
 
-<script>
+  <!-- scripts -->
+
+  <script>
     function openModal(isEdit = false, responsible = null) {
         const modal = document.getElementById('createResponsibleModal');
         const form = document.getElementById('responsibleForm');
@@ -399,9 +368,8 @@
         }
     }
 </script>
+@endsection
 
-      </main>
-    </div>
-  </div>
-</body>
-</html>
+
+
+
