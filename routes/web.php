@@ -27,7 +27,7 @@ use App\Http\Controllers\Student\DocumentController as StudentDocumentController
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
 
 Route::get('/', function () {
-    return redirect()->route('login');
+    return view('landing');
 });
 
 // Route::get('/dashboard', function () {
