@@ -243,13 +243,17 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="mt-4 flex items-center">
+                        <input type="checkbox" id="termos" class="mr-2" onchange="toggleModal()">
+                        <label for="termos" class="text-gray-800 dark:text-gray-200 cursor-pointer">
+                            Eu aceito os <span class="text-emerald-600 underline">termos de uso</span>
+                        </label>
+                    </div>
                     <!-- Submit Button -->
                     <div class="mt-6">
-                        <button type="submit"
+                        <button id="submitBtn" type="submit" disabled
                             class="w-full flex items-center justify-center px-4 py-3 border border-transparent
-                            rounded-lg shadow-sm text-white bg-emerald-600 hover:bg-emerald-700
-                            focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500
+                            rounded-lg shadow-sm text-white bg-gray-400 cursor-not-allowed
                             transition duration-300 text-sm font-semibold">
                             <i class="fas fa-user-plus mr-2"></i>
                             Cadastrar
@@ -259,7 +263,87 @@
             </div>
         </div>
     </div>
+    <div id="modal" class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 hidden">
+    <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-200">Termos de Uso</h2>
+        <div class="mt-4 max-h-80 overflow-y-auto p-2 bg-gray-100 dark:bg-gray-700 rounded">
+            <p class="text-sm text-gray-700 dark:text-gray-300"><strong>Última atualização:</strong>21/02/2025</p>
+            <p class="text-sm text-gray-700 dark:text-gray-300"><strong>PACSAFE - CNPJ: 19.085.289/0001-17</strong></p>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Bem-vindo ao <strong>PACSAFE</strong>, um sistema de reconhecimento facial desenvolvido para escolas, que permite o cadastramento dos alunos e responsáveis, incluindo dados pessoais e fotos para identificação.</p>
+            
+            <h3 class="mt-4 font-semibold text-gray-800 dark:text-gray-200">1. COLETA DE DADOS</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Para fornecer nossos serviços, coletamos os seguintes dados:</p>
+            <ul class="list-disc ml-5">
+                <li class="text-sm text-gray-700 dark:text-gray-300"><strong>Dados do responsável:</strong> Nome completo, CPF, e-mail, telefone.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300"><strong>Dados do aluno:</strong> Nome completo, data de nascimento, série escolar, turma.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300"><strong>Dados biométricos:</strong> Foto do rosto do aluno para identificação via reconhecimento facial.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300"><strong>Dados de acesso:</strong> Registros de login, horários de entrada e saída na escola.</li>
+            </ul>
 
+            <h3 class="mt-4 font-semibold text-gray-800 dark:text-gray-200">2. FINALIDADE DO TRATAMENTO DE DADOS</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Os dados coletados serão utilizados exclusivamente para:</p>
+            <ul class="list-disc ml-5">
+                <li class="text-sm text-gray-700 dark:text-gray-300">Identificação e controle de acesso dos alunos às dependências da escola.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Garantia da segurança escolar, evitando acessos não autorizados.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Comunicação com os responsáveis, enviando alertas sobre a entrada e saída dos alunos.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Cumprimento de obrigações legais ou solicitações de autoridades.</li>
+            </ul>
+
+            <h3 class="mt-4 font-semibold text-gray-800 dark:text-gray-200">3. COMPARTILHAMENTO DE DADOS</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Os dados coletados <strong>não serão vendidos ou compartilhados</strong> com terceiros, exceto:</p>
+            <ul class="list-disc ml-5">
+                <li class="text-sm text-gray-700 dark:text-gray-300">Com a escola contratante, para a gestão acadêmica e segurança.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Com órgãos públicos, caso seja necessário para cumprimento de obrigações legais.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Com prestadores de serviço, exclusivamente para manutenção e suporte técnico do PACSAFE.</li>
+            </ul>
+
+            <h3 class="mt-4 font-semibold text-gray-800 dark:text-gray-200">4. ARMAZENAMENTO E SEGURANÇA</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Adotamos medidas técnicas e organizacionais para proteger os dados, incluindo:</p>
+            <ul class="list-disc ml-5">
+                <li class="text-sm text-gray-700 dark:text-gray-300">Criptografia para armazenamento seguro das informações.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Controle de acesso restrito apenas a usuários autorizados.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Monitoramento e auditoria para prevenir acessos indevidos.</li>
+            </ul>
+
+            <h3 class="mt-4 font-semibold text-gray-800 dark:text-gray-200">5. DIREITOS DO TITULAR DE DADOS (LGPD)</h3>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Conforme a LGPD, o titular (ou responsável legal) pode solicitar:</p>
+            <ul class="list-disc ml-5">
+                <li class="text-sm text-gray-700 dark:text-gray-300">Confirmação de que seus dados estão sendo processados.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Correção de dados incorretos ou desatualizados.</li>
+                <li class="text-sm text-gray-700 dark:text-gray-300">Exclusão dos dados, quando permitido por lei.</li>
+            </ul>
+            <p class="text-sm text-gray-700 dark:text-gray-300">Para exercer seus direitos, entre em contato pelo e-mail <strong>[seuemail@pacsafe.com]</strong>.</p>
+        </div>
+
+            </p>
+        <div class="mt-4 flex justify-end">
+            <button onclick="closeModal()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700">
+                Aceitar e Fechar
+            </button>
+        </div>
+    </div>
+</div>
+    <script>
+        function toggleModal() {
+            const checkbox = document.getElementById('termos');
+            const modal = document.getElementById('modal');
+
+            if (checkbox.checked) {
+                modal.classList.remove('hidden'); // Abre a modal
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.add('hidden'); // Fecha a modal
+
+            // Habilita o botão de envio
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+            submitBtn.classList.add('bg-emerald-600', 'hover:bg-emerald-700');
+        }
+    </script>
     <!-- Scripts -->
     <script>
         // Máscara para WhatsApp
