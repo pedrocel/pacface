@@ -26,10 +26,10 @@
                     <a href="#perfis" class="hover:text-emerald-400 transition-colors">Perfis</a>
                     <a href="#ponto" class="hover:text-emerald-400 transition-colors">Ponto Digital</a>
                 </div>
-                <a href="/login" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
+                <a href="{{ route('login') }}" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
                     Portal Docente
                 </a>
-                <a href="/login" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
+                <a href="{{ route('student.login') }}" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
                     Portal Aluno
                 </a>
             </div>
