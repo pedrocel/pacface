@@ -6,6 +6,7 @@
     <title>PacSafe - Sistema Acadêmico</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
     <style>
         .sidebar-hover {
             transition: all 0.3s ease;
@@ -151,5 +152,6 @@
             }, 1200);
         });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" async></script>
 </body>
 </html>

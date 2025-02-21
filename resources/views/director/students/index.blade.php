@@ -59,7 +59,7 @@
                                 <tr>
                                     <td class="px-6 py-4 whitespace-nowrap">
                                         <div class="flex items-center">
-                                        <img class="h-10 w-10 rounded-full" src="data:image/jpeg;base64,{{ $student->user->facial_image_base64 }}" alt="Foto do usuário">
+                                        <img class="h-10 w-10 rounded-full lazyload" src="https://static.vecteezy.com/system/resources/thumbnails/013/042/571/small_2x/default-avatar-profile-icon-social-media-user-photo-in-flat-style-vector.jpg" data-src="data:image/jpeg;base64,{{ $student->user->facial_image_base64 }}" alt="Foto do usuário">
 
                                             <div class="ml-4">
                                                 <div class="text-sm font-medium text-gray-900">{{ $student->user->name }}</div>
