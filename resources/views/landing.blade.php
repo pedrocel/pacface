@@ -27,10 +27,10 @@
                     <a href="#ponto" class="hover:text-emerald-400 transition-colors">Ponto Digital</a>
                 </div>
                 <a href="{{ route('login') }}" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
-                    Portal Docente
+                    Secretaria
                 </a>
                 <a href="{{ route('student.login') }}" class="bg-emerald-600 hover:bg-emerald-700 px-6 py-2 rounded-full transition-colors">
-                    Portal Aluno
+                    Aluno
                 </a>
             </div>
         </div>
