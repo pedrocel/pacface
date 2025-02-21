@@ -32,7 +32,7 @@ class StudentsController extends Controller
             });
         })
         ->with('user')
-        ->get();
+        ->paginate(10);
         
         return view('director.students.index', compact('user', 'userOrganization', 'profiles', 'org'));
     }
