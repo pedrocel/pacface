@@ -55,7 +55,9 @@
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ $failedNotifications }}</span>
-                    <span class="text-purple-500 text-sm ml-2">{{ number_format(($failedNotifications / $totalNotifications) * 100, 2) }}%</span>
+                    <span class="text-purple-500 text-sm ml-2">
+                        {{ $totalNotifications > 0 ? number_format(($failedNotifications / $totalNotifications) * 100, 2) . '%' : '0%' }}
+                    </span>
                 </div>
             </div>
 
