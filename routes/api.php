@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\NotificationTestController;
 use App\Http\Controllers\FaceEventController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -10,3 +11,4 @@ Route::get('/user', function (Request $request) {
 
 Route::post('/webhook/face-event', action: [FaceEventController::class, 'handleWebhook']);
 Route::get('/crawler/user-face', action: [FaceEventController::class, 'getUsers']);
+Route::post('/test-notification', [NotificationTestController::class, 'sendTestNotification']);
