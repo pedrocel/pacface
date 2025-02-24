@@ -59,8 +59,8 @@
             <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Contact Information -->
                 <div class="space-y-6">
-                    <h2 class="text-xl font-semibold text-emerald-300 mb-4">
-                        <i class="fas fa-address-card mr-2"></i>
+                    <h2 class="text-xl font-semibold text-white mb-4">
+                        <i class="fas fa-address-card mr-2 text-emerald-300"></i>
                         Informações de Contato
                     </h2>
 
@@ -71,8 +71,8 @@
                                 <i class="fab fa-whatsapp text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">WhatsApp</p>
-                                <p class="text-emerald-200">{{ $user->whatsapp ?? 'Não informado' }}</p>
+                                <p class="text-sm text-white">WhatsApp</p>
+                                <p class="text-white">{{ $user->whatsapp ?? 'Não informado' }}</p>
                             </div>
                         </div>
                     </div>
@@ -84,8 +84,8 @@
                                 <i class="fas fa-id-card text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">CPF</p>
-                                <p class="text-emerald-200">{{ $user->cpf ?? 'Não informado' }}</p>
+                                <p class="text-sm text-white">CPF</p>
+                                <p class="text-white">{{ $user->cpf ?? 'Não informado' }}</p>
                             </div>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
                                 <i class="fas fa-calendar text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">Data de Nascimento</p>
-                                <p class="text-emerald-200"> {{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->format('d/m/Y') : 'Não informado' }}</p>
+                                <p class="text-sm text-white">Data de Nascimento</p>
+                                <p class="text-white"> {{ $user->birthdate ? \Carbon\Carbon::parse($user->birthdate)->format('d/m/Y') : 'Não informado' }}</p>
                             </div>
                         </div>
                     </div>
@@ -110,8 +110,8 @@
                                 <i class="fas fa-user-graduate text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">Status de Emancipação</p>
-                                <p class="text-emerald-200">{{ $user->is_emancipated ? 'Sim' : 'Não' }}</p>
+                                <p class="text-sm text-white">Status de Emancipação</p>
+                                <p class="text-white">{{ $user->is_emancipated ? 'Sim' : 'Não' }}</p>
                             </div>
                         </div>
                     </div>
@@ -119,8 +119,8 @@
 
                 <!-- Academic Information -->
                 <div class="space-y-6">
-                    <h2 class="text-xl font-semibold text-emerald-300 mb-4">
-                        <i class="fas fa-graduation-cap mr-2"></i>
+                    <h2 class="text-xl font-semibold text-white mb-4">
+                        <i class="fas fa-graduation-cap mr-2 text-emerald-300"></i>
                         Informações Acadêmicas
                     </h2>
 
@@ -131,13 +131,13 @@
                                 <i class="fas fa-clock text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">Turno</p>
+                                <p class="text-sm text-white">Turno</p>
                                 <div class="flex items-center space-x-2 mt-2">
                                     <span class="inline-flex items-center px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300">
                                         <i class="fas fa-sun mr-2"></i>
                                         Matutino
                                     </span>
-                                    <span class="text-xs text-emerald-400/70">07:00 - 12:00</span>
+                                    <span class="text-xs text-white">07:00 - 12:00</span>
                                 </div>
                             </div>
                         </div>
@@ -150,10 +150,10 @@
                                 <i class="fas fa-map-marker-alt text-emerald-400"></i>
                             </div>
                             <div class="ml-4">
-                                <p class="text-sm text-emerald-400/70">Endereço</p>
-                                <p class="text-emerald-200">Rua Exemplo, 123</p>
-                                <p class="text-emerald-400/70 text-sm">Cidade - Estado</p>
-                                <p class="text-emerald-400/70 text-sm">CEP: 13000-000</p>
+                                <p class="text-sm text-white">Endereço</p>
+                                <p class="text-white">Rua Exemplo, 123</p>
+                                <p class="text-white text-sm">Cidade - Estado</p>
+                                <p class="text-white text-sm">CEP: 13000-000</p>
                             </div>
                         </div>
                     </div>

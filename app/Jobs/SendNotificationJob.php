@@ -93,7 +93,7 @@ class SendNotificationJob implements ShouldQueue
             // Faz a requisição para a API do ChatPro
             $response = $client->request('POST', $url, [
                 'json' => [
-                    'number' => '5582988291668', // Número do usuário no formato internacional
+                    'number' => $user->whatsapp, // Número do usuário no formato internacional
                     'message' => $this->notification->message, // Mensagem da notificação
                 ],
                 'headers' => [
@@ -102,6 +102,7 @@ class SendNotificationJob implements ShouldQueue
                     'Content-Type' => 'application/json',
                 ],
             ]);
+            dd($response);
 
             // Registra o log de envio
             NotificationLog::create([
@@ -112,8 +113,6 @@ class SendNotificationJob implements ShouldQueue
 
             Log::info("WhatsApp enviado com sucesso para {$user->phone}.");
         } catch (RequestException $e) {
-            dd('@@@@@@@@@@@@@@@@@@@@@@@@'.$e);
-
             // Captura erros de requisição
             if ($e->hasResponse()) {
                 $response = $e->getResponse();

@@ -14,19 +14,19 @@
                     <label for="file" class="block text-sm font-medium text-gray-700 mr-2">Escolha a planilha</label>
                     <input type="file" name="file" id="file" class="mt-1 block w-full text-sm text-gray-900 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 file:border-0 file:bg-blue-100 file:text-blue-700 file:px-4 file:py-2 file:rounded-l-md hover:file:bg-blue-200 transition duration-300" accept=".xlsx" required>
 
-                    <button type="submit" class="ml-2 bg-gradient-to-r from-green-500 to-teal-600 text-white px-6 py-3 rounded-lg shadow-md hover:from-green-600 hover:to-teal-700 focus:ring-4 focus:ring-green-300 transition duration-300 ease-in-out transform hover:scale-105">
+                    <button type="submit" class="ml-2 bg-emerald-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-emerald-500 focus:ring-4 focus:ring-green-300 transition duration-300 ease-in-out transform hover:scale-105">
                         Enviar
                     </button>
                 </form>
                 </div>
-                <button onclick="openModal()" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                <button onclick="openModal()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                 + Cadastrar Novo Estudante
                 </button>
             </div>
         </div>
     <div class="overflow-x-auto"> <!-- Adicionando altura máxima e overflow -->
         <table class="w-full border-collapse bg-white shadow-lg rounded-lg border border-gray-200">
-            <thead class="text-gray-100 bg-gradient-to-r from-green-600 to-green-500 shadow-lg">
+            <thead class="text-gray-100 bg-emerald-600 shadow-lg">
                 <tr>
                     <th class="px-6 py-3 text-left text-sm font-semibold">CPF</th>
                     <th class="px-6 py-3 text-left text-sm font-semibold">Organização</th>
@@ -43,7 +43,7 @@
                         @if($student->status == 1)
                             <button class="px-4 py-2 bg-orange-500 text-white rounded-md hover:bg-orange-600 transition duration-300">Pendente</button>
                         @elseif($student->status == 0)
-                            <button class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 transition duration-300">Aluno registrado</button>
+                            <button class="px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-green-600 transition duration-300">Aluno registrado</button>
                         @else
                             <button class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition duration-300">Status desconhecido</button>
                         @endif

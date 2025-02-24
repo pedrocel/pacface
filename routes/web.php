@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\ControllerController;
+use App\Http\Controllers\Director\FrequencyController;
+use App\Http\Controllers\Director\NotificationController;
+use App\Http\Controllers\Director\SnackController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\ProfileController;
@@ -123,6 +126,13 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::post('/pre-cadastro', [DirectorStudentsController::class, 'postPreRegister'])->name('director.pre-register.post');
     Route::put('/pre-cadastro/excluir/{id}', [DirectorStudentsController::class, 'deletePreRegister'])->name('director.pre-register.delete');
     Route::post('/upload-cpf', [DirectorStudentsController::class, 'uploadCpf'])->name('upload.cpf');
+
+    Route::get('/merenda/dashboard', [SnackController::class, 'getDashboard'])->name('director.snack.dashboard.get');
+
+    Route::get('/frequencia/dashboard', [FrequencyController::class, 'getDashboard'])->name('director.frequency.dashboard.get');
+    
+    
+    Route::get('/notificacoes/dashboard', [NotificationController::class, 'getDashboard'])->name('director.notifications.dashboard.get');
 
 
 

@@ -10,11 +10,50 @@ use App\Models\NotificationTemplate;
 use App\Models\NotificationType;
 use App\Models\NotificationUser;
 use App\Models\User;
+use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use NotificationTemplate as GlobalNotificationTemplate;
 
 class NotificationController extends Controller
 {
+
+    public function getDashboard(Request $request)
+{
+    $user = Auth::user();
+
+    $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+    $query = Notification::query();
+
+    // Filtro por tipo de notificação
+    if ($request->has('type')) {
+        $query->where('notification_type_id', $request->type);
+    }
+
+    // Total de notificações
+    $totalNotifications = $query->count();
+
+    // Notificações enviadas com sucesso
+    $successfulNotifications = NotificationLog::where('status', 'sent')->count();
+
+    // Notificações com falha
+    $failedNotifications = NotificationLog::where('status', 'failed')->count();
+
+    // Lista de notificações
+    $notifications = $query->with('logs')->latest()->paginate(10);
+
+    $notificationTypes = NotificationType::all();
+
+    return view('director.notifications.dashboard', compact(
+        'totalNotifications',
+        'successfulNotifications',
+        'failedNotifications',
+        'notifications',
+        'org',
+        'notificationTypes'
+    ));
+}
     /**
      * Exibe a lista de notificações.
      */
