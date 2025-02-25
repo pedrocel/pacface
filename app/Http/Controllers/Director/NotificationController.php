@@ -68,9 +68,11 @@ class NotificationController extends Controller
      */
     public function create()
     {
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
         $types = NotificationType::all();
         $users = User::all();
-        return view('director.notifications.create', compact('types', 'users'));
+        return view('director.notifications.create', compact('types', 'users', 'org'));
     }
 
     /**

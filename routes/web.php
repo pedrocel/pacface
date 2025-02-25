@@ -19,6 +19,7 @@ use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Director\DashboardController as DirectorDashboardController;
+use App\Http\Controllers\Director\OcorrenceController;
 use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
@@ -130,9 +131,15 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/merenda/dashboard', [SnackController::class, 'getDashboard'])->name('director.snack.dashboard.get');
 
     Route::get('/frequencia/dashboard', [FrequencyController::class, 'getDashboard'])->name('director.frequency.dashboard.get');
+
+    Route::get('/ocorrencia/dashboard', [OcorrenceController::class, 'getDashboard'])->name('director.ocurrence.dashboard.get');
+    Route::get('/ocorrencia/detalhes', [OcorrenceController::class, 'getDetail'])->name('director.ocurrence.detail.get');
     
     
+    Route::get('/notificacoes/criar', [NotificationController::class, 'create'])->name('director.notifications.create.get');
     Route::get('/notificacoes/dashboard', [NotificationController::class, 'getDashboard'])->name('director.notifications.dashboard.get');
+
+    Route::get('/notificacoes/criar', [NotificationController::class, 'create'])->name('director.notifications.create.get');
 
 
 

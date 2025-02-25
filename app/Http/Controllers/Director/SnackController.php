@@ -45,9 +45,9 @@ class SnackController extends Controller
 
         $total = $morning + $afternoon + $evening;
 
-        $faceEvents = FaceEvent::orderBy('id', 'desc')->paginate(7);
+        $faceEvents = FaceEvent::orderBy('id', 'desc')->paginate(5);
 
-        $linkedUsers = User::paginate(10);
+        $linkedUsers = User::paginate(5);
 
         return view('director.snack.dashboard', compact('morning', 'afternoon', 'evening', 'org', 'faceEvents', 'total', 'linkedUsers'));
     }

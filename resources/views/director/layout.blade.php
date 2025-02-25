@@ -39,6 +39,19 @@
             transition: opacity 0.5s ease-in;
             pointer-events: auto;
         }
+        .dragging {
+        opacity: 0.5;
+        border: 2px dashed #4f46e5;
+        }
+        
+        .drop-zone {
+        min-height: 200px;
+        }
+
+        .drop-zone.drag-over {
+        background-color: #eef2ff;
+        border: 2px dashed #4f46e5;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -87,6 +100,17 @@
                         <span class="ml-3 font-medium">Frequência Escolar</span>
                     </a>
 
+                    <a href="{{ route('director.ocurrence.dashboard.get') }}" 
+                    class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
+                    {{ request()->routeIs('director.ocurrence.dashboard.get') ? 'text-gray-100 bg-orange-500 shadow-lg' : 'text-gray-300' }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <line x1="12" y1="12" x2="12" y2="6" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="12" x2="16" y2="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span class="ml-3 font-medium">Ocorrências</span>
+                    </a>
+
                     <a href="{{ route('director.profile.index') }}" 
                     class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
                     {{ request()->routeIs('director.profile.index') ? 'text-gray-100 bg-emerald-600 shadow-lg' : 'text-gray-300' }}">
@@ -121,14 +145,16 @@
                             </svg>
                             <span class="ml-3 font-medium">Configurações</span>
                         </a>
-                        <a href="{{ route('director.snack.dashboard.get') }}" class="flex items-center px-4 py-3 text-gray-300 sidebar-hover rounded-lg">
+                        <a href="{{ route('director.snack.dashboard.get') }}" class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
+                        {{ request()->routeIs('director.snack.dashboard.get') ? 'text-gray-100 bg-emerald-600 shadow-lg' : 'text-gray-300' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM8 12h8M9 15h6M10 18h4M7 9h10M5 6h14"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4L20 8M20 4L16 8"/>
                             </svg>
                             <span class="ml-3 font-medium">Merenda</span>
                         </a>
-                        <a href="{{ route('director.notifications.dashboard.get') }}" class="flex items-center px-4 py-3 text-gray-300 sidebar-hover rounded-lg">
+                        <a href="{{ route('director.notifications.dashboard.get') }}" class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
+                        {{ request()->routeIs('director.notifications.dashboard.get') ? 'text-gray-100 bg-emerald-600 shadow-lg' : 'text-gray-300' }}">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2a10 10 0 100 20 10 10 0 000-20zM8 12h8M9 15h6M10 18h4M7 9h10M5 6h14"/>
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 4L20 8M20 4L16 8"/>
