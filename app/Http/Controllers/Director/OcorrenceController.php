@@ -15,8 +15,6 @@ class OcorrenceController extends Controller
 
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        $students = User::
-
         return view('director.ocurrence.dashboard', compact('org'));
 
     }
