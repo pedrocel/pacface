@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Director\DashboardController as DirectorDashboardController;
 use App\Http\Controllers\Director\OcorrenceController;
+use App\Http\Controllers\Director\PointDigitalController;
 use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
@@ -140,6 +141,8 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/notificacoes/dashboard', [NotificationController::class, 'getDashboard'])->name('director.notifications.dashboard.get');
 
     Route::get('/notificacoes/criar', [NotificationController::class, 'create'])->name('director.notifications.create.get');
+    
+    Route::get('/ponto-digital/dashboard', [PointDigitalController::class, 'getDashboard'])->name('director.point-digital.dashboard.get');
 
 
 

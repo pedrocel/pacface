@@ -8,7 +8,13 @@
         <!-- Cabeçalho -->
         <div class="flex justify-between items-center mb-8">
             <h2 class="text-3xl font-bold text-gray-800">Dashboard de ocorrências</h2>
-            <div class="flex items-center">
+            <div class="flex items-center space-x-2">
+                <button onclick="toggleModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded-lg flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                    Nova Ocorrência 
+                </button>
                 <!-- Botão de Filtro -->
                 <button onclick="openFilterModal()" class="flex items-center px-4 py-2 bg-emerald-600 text-white rounded-md hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -21,204 +27,206 @@
 
         <!-- Grade de Estatísticas -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-             <!-- Cards de Indicadores -->
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-gray-500 text-sm font-medium">Total de Ocorrências</h3>
-                    <p class="text-3xl font-bold text-gray-800 mt-2">157</p>
-                    <div class="flex items-center text-green-500 text-sm mt-2">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>12% este mês</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-gray-500 text-sm font-medium">Ocorrências Abertas</h3>
-                    <p class="text-3xl font-bold text-gray-800 mt-2">42</p>
-                    <div class="flex items-center text-red-500 text-sm mt-2">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12 13a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 13z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>3% esta semana</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-gray-500 text-sm font-medium">Alunos Monitorados</h3>
-                    <p class="text-3xl font-bold text-gray-800 mt-2">89</p>
-                    <div class="flex items-center text-green-500 text-sm mt-2">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>8% este mês</span>
-                    </div>
-                </div>
-
-                <div class="bg-white rounded-lg shadow-md p-6">
-                    <h3 class="text-gray-500 text-sm font-medium">Resolvidas</h3>
-                    <p class="text-3xl font-bold text-gray-800 mt-2">115</p>
-                    <div class="flex items-center text-green-500 text-sm mt-2">
-                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
-                    </svg>
-                    <span>15% este mês</span>
-                    </div>
-                </div>
-
-                
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <div class="flex-1 min-w-[300px]">
-                        <div class="bg-gray-100 rounded-lg p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">Pendentes</h3>
-                            <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">3</span>
-                        </div>
-                        <div class="space-y-4 drop-zone" 
-                            data-status="pending"
-                            ondrop="drop(event)"
-                            ondragover="allowDrop(event)"
-                            ondragleave="dragLeave(event)">
-                            <!-- Card de Ocorrência -->
-                            <div class="bg-white rounded-lg shadow p-4 cursor-move" 
-                                draggable="true"
-                                ondragstart="drag(event)"
-                                ondragend="dragEnd(event)"
-                                data-id="003"
-                                onclick="showOccurrenceDetails('003', 'Pedro Santos', '6º Ano C', 'Faltas Consecutivas', 'Maria Oliveira', 'Paulo Santos', 'Fernanda Costa', 'O aluno está ausente há 3 dias consecutivos sem justificativa prévia.')">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-sm font-medium text-gray-600">#003</span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                Novo
-                                </span>
-                            </div>
-                            <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
-                            <div class="flex items-center mb-3">
-                                <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Pedro+Santos" alt="">
-                                <span class="ml-2 text-sm text-gray-600">Pedro Santos</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>6º Ano C</span>
-                                <span>Hoje</span>
-                            </div>
-                            </div>
-
-                            <!-- Card de Ocorrência -->
-                            <div class="bg-white rounded-lg shadow p-4 cursor-move"
-                                draggable="true"
-                                ondragstart="drag(event)"
-                                ondragend="dragEnd(event)"
-                                data-id="004"
-                                onclick="showOccurrenceDetails('004', 'Maria Costa', '7º Ano A', 'Faltas Consecutivas', 'Carlos Souza', 'Amanda Lima', 'Ricardo Oliveira', 'A aluna está ausente há 4 dias consecutivos sem justificativa.')">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-sm font-medium text-gray-600">#004</span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
-                                Novo
-                                </span>
-                            </div>
-                            <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
-                            <div class="flex items-center mb-3">
-                                <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Maria+Costa" alt="">
-                                <span class="ml-2 text-sm text-gray-600">Maria Costa</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>7º Ano A</span>
-                                <span>Ontem</span>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                
-                    <div class="flex-1 min-w-[300px]">
-                        <div class="bg-gray-100 rounded-lg p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">Em Andamento</h3>
-                            <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">2</span>
-                        </div>
-                        <div class="space-y-4 drop-zone" 
-                            data-status="in-progress"
-                            ondrop="drop(event)"
-                            ondragover="allowDrop(event)"
-                            ondragleave="dragLeave(event)">
-                            <!-- Card de Ocorrência -->
-                            <div class="bg-white rounded-lg shadow p-4 cursor-move"
-                                draggable="true"
-                                ondragstart="drag(event)"
-                                ondragend="dragEnd(event)"
-                                data-id="001"
-                                onclick="showOccurrenceDetails('001', 'João Silva', '8º Ano A', 'Faltas Consecutivas', 'Maria Oliveira', 'Paulo Santos', 'Fernanda Costa', 'O aluno está ausente há 3 dias consecutivos. Contato realizado com responsáveis.')">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-sm font-medium text-gray-600">#001</span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
-                                Em Progresso
-                                </span>
-                            </div>
-                            <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
-                            <div class="flex items-center mb-3">
-                                <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=João+Silva" alt="">
-                                <span class="ml-2 text-sm text-gray-600">João Silva</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>8º Ano A</span>
-                                <span>2 dias atrás</span>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <div class="flex-1 min-w-[300px]">
-                        <div class="bg-gray-100 rounded-lg p-4">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-lg font-semibold text-gray-900">Concluídas</h3>
-                            <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">4</span>
-                        </div>
-                        <div class="space-y-4 drop-zone" 
-                            data-status="completed"
-                            ondrop="drop(event)"
-                            ondragover="allowDrop(event)"
-                            ondragleave="dragLeave(event)">
-                            <!-- Card de Ocorrência -->
-                            <div class="bg-white rounded-lg shadow p-4 cursor-move"
-                                draggable="true"
-                                ondragstart="drag(event)"
-                                ondragend="dragEnd(event)"
-                                data-id="002"
-                                onclick="showOccurrenceDetails('002', 'Ana Santos', '7º Ano B', 'Faltas Consecutivas', 'Carlos Souza', 'Amanda Lima', 'Ricardo Oliveira', 'Aluna retornou às aulas após justificativa médica.')">
-                            <div class="flex justify-between items-start mb-2">
-                                <span class="text-sm font-medium text-gray-600">#002</span>
-                                <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
-                                Resolvido
-                                </span>
-                            </div>
-                            <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
-                            <div class="flex items-center mb-3">
-                                <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Ana+Santos" alt="">
-                                <span class="ml-2 text-sm text-gray-600">Ana Santos</span>
-                            </div>
-                            <div class="flex justify-between items-center text-sm text-gray-500">
-                                <span>7º Ano B</span>
-                                <span>3 dias atrás</span>
-                            </div>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-            </div>
-
-            <!-- Botão Nova Ocorrência -->
-            <div class="flex justify-end mb-6">
-            <button onclick="toggleModal()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded-lg flex items-center">
-                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-gray-500 text-sm font-medium">Total de Ocorrências</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">157</p>
+                <div class="flex items-center text-green-500 text-sm mt-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
                 </svg>
-                Nova Ocorrência
-            </button>
+                <span>12% este mês</span>
+                </div>
             </div>
 
-            <!-- Tabela de Ocorrências -->
-            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-gray-500 text-sm font-medium">Ocorrências Abertas</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">42</p>
+                <div class="flex items-center text-red-500 text-sm mt-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12 13a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 13z" clip-rule="evenodd"/>
+                </svg>
+                <span>3% esta semana</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-gray-500 text-sm font-medium">Alunos Monitorados</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">89</p>
+                <div class="flex items-center text-green-500 text-sm mt-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
+                </svg>
+                <span>8% este mês</span>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-gray-500 text-sm font-medium">Resolvidas</h3>
+                <p class="text-3xl font-bold text-gray-800 mt-2">115</p>
+                <div class="flex items-center text-green-500 text-sm mt-2">
+                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M12 7a1 1 0 01-.707-.293l-4-4a1 1 0 01.707-1.414 1 1 0 011.414 0l4 4a1 1 0 01-.707 1.414A1 1 0 0112 7z" clip-rule="evenodd"/>
+                </svg>
+                <span>15% este mês</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="flex-1 min-w-[300px]">
+                    <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Pendentes</h3>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">3</span>
+                    </div>
+                    <div class="space-y-4 drop-zone" 
+                        data-status="pending"
+                        ondrop="drop(event)"
+                        ondragover="allowDrop(event)"
+                        ondragleave="dragLeave(event)">
+                        <!-- Card de Ocorrência -->
+                        <div class="bg-white rounded-lg shadow p-4 cursor-move" 
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            ondragend="dragEnd(event)"
+                            data-id="003"
+                            onclick="showOccurrenceDetails('003', 'Pedro Santos', '6º Ano C', 'Faltas Consecutivas', 'Maria Oliveira', 'Paulo Santos', 'Fernanda Costa', 'O aluno está ausente há 3 dias consecutivos sem justificativa prévia.')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-medium text-gray-600">#003</span>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                            Novo
+                            </span>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
+                        <div class="flex items-center mb-3">
+                            <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Pedro+Santos" alt="">
+                            <span class="ml-2 text-sm text-gray-600">Pedro Santos</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>6º Ano C</span>
+                            <span>Hoje</span>
+                        </div>
+                        </div>
+
+                        <!-- Card de Ocorrência -->
+                        <div class="bg-white rounded-lg shadow p-4 cursor-move"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            ondragend="dragEnd(event)"
+                            data-id="004"
+                            onclick="showOccurrenceDetails('004', 'Maria Costa', '7º Ano A', 'Faltas Consecutivas', 'Carlos Souza', 'Amanda Lima', 'Ricardo Oliveira', 'A aluna está ausente há 4 dias consecutivos sem justificativa.')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-medium text-gray-600">#004</span>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                            Novo
+                            </span>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
+                        <div class="flex items-center mb-3">
+                            <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Maria+Costa" alt="">
+                            <span class="ml-2 text-sm text-gray-600">Maria Costa</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>7º Ano A</span>
+                            <span>Ontem</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            
+                <div class="flex-1 min-w-[300px]">
+                    <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Em Andamento</h3>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">2</span>
+                    </div>
+                    <div class="space-y-4 drop-zone" 
+                        data-status="in-progress"
+                        ondrop="drop(event)"
+                        ondragover="allowDrop(event)"
+                        ondragleave="dragLeave(event)">
+                        <!-- Card de Ocorrência -->
+                        <div class="bg-white rounded-lg shadow p-4 cursor-move"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            ondragend="dragEnd(event)"
+                            data-id="001"
+                            onclick="showOccurrenceDetails('001', 'João Silva', '8º Ano A', 'Faltas Consecutivas', 'Maria Oliveira', 'Paulo Santos', 'Fernanda Costa', 'O aluno está ausente há 3 dias consecutivos. Contato realizado com responsáveis.')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-medium text-gray-600">#001</span>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                            Em Progresso
+                            </span>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
+                        <div class="flex items-center mb-3">
+                            <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=João+Silva" alt="">
+                            <span class="ml-2 text-sm text-gray-600">João Silva</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>8º Ano A</span>
+                            <span>2 dias atrás</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-[300px]">
+                    <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Concluídas</h3>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">4</span>
+                    </div>
+                    <div class="space-y-4 drop-zone" 
+                        data-status="completed"
+                        ondrop="drop(event)"
+                        ondragover="allowDrop(event)"
+                        ondragleave="dragLeave(event)">
+                        <!-- Card de Ocorrência -->
+                        <div class="bg-white rounded-lg shadow p-4 cursor-move"
+                            draggable="true"
+                            ondragstart="drag(event)"
+                            ondragend="dragEnd(event)"
+                            data-id="002"
+                            onclick="showOccurrenceDetails('002', 'Ana Santos', '7º Ano B', 'Faltas Consecutivas', 'Carlos Souza', 'Amanda Lima', 'Ricardo Oliveira', 'Aluna retornou às aulas após justificativa médica.')">
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-sm font-medium text-gray-600">#002</span>
+                            <span class="px-2 py-1 text-xs font-semibold rounded-full bg-green-100 text-green-800">
+                            Resolvido
+                            </span>
+                        </div>
+                        <h4 class="font-medium text-gray-900 mb-2">Faltas Consecutivas</h4>
+                        <div class="flex items-center mb-3">
+                            <img class="h-6 w-6 rounded-full" src="https://ui-avatars.com/api/?name=Ana+Santos" alt="">
+                            <span class="ml-2 text-sm text-gray-600">Ana Santos</span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm text-gray-500">
+                            <span>7º Ano B</span>
+                            <span>3 dias atrás</span>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="flex-1 min-w-[300px]">
+                    <div class="bg-gray-100 rounded-lg p-4">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-semibold text-gray-900">Resumo Geral</h3>
+                        <span class="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm">4</span>
+                    </div>
+                    <div class="space-y-4 drop-zone" >
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+                </div>
+        </div>
+
+
+        <div class="py-8">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <div class="p-6">
                 <h2 class="text-xl font-semibold text-gray-800 mb-4">Ocorrências Recentes</h2>
             </div>
@@ -506,6 +514,7 @@
       </div>
     </div>
   </div>
+  </div>
 
         <!-- Script para controlar o modal -->
     <script>
@@ -621,4 +630,29 @@
       }
     }
   </script>
+  <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Pendentes', 'Em andamento', 'Concluídas'],
+                datasets: [{
+                    label: 'Valores',
+                    data: [12, 19, 7],
+                    backgroundColor: ['#f97316', '#0b51df', '#10B981'],
+                    borderRadius: 10,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false }
+                },
+                scales: {
+                    y: { beginAtZero: true }
+                }
+            }
+        });
+    </script>
 @endsection
