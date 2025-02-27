@@ -67,16 +67,12 @@
         <aside id="sidebar" class="fixed md:relative w-64 h-full bg-[#1a1a1a] text-white transform transition-transform duration-300 ease-in-out md:transform-none -translate-x-full md:translate-x-0 z-40">
             <div class="flex flex-col h-full">
                 <!-- Logo Section -->
-                <div class="p-6 bg-emerald-600">
-                    <div class="flex items-center space-x-3">
-                        <div class="p-2 bg-white rounded-lg">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-                            </svg>
-                        </div>
-                        <h1 class="text-2xl font-bold tracking-wider">{{ $org->organization->name }}</h1>
+                <div class=" bg-emerald-600 flex justify-center">
+                    <div class="p-1 rounded-lg flex justify-center items-center">
+                        <img src="https://api-eventos.pacsafe.com.br/logo-branca-1024x500.png" alt="PacSafe Edu Logo" class="w-44 h-28 object-contain">
                     </div>
                 </div>
+
 
                 <!-- Navigation -->
                 <nav class="flex-1 px-4 py-6 space-y-2 overflow-y-auto">
