@@ -35,6 +35,14 @@ Route::get('/', function () {
     return view('landing');
 });
 
+Route::get('/landing', function () {
+    return view('landing');
+});
+
+Route::get('/pactime', function () {
+    return view('pactime');
+});
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');

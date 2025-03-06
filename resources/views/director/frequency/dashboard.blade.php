@@ -22,7 +22,7 @@
             <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-gray-600 text-sm font-medium">Total de Alunos na escola</h3>
-                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Total</span>
+                    <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Cadastrados</span>
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ $totalStudents }}</span>
@@ -33,7 +33,7 @@
             <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">
                     <h3 class="text-gray-600 text-sm font-medium">Presenças registradas</h3>
-                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Presenças confirmadas</span>
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Hoje</span>
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ $presentStudents }}</span>
@@ -43,14 +43,13 @@
             <!-- Notificações com Falha -->
             <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-600 text-sm font-medium">Alunos ausentes</h3>
+                    <h3 class="text-gray-600 text-sm font-medium">Casos de evasão</h3>
                     <span class="bg-red-300 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Faltas</span>
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-red-600">{{ $absentStudents }}</span>
                 </div>
             </div>
-
             <!-- Tipos de Notificação -->
             <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
                 <div class="flex items-center justify-between mb-4">

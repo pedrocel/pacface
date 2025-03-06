@@ -54,6 +54,8 @@ class ProfileController extends Controller
             'status' => 1,
             'organization_id' => $org->organization->id,
             'name' => $user->name,
+            'access_group_id' => $request['access_group_id'],
+                                    
         ]);
     }
 }

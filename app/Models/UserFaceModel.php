@@ -20,6 +20,7 @@ class UserFaceModel extends Model
         'facial_image_base64',
         'status',
         'organization_id',
+        'access_group_id',
     ];
 
     // Caso o campo `user_id` seja uma chave estrangeira, podemos definir o relacionamento

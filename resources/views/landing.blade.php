@@ -75,7 +75,7 @@
             <a href="#notificacoes" class="text-gray-700 hover:text-primary font-medium">Notificações</a>
             <a href="#merenda" class="text-gray-700 hover:text-primary font-medium">Merenda</a>
             <a href="#perfis" class="text-gray-700 hover:text-primary font-medium">Perfis</a>
-            <a href="#ponto" class="text-gray-700 hover:text-primary font-medium">Ponto Digital</a>
+            <a href="pactime" class="text-gray-700 hover:text-primary font-medium">Ponto Digital</a>
             <a href="#depoimentos" class="text-gray-700 hover:text-primary font-medium">Depoimentos</a>
             <a href="#faq" class="text-gray-700 hover:text-primary font-medium">FAQ</a>
             <a href="#contato" class="text-gray-700 hover:text-primary font-medium">Contato</a>
@@ -606,11 +606,22 @@
     <!-- Ponto Digital Section -->
     <section id="ponto" class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-16">
-          <div class="inline-block px-3 py-1 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-4">Gestão de Pessoal</div>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Ponto Digital Facial</h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto">Sistema avançado de registro de ponto através de reconhecimento facial.</p>
-        </div>
+      <div class="text-center mb-16">
+  <div class="inline-block px-3 py-1 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-4">
+    Gestão de Pessoal
+  </div>
+  <br>
+  <a href="pactime" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+    Ponto Digital Facial
+  </a>
+  <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
+    Sistema avançado de registro de ponto através de reconhecimento facial.
+  </p>
+  <a href="pactime" class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary/90 transition duration-300">
+    Experimente Agora
+  </a>
+</div>
+
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-100">

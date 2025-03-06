@@ -24,7 +24,7 @@
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ count($userOrganization) }}</span>
-                    <span class="text-green-500 text-sm ml-2">+12% na ultima semana </span>
+                    <span class="text-green-500 text-sm ml-2">98% para a meta de 2000 Alunos </span>
                 </div>
             </div>
 
@@ -36,7 +36,7 @@
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ count($biometrias) }}</span>
-                    <span class="text-blue-500 text-sm ml-2">{{ number_format($percentualBiometria, 2) }}%</span>
+                    <span class="text-blue-500 text-sm ml-2">{{ number_format($percentualBiometria, 2) }}% de 2000 alunos</span>
                 </div>
             </div>
 
@@ -48,7 +48,7 @@
                 </div>
                 <div class="flex items-center">
                     <span class="text-3xl font-bold text-gray-900">{{ count($acessosHoje) }}</span>
-                    <span class="text-purple-500 text-sm ml-2">Representa {{ number_format($percentualAcessosHoje, 2) }}% do total de alunos </span>
+                    <span class="text-purple-500 text-sm ml-2">última presença as 16:11 de hoje</span>
                 </div>
             </div>
 
