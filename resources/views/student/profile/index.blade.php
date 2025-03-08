@@ -321,26 +321,60 @@ document.getElementById('retake').addEventListener('click', () => {
 // Salvar a imagem capturada em Base64 e enviar o formulário
 document.getElementById('save').addEventListener('click', () => {
     const canvas = document.getElementById('canvas');
-    const base64Image = canvas.toDataURL('image/png').split(',')[1];
+    const base64Image = canvas.toDataURL('image/png');
 
-    // Preencher o campo hidden com a imagem em Base64
+    // Converter Base64 para Blob
+    function base64ToBlob(base64, mimeType) {
+        const byteString = atob(base64.split(',')[1]); // Remove o cabeçalho Base64
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+        for (let i = 0; i < byteString.length; i++) {
+            uint8Array[i] = byteString.charCodeAt(i);
+        }
+        return new Blob([uint8Array], { type: mimeType });
+    }
+
+    // Criar um arquivo a partir do Blob
+    const blob = base64ToBlob(base64Image, 'image/png');
+    const file = new File([blob], 'captured_image.png', { type: 'image/png' });
+
+    // Criar um novo campo de input type="file" no formulário
+    const uploadForm = document.getElementById('uploadForm');
+    
+    // Criar um DataTransfer para adicionar o arquivo ao input file
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+
+    // Criar ou atualizar o input file no formulário
+    let fileInput = document.getElementById('fileInput');
+    if (!fileInput) {
+        fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.name = 'image_file';
+        fileInput.id = 'fileInput';
+        fileInput.hidden = true;
+        uploadForm.appendChild(fileInput);
+    }
+    fileInput.files = dataTransfer.files;
+
+    // Preencher o campo hidden com a imagem Base64
     const facialImageBase64Input = document.getElementById('facialImageBase64');
-    facialImageBase64Input.value = base64Image;
+    facialImageBase64Input.value = base64Image.split(',')[1]; // Apenas os dados da imagem
 
     // Atualizar a visualização da imagem
     const facialImagePreview = document.getElementById('facialImagePreview');
-    facialImagePreview.src = `data:image/png;base64,${base64Image}`;
+    facialImagePreview.src = base64Image;
 
-    // Enviar o formulário de upload
-    const uploadForm = document.getElementById('uploadForm');
+    // Enviar o formulário
     uploadForm.submit();
 
-    // Fechar modal
+    // Fechar modal (se necessário)
     const captureModal = document.getElementById('captureModal');
     captureModal.classList.add('hidden');
 
     Swal.fire('Sucesso!', 'Imagem capturada e enviada com sucesso!', 'success');
 });
+
 
 // Fechar o modal de captura
 document.getElementById('closeModal').addEventListener('click', () => {
