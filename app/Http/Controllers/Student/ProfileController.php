@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function updateImage(Request $request){
 
-        dd($request->all());
+        dd($request->file('image_file'));
         // Obtém o usuário autenticado
         $user = Auth::user();
 
