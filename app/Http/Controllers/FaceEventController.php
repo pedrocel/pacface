@@ -25,8 +25,6 @@ class FaceEventController extends Controller
         return response()->json(['message' => 'Face event created successfully'], 201);
     }
 
-    pulic function getUsersFromId
-
     public function handleWebhook(Request $request)
     {
         // Criação do evento facial
