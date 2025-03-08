@@ -70,6 +70,7 @@ class ProfileController extends Controller
     
     $imageInfo = @getimagesizefromstring($imageData);
 
+    dd($imageInfo);
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.png';
 
