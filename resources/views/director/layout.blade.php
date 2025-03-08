@@ -107,6 +107,17 @@
                         <span class="ml-3 font-medium">Turmas</span>
                     </a>
 
+                    <a href="{{ route('director.discipline.index') }}" 
+                    class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
+                    {{ request()->routeIs('director.discipline.index') ? 'text-gray-100 bg-emerald-600 shadow-lg' : 'text-gray-300' }}">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+                            <line x1="12" y1="12" x2="12" y2="6" stroke="currentColor" stroke-width="2"/>
+                            <line x1="12" y1="12" x2="16" y2="12" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        <span class="ml-3 font-medium">Disciplinas</span>
+                    </a>
+
                     <a href="{{ route('director.ocurrence.dashboard.get') }}" 
                     class="flex items-center px-4 py-3 rounded-lg sidebar-hover 
                     {{ request()->routeIs('director.ocurrence.dashboard.get') ? 'text-gray-100 bg-orange-500 shadow-lg' : 'text-gray-300' }}">

@@ -14,11 +14,9 @@ return new class extends Migration
         Schema::create('disciplines', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type')->nullable();
-            $table->integer('id_class')->constrained('classes')->onDelete('cascade');
-            $table->integer('id_teacher')->constrained('users')->onDelete('cascade');
-            $table->integer('qtd_students')->nullable();
-            $table->boolean('status')->default(true);
+            $table->integer('year')->nullable();
+            $table->uuid('organization_id')->nullable();
+            $table->boolean('status')->default(1); // Status com valor padrão 1 (ativo)
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('discipline');
+        Schema::dropIfExists('disciplines');
     }
 };

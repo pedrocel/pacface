@@ -5,17 +5,17 @@
 @section('content')
     <div class="p-8">
         <div class="flex justify-between items-center mb-8">
-            <h2 class="text-3xl font-bold text-gray-800">Criar turma</h2>
+            <h2 class="text-3xl font-bold text-gray-800">Criar disciplina</h2>
             
         </div>
 
 
-    <form action="{{ route('director.class.store') }}" method="POST">
+    <form action="{{ route('director.discipline.store') }}" method="POST">
         @csrf
 
         {{-- Name --}}
         <div class="mb-4">
-            <label for="name" class="block font-medium">Nome da turma</label>
+            <label for="name" class="block font-medium">Nome da disciplina</label>
             <input 
                 type="text" 
                 name="name" 
@@ -45,36 +45,6 @@
 </div>
 
 
-        {{-- Qtd Students --}}
-        <div class="mb-4">
-            <label for="qtd_students" class="block font-medium">Quantidade de alunos</label>
-            <input 
-                type="number" 
-                name="qtd_students" 
-                id="qtd_students" 
-                class="border border-gray-300 rounded w-full px-4 py-2 focus:ring focus:ring-blue-500 focus:border-blue-500" 
-                value="{{ old('qtd_students') }}">
-            @error('qtd_students')
-                <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div class="mb-4">
-    <label for="turn" class="block font-medium">Turno</label>
-    <select 
-        name="turn" 
-        id="turn" 
-        class="border border-gray-300 rounded w-full px-4 py-2 focus:ring focus:ring-blue-500 focus:border-blue-500">
-        <option value="1" {{ old('turn') == 1 ? 'selected' : '' }}>Matutino</option>
-        <option value="2" {{ old('turn') == 2 ? 'selected' : '' }}>Vespertino</option>
-        <option value="3" {{ old('turn') == 3 ? 'selected' : '' }}>Noturno</option>
-    </select>
-    @error('turn')
-        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
-    @enderror
-</div>
-
-
         {{-- Year --}}
         <div class="mb-4">
             <label for="year" class="block font-medium">Ano</label>
@@ -96,7 +66,9 @@
             </button>
             <a href="{{ route('director.class.index') }}" class="ml-4 text-gray-600 hover:underline">
                 Cancelar
-        </div>
+   
+
+    </div>
     </form>
 
        

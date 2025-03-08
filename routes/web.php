@@ -20,6 +20,7 @@ use App\Http\Middleware\RedirectByProfile;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\CustomLoginController;
 use App\Http\Controllers\Director\DashboardController as DirectorDashboardController;
+use App\Http\Controllers\Director\DisciplineController;
 use App\Http\Controllers\Director\OcorrenceController;
 use App\Http\Controllers\Director\PointDigitalController;
 use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
@@ -157,6 +158,13 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/turma/criar', [ClassController::class, 'create'])->name('director.class.create');
     Route::post('/turma/criar', [ClassController::class, 'store'])->name('director.class.store');
 
+    Route::get('/disciplinas', [DisciplineController::class, 'index'])->name('director.discipline.index');
+    Route::get('/disciplina/criar', [DisciplineController::class, 'create'])->name('director.discipline.create');
+    Route::post('/disciplina/criar', [DisciplineController::class, 'store'])->name('director.discipline.store');
+    
+    Route::get('/professores', [DisciplineController::class, 'index'])->name('director.discipline.index');
+    Route::get('/professor/criar', [DisciplineController::class, 'create'])->name('director.discipline.create');
+    Route::post('/professor/criar', [DisciplineController::class, 'store'])->name('director.discipline.store');
     
 
     Route::get('/alunos', [DirectorStudentsController::class, 'index'])->name('director.students.index');
