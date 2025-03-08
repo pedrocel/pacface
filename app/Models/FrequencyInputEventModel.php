@@ -16,4 +16,9 @@ class FrequencyInputEventModel extends Model
         'date',
         'timestamp',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'personId');
+    }
 }
