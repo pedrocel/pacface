@@ -28,7 +28,6 @@ class FaceEventController extends Controller
 
     public function handleWebhook(Request $request)
     {
-        // Criação do evento facial
         FaceEvent::create([
             'name' => $request->input('name'),
             'image' => $request->input('image'),
@@ -51,7 +50,7 @@ class FaceEventController extends Controller
     public function getUsersFromId($id)
     {
         $users = UserFaceModel::where('organization_id', $id)
-            ->select('user_id', 'status', 'organization_id', 'link_image', 'ip_device')
+            ->select('name','user_id', 'status', 'organization_id', 'link_image', 'ip_device')
             ->get();
 
         return response()->json($users);

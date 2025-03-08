@@ -226,42 +226,42 @@
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 1)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                    <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 2)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 3)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 4)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 5)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
                         <td class="px-4 py-3 text-sm text-gray-500 border-b">
                             @if(\Carbon\Carbon::parse($aula->date)->dayOfWeek === 6)
                                 <div class="bg-blue-100 rounded p-2 text-sm">
-                                    <p class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
+                                <a href="{{ route('director.room.show', $aula->id_room) }}" class="font-medium text-blue-800">{{ $aula->discipline->name}} - {{ $aula->room->name}}</p>
                                 </div>
                             @endif
                         </td>
