@@ -14,5 +14,5 @@ Route::post('/face-event/create-faltas', action: [FaceEventController::class, 'c
 Route::get('/crawler/user-face', action: [FaceEventController::class, 'getUsers']);
 Route::post('/test-notification', [NotificationTestController::class, 'sendTestNotification']);
 
-Route::post('/facia/frequency', [NotificationTestController::class, 'sendTestNotification']);
+Route::post('/facial/frequency', [FaceEventController::class, 'createFrequency']);
 

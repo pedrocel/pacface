@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\FaceEvent;
+use App\Models\FrequencyInputEventModel;
 use App\Models\User;
 use App\Models\UserFaceModel;
 use App\Models\UserFacial;
@@ -13,6 +14,17 @@ use Str;
 
 class FaceEventController extends Controller
 {
+    public function createFrequency(Request $request){
+        
+        FrequencyInputEventModel::create([
+            'ip' => $request->ip,
+            'personId' => $request->personId,
+            'date' => $request->date,
+        ]);
+
+        return response()->json(['message' => 'Face event created successfully'], 201);
+    }
+
     public function handleWebhook(Request $request)
     {
         // Criação do evento facial
