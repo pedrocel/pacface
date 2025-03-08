@@ -48,9 +48,15 @@ class FaceEventController extends Controller
         return response()->json(UserFaceModel::all());
     }
 
-    public function getUsersFromId($id){
-        return response()->json(UserFaceModel::where('organization_id', $id)->get());
+    public function getUsersFromId($id)
+    {
+        $users = UserFaceModel::where('organization_id', $id)
+            ->select('user_id', 'status', 'organization_id', 'access_group_id', 'link_image')
+            ->get();
+
+        return response()->json($users);
     }
+
 
     public function createFaltas(Request $request)
     {
