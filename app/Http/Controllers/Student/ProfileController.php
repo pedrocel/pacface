@@ -73,26 +73,25 @@ class ProfileController extends Controller
     $imageName = Str::random(10) . '.png';
 
     // Caminho onde a imagem será salva no diretório storage/app/public
-    $storagePath = storage_path('app/public/images'); // Caminho correto no sistema de arquivos
-
-    // Verifica se a pasta existe e cria, se não existir
-    if (!file_exists($storagePath)) {
-        mkdir($storagePath, 0777, true); // Cria a pasta com permissões adequadas
-    }
-
-    // Caminho completo para o arquivo da imagem
-    $path = $storagePath . '/' . $imageName;
-
-
+    // Usamos o Storage para salvar no diretório correto
+    $storagePath = 'images/' . $imageName;
 
     // Manipula a imagem, redimensiona para 500x500px e salva
     $img = Image::load($imageData)
         ->width(500)  // Ajusta a largura para 500px
         ->height(500) // Ajusta a altura para 500px
-        ->save($path); // Salva a imagem no caminho especificado
+        ->save(storage_path('app/public/' . $storagePath)); // Salva a imagem usando storage_path
 
-   
-   dd($path);
-   return $img;
+    // Verifica se o arquivo foi salvo corretamente
+    if (file_exists(storage_path('app/public/' . $storagePath))) {
+        dd('Imagem salva com sucesso!', $storagePath);
+    } else {
+        dd('Erro ao salvar a imagem!');
+    }
+
+    // Retorna o caminho público da imagem
+    $imageLink = Storage::url($storagePath);
+
+    return $imageLink;
 }
 }
