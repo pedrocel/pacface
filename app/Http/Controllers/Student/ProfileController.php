@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
 use App\Models\FaceEvent;
+use App\Models\FrequencyInputEventModel;
+use App\Models\RoomModel;
 use App\Models\UserFaceModel;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
@@ -59,7 +61,7 @@ class ProfileController extends Controller
             'status' => 1,
             'organization_id' => $org->organization->id,
             'name' => $user->name,
-            'access_group_id' => $request['access_group_id'],
+            'access_group_id' => RoomModel::first()->ip_device,
             'link_image' => $link_image
         ]);
     }
