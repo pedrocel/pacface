@@ -53,8 +53,6 @@ class RoomController extends Controller
 
         $frequencies = FrequencyInputEventModel::with('user')->where('ip', $room->ip_device)->get();
 
-        dd($frequencies);
-
         return view('director.rooms.show', data: compact('room', 'org', 'room', 'frequencies'));
     }
 }
