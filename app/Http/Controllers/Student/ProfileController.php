@@ -83,9 +83,7 @@ class ProfileController extends Controller
     // Link público da imagem (usando a URL configurada no filesystem)
     $publicPath = asset("storage/images/$imageName");
 
-    return response()->json([
-        'message' => 'Imagem salva com sucesso!',
-        'image_url' => $publicPath
-    ]);
+    return  $publicPath;
+    
 }
 }
