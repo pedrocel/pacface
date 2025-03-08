@@ -23,7 +23,9 @@ use App\Http\Controllers\Director\DashboardController as DirectorDashboardContro
 use App\Http\Controllers\Director\DisciplineController;
 use App\Http\Controllers\Director\OcorrenceController;
 use App\Http\Controllers\Director\PointDigitalController;
+use App\Http\Controllers\Director\RoomController;
 use App\Http\Controllers\Director\StudentsController as DirectorStudentsController;
+use App\Http\Controllers\Director\TeacherController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaceEventController;
 use App\Http\Controllers\FacialImageController;
@@ -155,17 +157,24 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/ponto-digital/dashboard', [PointDigitalController::class, 'getDashboard'])->name('director.point-digital.dashboard.get');
 
     Route::get('/turmas', [ClassController::class, 'index'])->name('director.class.index');
+    Route::get('/turma/detalhes/{id}', [ClassController::class, 'show'])->name('director.class.show');
     Route::get('/turma/criar', [ClassController::class, 'create'])->name('director.class.create');
     Route::post('/turma/criar', [ClassController::class, 'store'])->name('director.class.store');
+    Route::post('/aula/criar/{id_class}', [ClassController::class, 'storeClassRoom'])->name('director.class-room.store');
 
     Route::get('/disciplinas', [DisciplineController::class, 'index'])->name('director.discipline.index');
     Route::get('/disciplina/criar', [DisciplineController::class, 'create'])->name('director.discipline.create');
     Route::post('/disciplina/criar', [DisciplineController::class, 'store'])->name('director.discipline.store');
     
-    Route::get('/professores', [DisciplineController::class, 'index'])->name('director.discipline.index');
-    Route::get('/professor/criar', [DisciplineController::class, 'create'])->name('director.discipline.create');
-    Route::post('/professor/criar', [DisciplineController::class, 'store'])->name('director.discipline.store');
+    Route::get('/professores', [TeacherController::class, 'index'])->name('director.teacher.index');
+    Route::get('/professor/criar', [TeacherController::class, 'create'])->name('director.teacher.create');
+    Route::post('/professor/criar', [TeacherController::class, 'store'])->name('director.teacher.store');
     
+    Route::get('/salas', [RoomController::class, 'index'])->name('director.room.index');
+    Route::get('/sala/criar', [RoomController::class, 'create'])->name('director.room.create');
+    Route::post('/sala/criar', [RoomController::class, 'store'])->name('director.room.store');
+    
+
 
     Route::get('/alunos', [DirectorStudentsController::class, 'index'])->name('director.students.index');
     Route::get('/aluno/criar', [DirectorStudentsController::class, 'create'])->name('director.students.create');

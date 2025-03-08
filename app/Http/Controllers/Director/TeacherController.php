@@ -16,9 +16,9 @@ class TeacherController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        $disciplines = DisciplineModel::where('organization_id', $org->organization_id)->get();perPage: 
+        $teachers = UserOrganizationModel::where('organization_id', $org->organization_id)->get();perPage: 
 
-        return view('director.discipline.index', data: compact('disciplines', 'org'));
+        return view('director.teachers.index', data: compact('teachers', 'org'));
     }
 
     public function create()
@@ -26,7 +26,7 @@ class TeacherController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        return view('director.discipline.create');
+        return view('director.teachers.create');
     }
 
     public function store(Request $request){
@@ -37,7 +37,7 @@ class TeacherController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make($request->cpf),
             'whatsapp'       => $request->whatsapp,
             'cpf'            => $request->cpf,
             'birthdate'     => $request->birthdate,
@@ -54,6 +54,6 @@ class TeacherController extends Controller
             'status' => 1
         ]);
 
-        return redirect()->route('director.teachers.index');
+        return redirect()->route('director.teacher.index');
     }
 }

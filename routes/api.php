@@ -13,3 +13,6 @@ Route::post('/webhook/face-event', action: [FaceEventController::class, 'handleW
 Route::post('/face-event/create-faltas', action: [FaceEventController::class, 'createFaltas']);
 Route::get('/crawler/user-face', action: [FaceEventController::class, 'getUsers']);
 Route::post('/test-notification', [NotificationTestController::class, 'sendTestNotification']);
+
+Route::post('/facia/frequency', [NotificationTestController::class, 'sendTestNotification']);
+
