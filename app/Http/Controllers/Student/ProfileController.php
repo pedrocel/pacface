@@ -71,8 +71,16 @@ class ProfileController extends Controller
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.jpg';
 
-    // Caminho onde a imagem será salva
-    $path = public_path('storage/images/' . $imageName);
+    // Caminho onde a imagem será salva no diretório public
+    $storagePath = public_path('storage/images'); // Caminho da pasta onde a imagem será salva
+
+    // Verifica se a pasta existe e cria, se não existir
+    if (!file_exists($storagePath)) {
+        mkdir($storagePath, 0777, true); // Cria a pasta com permissões adequadas
+    }
+
+    // Caminho completo para o arquivo da imagem
+    $path = $storagePath . '/' . $imageName;
 
     // Manipula a imagem, redimensiona para 500x500px e salva
     $img = Image::load($imageData)
@@ -80,12 +88,12 @@ class ProfileController extends Controller
         ->height(500) // Ajusta a altura para 500px
         ->save($path); // Salva a imagem no caminho especificado
 
-        dd($img);
     // O link público da imagem será retornado
+    // Use Storage::url() para gerar o link correto
     $imageLink = Storage::url('images/' . $imageName);
 
-    // Agora, você pode salvar esse link no banco de dados, por exemplo:
-    $user = Auth::user() ; // Ou qualquer outro modelo de usuário
+    // Agora, você pode salvar esse link no banco de dados
+    $user = Auth::user(); // Ou qualquer outro modelo de usuário
     $user->link_image = $imageLink;
     $user->save();
 
