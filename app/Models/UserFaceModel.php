@@ -21,7 +21,8 @@ class UserFaceModel extends Model
         'status',
         'organization_id',
         'access_group_id',
-        'link_image'
+        'link_image',
+        'ip_device'
     ];
 
     // Caso o campo `user_id` seja uma chave estrangeira, podemos definir o relacionamento
