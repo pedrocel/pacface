@@ -74,6 +74,8 @@ class ProfileController extends Controller
     // Caminho onde a imagem será salva
     $path = public_path('storage/images/' . $imageName);
 
+    dd($path);
+
     // Manipula a imagem, redimensiona para 500x500px e salva
     Image::load($imageData)
         ->width(500)  // Ajusta a largura para 500px
