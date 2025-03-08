@@ -24,7 +24,6 @@ class ProfileController extends Controller
 
     public function updateImage(Request $request){
 
-        dd($request->file('image_file'));
         // Obtém o usuário autenticado
         $user = Auth::user();
 
@@ -52,7 +51,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        $link_image = $this->storeImageFromBase64($request['facial_image_base64']);
+        $link_image = $this->storeImageFromBase64(file('image_file'));
 
         UserFaceModel::create([
             'user_id' => Auth::user()->id,
@@ -65,39 +64,28 @@ class ProfileController extends Controller
         ]);
     }
 
-    private function storeImageFromBase64($base64Image)
+    private function storeImageFromBase64($file)
 {
-    $imageData = base64_decode($base64Image);
-    
-    $imageInfo = @getimagesizefromstring($imageData);
-
     // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.png';
+    $imageName = Str::random(10) . '.' . $file->getClientOriginalExtension();
 
-    // Caminho onde a imagem será salva no diretório storage/app/public
-    $storagePath = storage_path('app/public/images'); // Caminho correto no sistema de arquivos
+    // Caminho onde a imagem será salva no diretório storage/app/public/images
+    $storagePath = storage_path('app/public/images');
 
     // Verifica se a pasta existe e cria, se não existir
     if (!file_exists($storagePath)) {
-        mkdir($storagePath, 0777, true); // Cria a pasta com permissões adequadas
+        mkdir($storagePath, 0777, true);
     }
 
-    // Caminho completo para o arquivo da imagem
-    $path = $storagePath . '/' . $imageName;
+    // Move o arquivo para o local correto
+    $file->move($storagePath, $imageName);
 
-    // Manipula a imagem, redimensiona para 500x500px e salva
-    $img = Image::load($imageData)
-        ->width(500)  // Ajusta a largura para 500px
-        ->height(500) // Ajusta a altura para 500px
-        ->save($path); // Salva a imagem no caminho especificado
+    // Link público da imagem (usando a URL configurada no filesystem)
+    $publicPath = asset("storage/images/$imageName");
 
-    // Verifica se a imagem foi salva corretamente
-    if (Storage::disk('public')->exists('images/' . $imageName)) {
-        dd('Imagem salva com sucesso!');
-    } else {
-        dd('Erro ao salvar a imagem!');
-    }
-
-    return $path; // Caminho onde a imagem foi salva
+    return response()->json([
+        'message' => 'Imagem salva com sucesso!',
+        'image_url' => $publicPath
+    ]);
 }
 }
