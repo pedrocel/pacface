@@ -68,7 +68,7 @@ class ProfileController extends Controller
 {
     $imageData = base64_decode($base64Image);
 
-    dd($imageData);
+    dd($base64Image);
 
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.png';
