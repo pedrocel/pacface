@@ -67,35 +67,19 @@ class ProfileController extends Controller
     private function storeImageFromBase64($base64Image)
 {
     // Decodifica a imagem
-    $imageData = base64_decode($base64Image);
+    $content = 'Este é um arquivo de teste para verificar o armazenamento';
+    $fileName = 'test-file.txt';
 
-    // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.jpg';
+    // Armazena o arquivo na pasta public
+    Storage::disk('public')->put($fileName, $content);
 
-    // Caminho onde a imagem será salva no diretório storage/app/public
-    $storagePath = 'images/' . $imageName;
-
-    // Verifica se a pasta "images" existe e cria, caso não exista
-    if (!Storage::disk('public')->exists('images')) {
-        Storage::disk('public')->makeDirectory('images');
-    }
-
-    // Manipula a imagem, redimensiona para 500x500px e salva
-    $img = Image::load($imageData)
-        ->width(500)  // Ajusta a largura para 500px
-        ->height(500) // Ajusta a altura para 500px
-        ->save(storage_path('app/public/' . $storagePath)); // Salva a imagem
-
-    // Verifica se o arquivo foi salvo corretamente
-    if (Storage::disk('public')->exists($storagePath)) {
-        dd('Imagem salva com sucesso!', $storagePath);
+    // Verifica se o arquivo foi salvo
+    if (Storage::disk('public')->exists($fileName)) {
+        dd('Arquivo foi salvo com sucesso!');
     } else {
-        dd('Erro ao salvar a imagem!');
+        dd('Erro ao salvar o arquivo!');
     }
 
-    // Retorna o caminho público da imagem
-    $imageLink = Storage::url($storagePath);
-
-    return $imageLink;
+    return true;
 }
 }
