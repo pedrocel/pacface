@@ -14,7 +14,7 @@
         <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition duration-300">
                 <div class="p-6">
                     <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-xl font-bold text-gray-900">{{ $frequency->user->name}}</h3>
+                        <h3 class="text-xl font-bold text-gray-900">{{ $frequency ? $frequency->user->name : "Não identificado"}}</h3>
                         <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
                             Ativo
                         </span>
