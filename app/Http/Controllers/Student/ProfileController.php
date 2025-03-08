@@ -57,6 +57,8 @@ class ProfileController extends Controller
 
         $room = RoomModel::where('name', "!=", null)->first();
 
+        dd($room);
+
         UserFaceModel::create([
             'user_id' => Auth::user()->id,
             'facial_image_base64' => $request['facial_image_base64'],
