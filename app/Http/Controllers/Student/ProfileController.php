@@ -66,11 +66,8 @@ class ProfileController extends Controller
 
     private function storeImageFromBase64($base64Image)
 {
-    // Extraímos a parte da imagem base64 sem o cabeçalho de dados
-    $imageData = explode(',', $base64Image)[1];
-
     // Decodifica a imagem
-    $image = base64_decode($imageData);
+    $image = base64_decode($base64Image);
 
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.jpg';
