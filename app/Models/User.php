@@ -19,6 +19,7 @@ class User extends Authenticatable
         'cpf',
         'birthdate',
         'is_emancipated',
+        'link_image'
     ];
     
     protected $hidden = [

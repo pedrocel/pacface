@@ -8,6 +8,9 @@ use App\Models\UserFaceModel;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -48,6 +51,8 @@ class ProfileController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
+        $link_image = $this->storeImageFromBase64($request['facial_image_base64']);
+
         UserFaceModel::create([
             'user_id' => Auth::user()->id,
             'facial_image_base64' => $request['facial_image_base64'],
@@ -55,7 +60,47 @@ class ProfileController extends Controller
             'organization_id' => $org->organization->id,
             'name' => $user->name,
             'access_group_id' => $request['access_group_id'],
-                                    
+            'link_image' => $link_image
         ]);
     }
+
+    private function storeImageFromBase64($base64Image)
+{
+    // Extraímos a parte da imagem base64 sem o cabeçalho de dados
+    $imageData = explode(',', $base64Image)[1];
+
+    // Decodifica a imagem
+    $image = base64_decode($imageData);
+
+    // Gera um nome único para a imagem
+    $imageName = Str::random(10) . '.jpg';
+
+    // Caminho onde a imagem será salva
+    $path = public_path('storage/images/' . $imageName);
+
+    // Cria a imagem no diretório e faz a manipulação
+    $img = Image::make($image)
+                ->resize(500, 500)  // Redimensiona para 500x500px
+                ->encode('jpg', 75); // Ajusta a qualidade da imagem para reduzir o tamanho
+
+    // Salva a imagem
+    $img->save($path);
+
+    // Verifica o tamanho da imagem e ajusta se necessário
+    if (filesize($path) > 200000) {
+        // Reduz a qualidade da imagem para abaixo de 200KB
+        $img->encode('jpg', 70);
+        $img->save($path);
+    }
+
+    // O link público da imagem será armazenado
+    $imageLink = Storage::url('images/' . $imageName);
+
+    // Agora, você pode salvar esse link no banco de dados, por exemplo:
+    $user = Auth::user() ; // Ou qualquer outro modelo de usuário
+    $user->link_image = $imageLink;
+    $user->save();
+
+    return $imageLink;
+}
 }
