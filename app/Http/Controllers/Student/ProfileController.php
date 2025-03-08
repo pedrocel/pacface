@@ -69,7 +69,7 @@ class ProfileController extends Controller
     $imageData = base64_decode($base64Image);
 
     // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.png';
+    $imageName = Str::random(10) . '.jpg';
 
     // Caminho onde a imagem será salva
     $path = public_path('storage/images/' . $imageName);
