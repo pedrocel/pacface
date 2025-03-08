@@ -18,7 +18,7 @@ class FaceEventController extends Controller
         
         FrequencyInputEventModel::create([
             'ip' => $request->ip,
-            'personId' => $request->personId,
+            'personId' => (int) $request->personId,
             'date' => $request->date,
         ]);
 
