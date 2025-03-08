@@ -69,12 +69,7 @@ class ProfileController extends Controller
     $imageData = base64_decode($base64Image);
     
     $imageInfo = @getimagesizefromstring($imageData);
-    if (!$imageInfo) {
-    dd($imageInfo);
-        return 'Erro: Não foi possível identificar a imagem.';
-    }
 
-    dd($imageInfo);
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.png';
 
