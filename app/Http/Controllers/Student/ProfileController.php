@@ -90,6 +90,7 @@ class ProfileController extends Controller
         ->save($path); // Salva a imagem no caminho especificado
 
    
-dd($path);
+   dd($path);
+   return $img;
 }
 }
