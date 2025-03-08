@@ -55,13 +55,15 @@ class ProfileController extends Controller
 
         $link_image = $this->storeImageFromBase64($request->file('image_file'));
 
+        $room = RoomModel::where('name', "!=", null)->first();
+
         UserFaceModel::create([
             'user_id' => Auth::user()->id,
             'facial_image_base64' => $request['facial_image_base64'],
             'status' => 1,
             'organization_id' => $org->organization->id,
             'name' => $user->name,
-            'access_group_id' => RoomModel::first()->ip_device,
+            'access_group_id' => $room->ip_device,
             'link_image' => $link_image
         ]);
     }
