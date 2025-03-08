@@ -51,7 +51,7 @@ class ProfileController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        $link_image = $this->storeImageFromBase64(file('image_file'));
+        $link_image = $this->storeImageFromBase64($request->file('image_file'));
 
         UserFaceModel::create([
             'user_id' => Auth::user()->id,
