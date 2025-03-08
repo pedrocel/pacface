@@ -14,12 +14,11 @@ return new class extends Migration
         Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('type')->nullable();
-            $table->string('identificaton')->nullable();
-            $table->uuid('id_organization')->constrained('organizations')->onDelete('cascade');
-            $table->string('description')->nullable();
+            $table->uuid('organization_id')->nullable();
+            $table->integer('status');
             $table->integer('qtd_students')->nullable();
-            $table->integer('status')->nullable();
+            $table->integer('turn')->nullable();
+            $table->integer('year')->nullable();
             $table->timestamps();
         });
     }

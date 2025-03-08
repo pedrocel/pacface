@@ -26,7 +26,7 @@
                     <a href="#contato" class="text-white hover:text-blue-200">Contato</a>
                     <a href="landing" class="text-white hover:text-blue-200">PACSAFE EDU</a>
                     <a href="{{ route('login') }}" class="bg-white text-blue-600 px-4 py-2 rounded-lg hover:bg-blue-50 transition">Entrar</a>
-                </div>
+                </div>  
             </div>
         </nav>
 

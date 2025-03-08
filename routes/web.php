@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ControllerController;
+use App\Http\Controllers\Director\ClassController;
 use App\Http\Controllers\Director\FrequencyController;
 use App\Http\Controllers\Director\NotificationController;
 use App\Http\Controllers\Director\SnackController;
@@ -152,7 +153,11 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     
     Route::get('/ponto-digital/dashboard', [PointDigitalController::class, 'getDashboard'])->name('director.point-digital.dashboard.get');
 
+    Route::get('/turmas', [ClassController::class, 'index'])->name('director.class.index');
+    Route::get('/turma/criar', [ClassController::class, 'create'])->name('director.class.create');
+    Route::post('/turma/criar', [ClassController::class, 'store'])->name('director.class.store');
 
+    
 
     Route::get('/alunos', [DirectorStudentsController::class, 'index'])->name('director.students.index');
     Route::get('/aluno/criar', [DirectorStudentsController::class, 'create'])->name('director.students.create');
