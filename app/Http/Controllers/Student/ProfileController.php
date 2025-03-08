@@ -8,9 +8,9 @@ use App\Models\UserFaceModel;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Image\Image;
 
 class ProfileController extends Controller
 {
@@ -66,31 +66,21 @@ class ProfileController extends Controller
 
     private function storeImageFromBase64($base64Image)
 {
-    // Decodifica a imagem
-    $image = base64_decode($base64Image);
+    $imageData = base64_decode($base64Image);
 
     // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.jpg';
+    $imageName = Str::random(10) . '.png';
 
     // Caminho onde a imagem será salva
     $path = public_path('storage/images/' . $imageName);
 
-    // Cria a imagem no diretório e faz a manipulação
-    $img = Image::make($image)
-                ->resize(500, 500)  // Redimensiona para 500x500px
-                ->encode('jpg', 75); // Ajusta a qualidade da imagem para reduzir o tamanho
+    // Manipula a imagem, redimensiona para 500x500px e salva
+    Image::load($imageData)
+        ->width(500)  // Ajusta a largura para 500px
+        ->height(500) // Ajusta a altura para 500px
+        ->save($path); // Salva a imagem no caminho especificado
 
-    // Salva a imagem
-    $img->save($path);
-
-    // Verifica o tamanho da imagem e ajusta se necessário
-    if (filesize($path) > 200000) {
-        // Reduz a qualidade da imagem para abaixo de 200KB
-        $img->encode('jpg', 70);
-        $img->save($path);
-    }
-
-    // O link público da imagem será armazenado
+    // O link público da imagem será retornado
     $imageLink = Storage::url('images/' . $imageName);
 
     // Agora, você pode salvar esse link no banco de dados, por exemplo:
