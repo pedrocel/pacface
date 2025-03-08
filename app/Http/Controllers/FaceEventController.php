@@ -25,6 +25,8 @@ class FaceEventController extends Controller
         return response()->json(['message' => 'Face event created successfully'], 201);
     }
 
+    pulic function getUsersFromId
+
     public function handleWebhook(Request $request)
     {
         // Criação do evento facial
@@ -45,6 +47,10 @@ class FaceEventController extends Controller
 
     public function getUsers(){
         return response()->json(UserFaceModel::all());
+    }
+
+    public function getUsersFromId($id){
+        return response()->json(UserFaceModel::where('organization_id', $id)->get());
     }
 
     public function createFaltas(Request $request)

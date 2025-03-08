@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Director;
 
 use App\Http\Controllers\Controller;
+use App\Models\FrequencyInputEventModel;
 use App\Models\RoomModel;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
@@ -41,5 +42,17 @@ class RoomController extends Controller
         ]);
 
         return redirect()->route('director.room.index');
+    }
+
+    public function show($id){
+
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+        $room = RoomModel::find($id);
+
+        $frequencies = FrequencyInputEventModel::where('ip', $room->ip_device)->get();
+
+        return view('director.rooms.show', data: compact('room', 'org', 'room', 'frequencies'));
     }
 }

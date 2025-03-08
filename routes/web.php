@@ -173,6 +173,7 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/salas', [RoomController::class, 'index'])->name('director.room.index');
     Route::get('/sala/criar', [RoomController::class, 'create'])->name('director.room.create');
     Route::post('/sala/criar', [RoomController::class, 'store'])->name('director.room.store');
+    Route::get('/sala/detalhes/{id}', [RoomController::class, 'show'])->name('director.room.show');
     
 
 
