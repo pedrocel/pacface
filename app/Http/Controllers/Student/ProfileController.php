@@ -24,6 +24,7 @@ class ProfileController extends Controller
 
     public function updateImage(Request $request){
 
+        dd($request->all());
         // Obtém o usuário autenticado
         $user = Auth::user();
 
@@ -70,7 +71,6 @@ class ProfileController extends Controller
     
     $imageInfo = @getimagesizefromstring($imageData);
 
-    dd($imageInfo);
     // Gera um nome único para a imagem
     $imageName = Str::random(10) . '.png';
 
