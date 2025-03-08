@@ -80,6 +80,7 @@ class ProfileController extends Controller
         ->height(500) // Ajusta a altura para 500px
         ->save($path); // Salva a imagem no caminho especificado
 
+        dd($img);
     // O link público da imagem será retornado
     $imageLink = Storage::url('images/' . $imageName);
 
