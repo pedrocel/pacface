@@ -70,7 +70,7 @@ class ProfileController extends Controller
     $imageData = base64_decode($base64Image);
 
     // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.jpg';
+    $imageName = Str::random(10) . '.png';
 
     // Caminho onde a imagem será salva no diretório storage/app/public
     $storagePath = storage_path('app/public/images'); // Caminho correto no sistema de arquivos
@@ -83,7 +83,6 @@ class ProfileController extends Controller
     // Caminho completo para o arquivo da imagem
     $path = $storagePath . '/' . $imageName;
 
-   dd($path);
 
 
     // Manipula a imagem, redimensiona para 500x500px e salva
