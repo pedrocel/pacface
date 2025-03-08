@@ -89,15 +89,7 @@ class ProfileController extends Controller
         ->height(500) // Ajusta a altura para 500px
         ->save($path); // Salva a imagem no caminho especificado
 
-    // O link público da imagem será retornado
-    // Use Storage::url() para gerar o link correto
-    $imageLink = Storage::url('images/' . $imageName); // Gera o link público com Storage::url()
-
-    // Agora, você pode salvar esse link no banco de dados
-    $user = Auth::user(); // Ou qualquer outro modelo de usuário
-    $user->link_image = $imageLink;
-    $user->save();
-
-    return $imageLink;
+   
+dd($path);
 }
 }
