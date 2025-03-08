@@ -70,24 +70,49 @@ class ProfileController extends Controller
 
     private function storeImageFromBase64($file)
 {
-    // Gera um nome único para a imagem
-    $imageName = Str::random(10) . '.' . $file->getClientOriginalExtension();
+    $imageName = Str::random(10) . '.jpg';  // Sempre salva como JPG
 
     // Caminho onde a imagem será salva no diretório storage/app/public/images
     $storagePath = storage_path('app/public/images');
 
     // Verifica se a pasta existe e cria, se não existir
     if (!file_exists($storagePath)) {
-        mkdir($storagePath, 0777, true);
+        mkdir($storagePath, 0777, true); // Cria a pasta com permissões adequadas
     }
 
-    // Move o arquivo para o local correto
-    $file->move($storagePath, $imageName);
+    // Carrega a imagem original
+    $image = null;
+    $extension = strtolower($file->getClientOriginalExtension());
 
-    // Link público da imagem (usando a URL configurada no filesystem)
+    // Converte a imagem para JPG dependendo do formato
+    switch ($extension) {
+        case 'png':
+            $image = imagecreatefrompng($file->getRealPath());
+            break;
+        case 'gif':
+            $image = imagecreatefromgif($file->getRealPath());
+            break;
+        case 'jpeg':
+        case 'jpg':
+            $image = imagecreatefromjpeg($file->getRealPath());
+            break;
+        default:
+            throw new \Exception("Tipo de imagem não suportado.");
+    }
+
+    // Caminho completo onde a imagem será salva
+    $path = $storagePath . '/' . $imageName;
+
+    // Salva a imagem convertida para JPG (qualidade 80)
+    imagejpeg($image, $path, 80);  // 80 é a qualidade da imagem (pode ajustar)
+
+    // Libera a memória
+    imagedestroy($image);
+
+    // Link público da imagem
     $publicPath = asset("storage/images/$imageName");
 
-    return  $publicPath;
+    return $publicPath;
     
 }
 }
