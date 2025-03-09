@@ -20,3 +20,6 @@ Route::post('/test-notification', [NotificationTestController::class, 'sendTestN
 
 Route::post('/facial/frequency', [FaceEventController::class, 'createFrequency']);
 
+Route::post('/{id_org}/student/update/{id_user}', [FaceEventController::class, 'studentUpdate']);
+
+

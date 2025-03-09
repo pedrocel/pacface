@@ -17,6 +17,14 @@ use GuzzleHttp\Exception\RequestException;
 
 class FaceEventController extends Controller
 {
+
+    public function studentUpdate($id_org, $id_user){
+        $user = UserFaceModel::where('user_id', $id_user)->first();
+        $user->status == 6;
+        $user->save();
+        return response()->json(['message' => 'User Updated with successfully'], 201);
+    }
+
     public function createFrequency(Request $request){
         
         FrequencyInputEventModel::create([
@@ -91,6 +99,7 @@ class FaceEventController extends Controller
     public function getUsersFromId($id)
     {
         $users = UserFaceModel::where('organization_id', $id)
+            ->where('status', '!=', 6)
             ->select('name','user_id', 'status', 'organization_id', 'link_image', 'ip_device')
             ->get();
 
