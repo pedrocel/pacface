@@ -228,6 +228,10 @@
         background-color: #eef2ff;
         border: 2px dashed #4f46e5;
         }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
