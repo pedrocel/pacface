@@ -5,12 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\FaceEvent;
 use App\Models\FrequencyInputEventModel;
+use App\Models\RoomModel;
 use App\Models\User;
 use App\Models\UserFaceModel;
 use App\Models\UserFacial;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Str;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 
 class FaceEventController extends Controller
 {
@@ -22,6 +25,40 @@ class FaceEventController extends Controller
             'personId' => $request->personID,
             'date' => $request->date,
         ]);
+
+        $user = User::where('id', operator: $request->personID)->first();
+        $sala = RoomModel::where('ip',  $request->ip)->first();
+
+        try {
+            $client = new Client();
+
+            // Configurações da API do ChatPro
+            $instanceId = 'chatpro-1aors879o7';
+            $token = '66rvryi9wasim03a63ljr8cmyloby8';
+            $url = "https://v5.chatpro.com.br/{$instanceId}/api/v1/send_message";
+
+            // Faz a requisição para a API do ChatPro
+            $response = $client->request('POST', $url, [
+                'json' => [
+                    'number' => '5582988291668', // Número do usuário no formato internacional
+                    'message' => 'O Aluno', $user->name.' foi identificado na: '.$sala->name. '. Data do registro: '. $request->date, // Mensagem da notificação
+                ],
+                'headers' => [
+                    'Authorization' => $token, // Adiciona o prefixo Bearer
+                    'Accept' => 'application/json',
+                    'Content-Type' => 'application/json',
+                ],
+            ]);
+        } catch (RequestException $e) {
+            // Captura erros de requisição
+            if ($e->hasResponse()) {
+                $response = $e->getResponse();
+                $errorMessage = "Erro ao enviar WhatsApp para  " . $response->getStatusCode() . " - " . $response->getBody();
+            } else {
+                $errorMessage = "Erro ao enviar WhatsApp para  " . $e->getMessage();
+            }
+           
+        }
 
         return response()->json(['message' => 'Face event created successfully'], 201);
     }
