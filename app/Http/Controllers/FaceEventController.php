@@ -19,7 +19,6 @@ class FaceEventController extends Controller
 {
     public function createFrequency(Request $request){
         
-
         FrequencyInputEventModel::create([
             'ip' => $request->ip,
             'personId' => $request->personID,
@@ -41,7 +40,7 @@ class FaceEventController extends Controller
             $response = $client->request('POST', $url, [
                 'json' => [
                     'number' => '5582988291668', // Número do usuário no formato internacional
-                    'message' => 'O Aluno', $user->name.' foi identificado na: '.$sala->name. '. Data do registro: '. $request->date, // Mensagem da notificação
+                    'message' => 'O', // Mensagem da notificação
                 ],
                 'headers' => [
                     'Authorization' => $token, // Adiciona o prefixo Bearer
