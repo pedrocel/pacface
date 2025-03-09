@@ -25,11 +25,10 @@ class FaceEventController extends Controller
             'date' => $request->date,
         ]);
 
-        $user = User::where('id', operator: $request->personID)->first();
-        $sala = RoomModel::where('ip',  $request->ip)->first();
-
         try {
             $client = new Client();
+            $user = User::where('id', $request->personID)->first();
+            $sala = RoomModel::where('ip_device',  $request->ip)->first();
 
             // Configurações da API do ChatPro
             $instanceId = 'chatpro-1aors879o7';
@@ -40,7 +39,7 @@ class FaceEventController extends Controller
             $response = $client->request('POST', $url, [
                 'json' => [
                     'number' => '5582988291668', // Número do usuário no formato internacional
-                    'message' => 'O Aluno', $user->name.' foi identificado na: '.$sala->name. '. Data do registro: '. $request->date, // Mensagem da notificação
+                    'message' => 'O Aluno '. $user->name.' foi identificado na: '.$sala->name. '. Data do registro: '. $request->date, // Mensagem da notificação
                 ],
                 'headers' => [
                     'Authorization' => $token, // Adiciona o prefixo Bearer
