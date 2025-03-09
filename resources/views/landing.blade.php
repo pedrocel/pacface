@@ -498,10 +498,9 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Servidores Públicos</h3>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Servidores</h3>
             <p class="text-gray-600 text-center">Gestão administrativa e relatórios gerais</p>
           </div>
-          
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -513,7 +512,6 @@
             <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Professores</h3>
             <p class="text-gray-600 text-center">Acompanhamento de frequência e desempenho</p>
           </div>
-          
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -523,17 +521,15 @@
             <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Agentes Sociais</h3>
             <p class="text-gray-600 text-center">Monitoramento e intervenção social</p>
           </div>
-          
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
               </svg>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Bolsa Família</h3>
-            <p class="text-gray-600 text-center">Acompanhamento de beneficiários</p>
+            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Estudantes</h3>
+            <p class="text-gray-600 text-center">Acompanhamento de aulas, faltas e atividades</p>
           </div>
-          
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -543,7 +539,6 @@
             <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Responsáveis</h3>
             <p class="text-gray-600 text-center">Acompanhamento dos alunos</p>
           </div>
-          
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -603,26 +598,24 @@
       </div>
     </section>
 
-    <!-- Ponto Digital Section -->
     <section id="ponto" class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="text-center mb-16">
-  <div class="inline-block px-3 py-1 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-4">
-    Gestão de Pessoal
-  </div>
-  <br>
-  <a href="pactime" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-    Ponto Digital Facial
-  </a>
-  <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
-    Sistema avançado de registro de ponto através de reconhecimento facial.
-  </p>
-  <a href="pactime" class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary/90 transition duration-300">
-    Experimente Agora
-  </a>
-</div>
+        <div class="text-center mb-16">
+          <div class="inline-block px-3 py-1 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-4">
+            Gestão de Pessoal
+          </div>
+          <br>
+          <a href="pactime" class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Ponto Digital Facial
+          </a>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto mb-6">
+            Sistema avançado de registro de ponto através de reconhecimento facial.
+          </p>
+          <a href="pactime" class="px-6 py-3 bg-primary text-white rounded-lg shadow-md hover:bg-primary/90 transition duration-300">
+            Experimente Agora
+          </a>
+        </div>
 
-        
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-100">
             <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
@@ -656,6 +649,7 @@
         </div>
       </div>
     </section>
+    
 
     <!-- FAQ Section -->
     <section id="faq" class="py-16 bg-white">
