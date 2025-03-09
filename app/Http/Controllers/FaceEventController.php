@@ -32,6 +32,8 @@ class FaceEventController extends Controller
                 $client = new Client();
                 $sala = RoomModel::where('ip_device',  $request->ip)->first();
     
+                //implementar a filtragem de ip atravez do relaiconamentop sala, disiciplna, turmna, aula
+                
                 // Configurações da API do ChatPro
                 $instanceId = 'chatpro-1aors879o7';
                 $token = '66rvryi9wasim03a63ljr8cmyloby8';
