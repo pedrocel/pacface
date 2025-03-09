@@ -30,7 +30,6 @@ class FaceEventController extends Controller
         if($user){
             try {
                 $client = new Client();
-                $user = User::where('id', $request->personID)->first();
                 $sala = RoomModel::where('ip_device',  $request->ip)->first();
     
                 // Configurações da API do ChatPro
