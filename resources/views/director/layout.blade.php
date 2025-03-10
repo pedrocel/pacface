@@ -241,7 +241,12 @@
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
     </div>
-
+    @php
+        use App\Models\UserOrganizationModel;
+        use Illuminate\Support\Facades\Auth;
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
+    @endphp
     <!-- Mobile Menu Overlay -->
     <div id="sidebarOverlay" class="lg:hidden fixed inset-0 bg-black bg-opacity-50 sidebar-overlay z-30" onclick="toggleSidebar()"></div>
 
@@ -386,10 +391,7 @@
                         </div>
                     </div>
                     <div>
-                        @php
-                            $user = Auth::user();
-                            $org = UserOrganizationModel::where('user_id', $user->id)->first();
-                        @endphp
+                        
                         <h3 class="text-xl font-semibold">{{ $user->name }}</h3>
                         <p class="text-gray-600">{{ $user->profissao ?? 'Profissão não informada' }}</p>
                         <p class="text-sm text-emerald-600">Online há 2 horas</p>
