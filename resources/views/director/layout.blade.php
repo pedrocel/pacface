@@ -430,11 +430,16 @@
                     <a href="{{ route('director.discipline.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
                     {{ request()->routeIs('director.discipline.index') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
                         </div>
                         <span>Disciplinas</span>
                     </a>
 
+                    <a href="{{ route('director.discipline.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+                        <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
+                        </div>
+                        <span>Disciplinas</span>
+                    </a>
                     <a href="{{ route('director.ocurrence.dashboard.get') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
