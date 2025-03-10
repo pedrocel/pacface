@@ -19,7 +19,7 @@
                     </button>
                 </form>
                 </div>
-                <button onclick="openModal()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
+                <button id="showModalButton" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
                 + Cadastrar Novo Estudante
                 </button>
             </div>
@@ -71,11 +71,10 @@
 
 
 
-
-    <!-- Modal de Cadastro -->
+<!-- Modal de Cadastro -->
 <div id="preRegisterModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-600 hover:text-red-500">
+        <button id="closeModalButton" class="absolute top-2 right-2 text-gray-600 hover:text-red-500">
             &times;
         </button>
         <h2 class="text-xl font-semibold mb-4">Pré Cadastro do Aluno</h2>
@@ -90,7 +89,7 @@
             </div>
 
             <div class="flex justify-between">
-                <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
+                <button type="button" id="closeModal" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Fechar</button>
                 <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar</button>
             </div>
         </form>
@@ -106,8 +105,6 @@ document.getElementById('cpf').addEventListener('input', function (e) {
     if (value.length > 9) value = value.replace(/^(\d{3})\.(\d{3})\.(\d{3})/, '$1.$2.$3-');
     e.target.value = value;
 });
-</script>
-<script>
     document.addEventListener("DOMContentLoaded", function() {
     // Seleciona todos os elementos com a classe 'cpf'
     const cpfs = document.querySelectorAll('.cpf');
@@ -158,38 +155,36 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
-</script>
 
-<script>
-    function openModal() {
-        document.getElementById('preRegisterModal').classList.remove('hidden');
-        document.getElementById('preRegisterModal').classList.add('flex');
-    }
+    document.addEventListener("DOMContentLoaded", function () {
+        const modal = document.getElementById("preRegisterModal");
+        const openButton = document.getElementById("showModalButton");
+        const closeButtons = document.querySelectorAll("#closeModal, #closeModalButton");
 
-    function closeModal() {
-        document.getElementById('preRegisterModal').classList.add('hidden');
-        document.getElementById('preRegisterModal').classList.remove('flex');
-    }
-
-    document.addEventListener('click', function(event) {
-        const modal = document.getElementById('preRegisterModal');
-        if (event.target === modal) {
-            closeModal();
+        function showModal() {
+            modal.classList.remove("hidden");
+            modal.classList.add("flex");
         }
-    });
-</script>
 
-<script>
-    document.getElementById('profileButton').addEventListener('click', function () {
-        const dropdown = document.getElementById('profileDropdown');
-        dropdown.classList.toggle('hidden');
-    });
-    
-    document.addEventListener('click', function (event) {
-        if (event.target.classList.contains('edit-responsible')) {
-            const responsible = JSON.parse(event.target.getAttribute('data-responsible'));
-            openModal(true, responsible);
+        function hideModal() {
+            modal.classList.add("hidden");
+            modal.classList.remove("flex");
         }
+
+        if (openButton) {
+            openButton.addEventListener("click", showModal);
+        }
+
+        closeButtons.forEach(button => {
+            button.addEventListener("click", hideModal);
+        });
+
+        // Fechar ao clicar fora do modal
+        document.addEventListener("click", function (event) {
+            if (event.target === modal) {
+                hideModal();
+            }
+        });
     });
 </script>
 
