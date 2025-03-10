@@ -269,7 +269,8 @@
             <!-- Navigation Menu -->
             <nav class="sidebar-menu p-4">
                 <div class="space-y-2">
-                    <a href="{{ route('director.dashboard') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+                    <a href="{{ route('director.dashboard') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.dashboard') ? 'text-gray-100 bg-emerald-600 shadow-lg' : 'text-gray-300' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><rect width="7" height="9" x="3" y="3" rx="1"></rect><rect width="7" height="5" x="14" y="3" rx="1"></rect><rect width="7" height="9" x="14" y="12" rx="1"></rect><rect width="7" height="5" x="3" y="16" rx="1"></rect></svg>
                         </div>
