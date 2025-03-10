@@ -111,7 +111,7 @@
             <div class="relative">
               <div class="absolute -top-4 -left-4 w-24 h-24 bg-secondary/30 rounded-full blur-xl"></div>
               <div class="absolute -bottom-8 -right-8 w-40 h-40 bg-primary/30 rounded-full blur-xl"></div>
-              <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Escola com tecnologia" class="rounded-lg shadow-xl relative z-10">
+              <img src="https://i.ibb.co/p6tctGvv/congratulations-you-did-test-very-well.jpg" alt="Escola com tecnologia" class="rounded-lg shadow-xl relative z-10">
             </div>
           </div>
         </div>
