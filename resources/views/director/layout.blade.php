@@ -454,24 +454,31 @@
 
                 <div class="mt-8 space-y-2">
                     <h3 class="px-2 text-xs font-semibold text-emerald-200 uppercase tracking-wider">Gestão</h3>
-                    <a href="{{ route('director.students.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+                    
+                    <a href="{{ route('director.students.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.students.index') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         </div>
                         <span>Alunos</span>
                     </a>
-                    <a href="{{ route('director.teacher.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+
+                    <a href="{{ route('director.teacher.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.teacher.index') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                         </div>
                         <span>Professores</span>
                     </a>
-                    <a href="{{ route('director.room.index') }}"  class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+
+                    <a href="{{ route('director.room.index') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.room.index') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
                         </div>
                         <span>Salas de aula</span>
                     </a>
+                  
                     <a href="{{ route('director.pre-register.get') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="19" x2="19" y1="8" y2="14"></line><line x1="22" x2="16" y1="11" y2="11"></line></svg>
