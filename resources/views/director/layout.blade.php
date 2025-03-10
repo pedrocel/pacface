@@ -362,7 +362,7 @@
             <div class="p-4 border-b border-emerald-700">
                 <div class="flex items-center gap-2">
                     <div class="text-center">
-                        <div class="inline-flex items-center gap-3 mb-4">
+                        <div class="inline-flex items-center gap-3">
                             <div class="bg-emerald-600 p-3 rounded-xl">
                                 <div class="recognition-box w-12 h-12 relative">
                                     <!-- Combined Graduate and Face Icon -->
