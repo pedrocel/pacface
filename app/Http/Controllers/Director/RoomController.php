@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Director;
 use App\Http\Controllers\Controller;
 use App\Models\FrequencyInputEventModel;
 use App\Models\RoomModel;
+use App\Models\User;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class RoomController extends Controller
 {
@@ -44,15 +46,48 @@ class RoomController extends Controller
         return redirect()->route('director.room.index');
     }
 
-    public function show($id){
-
+    public function show($id)
+    {
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
-
         $room = RoomModel::find($id);
 
-        $frequencies = FrequencyInputEventModel::with('user')->where('ip', $room->ip_device)->get();
+        // Agrupar as frequências por personId
+        $frequencies = FrequencyInputEventModel::with('user')
+            ->where('ip', $room->ip_device)
+            ->get()
+            ->groupBy('personId');  // Agrupa por personId (ou qualquer campo único para identificar o usuário)
 
-        return view('director.rooms.show', data: compact('room', 'org', 'room', 'frequencies'));
+        // Passar as frequências agrupadas para a view
+        return view('director.rooms.show', [
+            'room' => $room,
+            'org' => $org,
+            'frequencies' => $frequencies,
+        ]);
     }
+
+
+public function detail($studentId, $roomIp)
+{
+    // Buscar o aluno
+    $user = User::where('id', $studentId)->first();
+
+    $room = RoomModel::where('id', $roomIp)->first();
+
+    // Verificar se o aluno existe
+    if (!$user) {
+        return redirect()->back()->with('error', 'Aluno não encontrado!');
+    }
+
+    // Buscar as frequências desse aluno na sala especificada (com base no IP da sala)
+    $frequencies = FrequencyInputEventModel::with('user')
+        ->where('personId', $user->id)
+        ->where('ip', $room->ip_device)
+        ->get();
+
+    // Passar os dados para a view
+    return view('director.rooms.detail', compact('user', 'frequencies'));
+}
+
+
 }
