@@ -391,10 +391,6 @@
                                 <div class="corner corner-br"></div>
                             </div>
                         </div>
-                        <div class="text-left">
-                            <h1 class="text-4xl font-bold text-gray-900">PACSAFE</h1>
-                            <p class="text-lg text-emerald-600">Sistema de reconhecimento oficial acadêmico</p>
-                        </div>
                     </div>
                 </div>
                     
