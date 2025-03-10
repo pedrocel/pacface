@@ -256,8 +256,16 @@
             <div class="p-4 border-b border-emerald-700">
                 <div class="flex items-center gap-2">
                     <div class="p-2 bg-white/10 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            <path d="M6 8h12"/>
+                            <path d="M12 3v17"/>
+                            <path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            <path d="M12 12h3"/>
+                        </svg>
                     </div>
+                    
                     <div>
                         <h1 class="text-xl font-bold">PACSAFE</h1>
                         <p class="text-xs text-emerald-100">Sistema de reconhecimento oficial acadêmico</p>
