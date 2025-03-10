@@ -393,7 +393,7 @@
                             </div>
                             <div class="text-left">
                                 <h1 class="text-xl font-bold">PACSAFE EDU</h1>
-                                <p class="text-xs text-emerald-100">Sistema de reconhecimento facial acadêmico</p>
+                                <p class="text-xs text-emerald-100">Sistema Inteligente</p>
                             </div>
                         </div>
                     </div>
