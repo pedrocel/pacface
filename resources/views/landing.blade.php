@@ -57,6 +57,39 @@
         50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
       }
+
+      .profile-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .profile-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .icon-container {
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover .icon-container {
+            transform: scale(1.1);
+        }
+
+        .card-title {
+            transition: color 0.3s ease;
+        }
+
+        .profile-card:hover .card-title {
+            color: #059669;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
     </style>
   </head>
   <body class="bg-gray-50">
@@ -484,73 +517,122 @@
 
     <!-- Perfis Section -->
     <section id="perfis" class="py-16 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-7xl mx-auto px-4 py-16">
+        <!-- Minimal Header -->
         <div class="text-center mb-16">
-          <div class="inline-block px-3 py-1 bg-primary/10 rounded-full text-primary text-sm font-semibold mb-4">Acesso Personalizado</div>
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Perfis do Sistema</h2>
-          <p class="text-lg text-gray-600 max-w-3xl mx-auto">Acesso personalizado para cada tipo de usuário do sistema.</p>
+            <div class="inline-flex items-center justify-center mb-6">
+                <div class="bg-emerald-600 p-4 rounded-2xl floating">
+                    <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                              d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                              d="M9 12l2 2 4-4"/>
+                    </svg>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-900 mb-3">Perfis do Sistema</h1>
+            <div class="w-24 h-1 bg-emerald-600 mx-auto rounded-full mb-4"></div>
         </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+
+        <!-- Clean Profile Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Alunos Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Alunos</h3>
+                    <p class="text-gray-500 text-sm">Acesso a notas, frequência, materiais.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Alunos</h3>
-            <p class="text-gray-600 text-center">Acesso a notas, frequência, materiais.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M12 14l9-5-9-5-9 5 9 5z" />
-                <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
-              </svg>
+
+            <!-- Responsáveis Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Responsáveis</h3>
+                    <p class="text-gray-500 text-sm">Consulta de desempenho, comunicados e acompanhamento de frequência dos filhos.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Responsáveis</h3>
-            <p class="text-gray-600 text-center">Consulta de desempenho, comunicados e acompanhamento de frequência dos filhos.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-              </svg>
+
+            <!-- Equipe Pedagógica Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Equipe Pedagógica</h3>
+                    <p class="text-gray-500 text-sm">Gestão de aulas, avaliações, planejamento</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Equipe Pedagógica</h3>
-            <p class="text-gray-600 text-center">Gestão de aulas, avaliações, planejamento</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-              </svg>
+
+            <!-- Agentes Sociais Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Agentes Sociais</h3>
+                    <p class="text-gray-500 text-sm">Acompanhamento social, monitoramento de ocorrências e relatórios.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Agentes Sociais</h3>
-            <p class="text-gray-600 text-center">Acompanhamento social, monitoramento de ocorrências e relatórios.</p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-              </svg>
+
+            <!-- Psicólogos Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Psicólogos</h3>
+                    <p class="text-gray-500 text-sm">Registro de atendimentos, apoio emocional.</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Psicólogos</h3>
-            <p class="text-gray-600 text-center">Registro de atendimentos, apoio emocional.
-            </p>
-          </div>
-          <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition duration-300">
-            <div class="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mb-4 mx-auto">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-              </svg>
+
+            <!-- Nutricionistas Card -->
+            <div class="profile-card bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl">
+                <div class="flex justify-center mb-6">
+                    <div class="icon-container bg-emerald-600/10 p-6 rounded-2xl">
+                        <svg class="w-12 h-12 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" 
+                                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2 card-title">Nutricionistas</h3>
+                    <p class="text-gray-500 text-sm">Gestão da merenda escolar</p>
+                </div>
             </div>
-            <h3 class="text-xl font-semibold text-gray-900 mb-2 text-center">Nutricionistas</h3>
-            <p class="text-gray-600 text-center">Gestão da merenda escolar</p>
-          </div>
         </div>
-      </div>
+    </div>
     </section>
 
     <!-- Depoimentos Section -->
