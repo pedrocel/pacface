@@ -386,8 +386,11 @@
                         </div>
                     </div>
                     <div>
-                        <h3 class="text-xl font-semibold">João Silva</h3>
-                        <p class="text-gray-600">Professor de Matemática</p>
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                        <h3 class="text-xl font-semibold">{{ $user->name }}</h3>
+                        <p class="text-gray-600">{{ $user->profissao ?? 'Profissão não informada' }}</p>
                         <p class="text-sm text-emerald-600">Online há 2 horas</p>
                     </div>
                 </div>
