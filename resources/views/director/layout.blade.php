@@ -232,6 +232,112 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        .scanner-line {
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                #10B981,
+                transparent
+            );
+            animation: scan 2s linear infinite;
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+
+        @keyframes scan {
+            0% {
+                top: 0;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 100%;
+                opacity: 0;
+            }
+        }
+
+        .scanner-line-reverse {
+            animation: scan-reverse 2s linear infinite;
+            animation-delay: 1s;
+        }
+
+        @keyframes scan-reverse {
+            0% {
+                top: 100%;
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                top: 0;
+                opacity: 0;
+            }
+        }
+
+        .recognition-box {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .corner {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border: 2px solid #10B981;
+        }
+
+        .corner-tl {
+            top: 0;
+            left: 0;
+            border-right: 0;
+            border-bottom: 0;
+        }
+
+        .corner-tr {
+            top: 0;
+            right: 0;
+            border-left: 0;
+            border-bottom: 0;
+        }
+
+        .corner-bl {
+            bottom: 0;
+            left: 0;
+            border-right: 0;
+            border-top: 0;
+        }
+
+        .corner-br {
+            bottom: 0;
+            right: 0;
+            border-left: 0;
+            border-top: 0;
+        }
+
+        .pulse-effect {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -255,9 +361,42 @@
         <aside id="sidebar" class="sidebar w-64 bg-[#00875A] text-white flex flex-col">
             <div class="p-4 border-b border-emerald-700">
                 <div class="flex items-center gap-2">
-                    <div class="p-2 bg-white/10 rounded-lg">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-8 h-8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"></path><path d="m9 12 2 2 4-4"></path></svg>
+                <div class="text-center mb-12">
+                    <div class="inline-flex items-center gap-3 mb-4">
+                        <div class="bg-emerald-600 p-3 rounded-xl">
+                            <div class="recognition-box w-12 h-12 relative">
+                                <!-- Combined Graduate and Face Icon -->
+                                <svg viewBox="0 0 24 24" class="w-full h-full text-white">
+                                    <!-- Graduation Cap -->
+                                    <path d="M12 4l9 5-9 5-9-5 9-5z" fill="currentColor"/>
+                                    <!-- Face -->
+                                    <circle cx="12" cy="14" r="4" fill="currentColor" class="pulse-effect"/>
+                                    <!-- Eyes -->
+                                    <circle cx="10.5" cy="13" r="0.5" fill="#065f46"/>
+                                    <circle cx="13.5" cy="13" r="0.5" fill="#065f46"/>
+                                    <!-- Smile -->
+                                    <path d="M10.5 15a1.5 1.5 0 0 0 3 0" stroke="#065f46" fill="none" stroke-width="0.5"/>
+                                    <!-- Tassel -->
+                                    <path d="M12 9v2" stroke="currentColor" stroke-width="0.5"/>
+                                </svg>
+                                
+                                <!-- Scanner Lines -->
+                                <div class="scanner-line"></div>
+                                <div class="scanner-line scanner-line-reverse"></div>
+                                
+                                <!-- Corner Markers -->
+                                <div class="corner corner-tl"></div>
+                                <div class="corner corner-tr"></div>
+                                <div class="corner corner-bl"></div>
+                                <div class="corner corner-br"></div>
+                            </div>
+                        </div>
+                        <div class="text-left">
+                            <h1 class="text-4xl font-bold text-gray-900">PACSAFE</h1>
+                            <p class="text-lg text-emerald-600">Sistema de reconhecimento oficial acadêmico</p>
+                        </div>
                     </div>
+                </div>
                     
                     <div>
                         <h1 class="text-xl font-bold">PACSAFE</h1>
