@@ -435,15 +435,18 @@
                         <span>Disciplinas</span>
                     </a>
 
-                    <a href="{{ route('director.ocurrence.dashboard.get') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+                    <a href="{{ route('director.ocurrence.dashboard.get') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.ocurrence.dashboard.get') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path></svg>
                         </div>
                         <span>Ocorrências</span>
                     </a>
-                    <a href="{{ route('director.point-digital.dashboard.get') }}"  class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors">
+
+                    <a href="{{ route('director.point-digital.dashboard.get') }}" class="menu-item flex items-center gap-2 p-2 rounded hover:bg-emerald-700 group transition-colors
+                    {{ request()->routeIs('director.point-digital.dashboard.get') ? 'text-gray-100 bg-emerald-700 shadow-lg' : 'text-white' }}">
                         <div class="p-1.5 bg-white/10 rounded group-hover:bg-white/20 transition-colors">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M12 11c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"></path><path d="M12 11c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"></path><path d="M13.47 14.28c-.79.29-1.64.44-2.47.44s-1.68-.15-2.47-.44"></path><path d="M9 17.5c0 .53-.21 1.04-.59 1.42C7.84 19.5 6.93 20 6 20s-1.84-.5-2.41-1.08C3.21 18.54 3 18.03 3 17.5c0-1.1 1.34-2 3-2s3 .9 3 2z"></path><path d="M15 17.5c0 .53.21 1.04.59 1.42.57.58 1.48 1.08 2.41 1.08s1.84-.5 2.41-1.08c.38-.38.59-.89.59-1.42 0-1.1-1.34-2-3-2s-3 .9-3 2z"></path></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4"><path d="M12 11c0 1.66-1.34 3-3 3s-3-1.34-3-3 1.34-3 3-3 3 1.34 3 3z"></path><path d="M12 11c0-1.66 1.34-3 3-3s3 1.34 3 3-1.34 3-3 3-3-1.34-3-3z"></path><path d="M13.47 14.28c-.79.29-1.64.44-2.47.44s-1.68-.15-2.47-.44"></path><path d="M9 17.5c0 .53-.21 1.04-.59 1.42C7.84 19.5 6.93 20 6 20s-1.84-.5-2.41-1.08C3.21 18.54 3 18.03 3 17.5c0-1.1 1.34-2 3-2s3 .9 3 2z"></path><path d="M15 17.5c0 .53.21 1.04.59 1.42.57.58 1.48 1.08 2.41 1.08s1.84-.5 2.41-1.08c.38-.38.59-.89.59-1.42 0-1.1-1.34-2-3-2s-3 .9-3 2z"></path></svg>
                         </div>
                         <span>Ponto Digital</span>
                     </a>
