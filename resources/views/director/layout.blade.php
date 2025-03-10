@@ -361,42 +361,41 @@
         <aside id="sidebar" class="sidebar w-64 bg-[#00875A] text-white flex flex-col">
             <div class="p-4 border-b border-emerald-700">
                 <div class="flex items-center gap-2">
-                <div class="text-center mb-12">
-                    <div class="inline-flex items-center gap-3 mb-4">
-                        <div class="bg-emerald-600 p-3 rounded-xl">
-                            <div class="recognition-box w-12 h-12 relative">
-                                <!-- Combined Graduate and Face Icon -->
-                                <svg viewBox="0 0 24 24" class="w-full h-full text-white">
-                                    <!-- Graduation Cap -->
-                                    <path d="M12 4l9 5-9 5-9-5 9-5z" fill="currentColor"/>
-                                    <!-- Face -->
-                                    <circle cx="12" cy="14" r="4" fill="currentColor" class="pulse-effect"/>
-                                    <!-- Eyes -->
-                                    <circle cx="10.5" cy="13" r="0.5" fill="#065f46"/>
-                                    <circle cx="13.5" cy="13" r="0.5" fill="#065f46"/>
-                                    <!-- Smile -->
-                                    <path d="M10.5 15a1.5 1.5 0 0 0 3 0" stroke="#065f46" fill="none" stroke-width="0.5"/>
-                                    <!-- Tassel -->
-                                    <path d="M12 9v2" stroke="currentColor" stroke-width="0.5"/>
-                                </svg>
-                                
-                                <!-- Scanner Lines -->
-                                <div class="scanner-line"></div>
-                                <div class="scanner-line scanner-line-reverse"></div>
-                                
-                                <!-- Corner Markers -->
-                                <div class="corner corner-tl"></div>
-                                <div class="corner corner-tr"></div>
-                                <div class="corner corner-bl"></div>
-                                <div class="corner corner-br"></div>
+                    <div class="text-center mb-12">
+                        <div class="inline-flex items-center gap-3 mb-4">
+                            <div class="bg-emerald-600 p-3 rounded-xl">
+                                <div class="recognition-box w-12 h-12 relative">
+                                    <!-- Combined Graduate and Face Icon -->
+                                    <svg viewBox="0 0 24 24" class="w-full h-full text-white">
+                                        <!-- Graduation Cap -->
+                                        <path d="M12 4l9 5-9 5-9-5 9-5z" fill="currentColor"/>
+                                        <!-- Face -->
+                                        <circle cx="12" cy="14" r="4" fill="currentColor" class="pulse-effect"/>
+                                        <!-- Eyes -->
+                                        <circle cx="10.5" cy="13" r="0.5" fill="#065f46"/>
+                                        <circle cx="13.5" cy="13" r="0.5" fill="#065f46"/>
+                                        <!-- Smile -->
+                                        <path d="M10.5 15a1.5 1.5 0 0 0 3 0" stroke="#065f46" fill="none" stroke-width="0.5"/>
+                                        <!-- Tassel -->
+                                        <path d="M12 9v2" stroke="currentColor" stroke-width="0.5"/>
+                                    </svg>
+                                    
+                                    <!-- Scanner Lines -->
+                                    <div class="scanner-line"></div>
+                                    <div class="scanner-line scanner-line-reverse"></div>
+                                    
+                                    <!-- Corner Markers -->
+                                    <div class="corner corner-tl"></div>
+                                    <div class="corner corner-tr"></div>
+                                    <div class="corner corner-bl"></div>
+                                    <div class="corner corner-br"></div>
+                                </div>
+                            </div>
+                            <div class="text-left">
+                                <h1 class="text-xl font-bold">PACSAFE</h1>
+                                <p class="text-xs text-emerald-100">Sistema de reconhecimento oficial acadêmico</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-                    
-                    <div>
-                        <h1 class="text-xl font-bold">PACSAFE</h1>
-                        <p class="text-xs text-emerald-100">Sistema de reconhecimento oficial acadêmico</p>
                     </div>
                 </div>
             </div>
