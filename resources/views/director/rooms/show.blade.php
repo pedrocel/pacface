@@ -124,7 +124,7 @@
                 @php
                     // Pega o usuário associado ao personId, já que foi agrupado
                     $user = $userFrequencies->first()->user;
-                @endphp
+                @endphpx
 
                 <div class="attendance-card bg-white rounded-xl shadow-sm p-6 cursor-pointer" >
                     <div class="flex justify-between items-start mb-4">
@@ -150,10 +150,17 @@
                     </div>
                     <div class="text-sm mt-3 flex justify-between items-center">
                         <p><strong>{{ count($userFrequencies) }} Registro(s)</strong></p>
-                        <p><a href="{{ route('director.room.frequency.detail', [$user->id, $room->id ]) }}"
-                            class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all">
-                                <span>Ver Detalhes</span>
-                            </a> </p>
+                        <p>
+                            @if ($user && $room) <!-- Verifica se ambos os valores existem -->
+                                <a href="{{ route('director.room.frequency.detail', [$user->id, $room->id ]) }}"
+                                class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all">
+                                    <span>Ver Detalhes</span>
+                                </a>
+                            @else
+                                <span>Detalhes não disponíveis</span>
+                            @endif
+                        </p>
+
                     </div>
 
                 </div>
