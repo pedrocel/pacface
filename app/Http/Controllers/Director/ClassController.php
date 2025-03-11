@@ -111,8 +111,6 @@ class ClassController extends Controller
         $rooms = RoomModel::where('organization_id', $org->organization_id)->get();
         $classes = ClassModel::where('organization_id', $org->organization_id)->get();
 
-        dd($students);
-    
         return view('director.classes.show', compact('class', 'classes', 'students', 'teachers', 'aulas', 'disciplines', 'rooms'));
     }
     
