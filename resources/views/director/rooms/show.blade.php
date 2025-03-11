@@ -111,7 +111,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Última Atualização</p>
-                        <h3 class="text-sm font-bold">{{ $lastFrequencie ? \Carbon\Carbon::parse($lastFrequencie->date)->format('d/m/Y H:i') : "Sem registros"}}</h3>
+                        <h3 class="text-sm font-bold">{{ $lastFrequencie ? \Carbon\Carbon::parse($lastFrequencie[0]->date)->format('d/m/Y H:i') : "Sem registros"}}</h3>
                     </div>
                 </div>
             </div>
