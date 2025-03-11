@@ -493,7 +493,7 @@
                 <button onclick="openModal('settingsModal')" class="w-full bg-emerald-700 hover:bg-emerald-600 rounded-lg p-3 transition-all hover:shadow-lg">
                     <div class="flex items-center gap-3">
                         <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                            <img src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}" alt="{{ $user->name }}"
                                  alt="Profile" 
                                  class="w-10 h-10 rounded-full border-2 border-emerald-400">
                             <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-400 rounded-full border-2 border-emerald-700"></div>
@@ -538,7 +538,7 @@
                     <div class="relative">
                         <div class="profile-upload" onclick="openCamera()">
                             <img id="profileImage" 
-                                 src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                                 src="https://ui-avatars.com/api/?name={{ urlencode($user->name) }}" alt="{{ $user->name }}"
                                  alt="Profile" 
                                  class="w-24 h-24 rounded-full border-4 border-emerald-400 cursor-pointer">
                         </div>
@@ -546,7 +546,7 @@
                     <div>
                         
                         <h3 class="text-xl font-semibold">{{ $user->name }}</h3>
-                        <p class="text-gray-600">{{ $user->profissao ?? 'Profissão não informada' }}</p>
+                        <p class="text-gray-600">{{ $user->perfis[0]->name }}</p>
                         <p class="text-sm text-emerald-600">Online há 2 horas</p>
                     </div>
                 </div>
@@ -573,19 +573,19 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                         <div>
                             <p class="text-gray-600">Escola</p>
-                            <p class="font-medium">Escola Municipal São José</p>
+                            <p class="font-medium">{{$org->organization->name}}</p>
                         </div>
                         <div>
                             <p class="text-gray-600">Departamento</p>
-                            <p class="font-medium">Ensino Fundamental II</p>
+                            <p class="font-medium">Gestão</p>
                         </div>
                         <div>
                             <p class="text-gray-600">Matrícula</p>
-                            <p class="font-medium">2024001</p>
+                            <p class="font-medium">2025000001</p>
                         </div>
                         <div>
                             <p class="text-gray-600">Cargo</p>
-                            <p class="font-medium">Professor Efetivo</p>
+                            <p class="font-medium">Diretor Escolar</p>
                         </div>
                     </div>
                 </div>

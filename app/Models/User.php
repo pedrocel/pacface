@@ -58,7 +58,7 @@ class User extends Authenticatable
      */
     public function perfilAtual()
     {
-        return $this->userPerfis()->where('is_atual', true)->with('perfil')->first()?->perfil;
+        return $this->userPerfis()->where('is_atual', 1)->with('perfil')->first()?->perfil;
     }
 
     public function adm()
