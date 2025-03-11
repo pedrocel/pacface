@@ -124,7 +124,8 @@
                 @php
                     // Pega o usuário associado ao personId, já que foi agrupado
                     $user = $userFrequencies->first()->user;
-                @endphpx
+                @endphp
+                @if($user)
 
                 <div class="attendance-card bg-white rounded-xl shadow-sm p-6 cursor-pointer" >
                     <div class="flex justify-between items-start mb-4">
@@ -164,6 +165,7 @@
                     </div>
 
                 </div>
+                @endif
             @endforeach
         </div>
     </div>
