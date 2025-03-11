@@ -63,6 +63,8 @@ class RoomController extends Controller
         // Agrupar as frequências pelo personId e pegar apenas o último registro de cada um
         $lastFrequencies = $frequencies->last();
 
+        dd($lastFrequencies);
+
         // Passar as frequências agrupadas para a view
         return view('director.rooms.show', [
             'room' => $room,
