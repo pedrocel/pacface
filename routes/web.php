@@ -161,6 +161,7 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::get('/turma/criar', [ClassController::class, 'create'])->name('director.class.create');
     Route::post('/turma/criar', [ClassController::class, 'store'])->name('director.class.store');
     Route::post('/aula/criar/{id_class}', [ClassController::class, 'storeClassRoom'])->name('director.class-room.store');
+    Route::post('/turma/vincular/aluno', [ClassController::class, 'linkStudent'])->name('director.class.linkStudent');
 
     Route::get('/disciplinas', [DisciplineController::class, 'index'])->name('director.discipline.index');
     Route::get('/disciplina/criar', [DisciplineController::class, 'create'])->name('director.discipline.create');

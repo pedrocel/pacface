@@ -28,7 +28,7 @@
         <div class="flex justify-between items-center mb-8">
             <div>
                 <h1 class="text-2xl font-bold text-gray-900">Histórico de Frequência</h1>
-                <p class="text-gray-600 mt-1">Sala de aula 02</p>
+                <p class="text-gray-600 mt-1">{{$room->name}}</p>
             </div>
             <div class="flex items-center gap-4">
                 <div class="relative">
@@ -65,7 +65,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Total de Registros</p>
-                        <h3 class="text-2xl font-bold">156</h3>
+                        <h3 class="text-2xl font-bold">{{count($frequencies)}}</h3>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Alunos Ativos</p>
-                        <h3 class="text-2xl font-bold">9</h3>
+                        <h3 class="text-2xl font-bold">{{ count($uniqueFrequencies)}}</h3>
                     </div>
                 </div>
             </div>
@@ -94,7 +94,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Média de Atenção</p>
-                        <h3 class="text-2xl font-bold">85%</h3>
+                        <h3 class="text-2xl font-bold">aguardando dados</h3>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                     </div>
                     <div>
                         <p class="text-sm text-gray-600">Última Atualização</p>
-                        <h3 class="text-sm font-bold">09/03/2025 12:04</h3>
+                        <h3 class="text-sm font-bold">{{ $lastFrequencie ? \Carbon\Carbon::parse($lastFrequencie->date)->format('d/m/Y H:i') : "Sem registros"}}</h3>
                     </div>
                 </div>
             </div>

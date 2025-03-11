@@ -194,7 +194,7 @@
                 <div class="modal-header">
                 <button onclick="openModal('newClassRoom')" class="bg-[#00875A] hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all hover:shadow-lg">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
-                        <span class="hidden sm:inline">+ Adicionar Aula</span>
+                        <span class="hidden sm:inline"> Adicionar Aula</span>
                     </button>
                 </div>
             </div>
@@ -290,13 +290,19 @@
             </div>
 
             <div class="p-6">
-            <form  class="space-y-6">
-            @csrf
+            <form  action="{{ route('director.class.linkStudent') }}" method="POST" class="space-y-6">
+                @csrf
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Vincular aluno a turma</label>
-                            <input name="name" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
-                                   placeholder="Ex: Primeiro Ano A">
+                    <input type="hidden" name="id_class" value="{{ $class->id }}">
+
+                        <div class="mb-3">
+                            <label for="student_id" class="form-label">Selecionar Aluno</label>
+                            <select id="student_id" name="id_user" class="form-control select2" required>
+                                <option value="">Selecione um aluno...</option>
+                                @foreach ($studentsAvailables as $id => $name)
+                                    <option value="{{ $id }}">{{ $name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         
                         <div>
@@ -336,6 +342,83 @@
         </div>
     </div>
        
+    <div id="newClassRoom" class="fixed inset-0 bg-black bg-opacity-30 modal-backdrop hidden z-50 flex items-center justify-center">
+        <div class="modal-content bg-white rounded-2xl shadow-xl w-full max-w-2xl mx-4">
+            <div class="flex items-center justify-between p-6 border-b">
+                <h2 class="text-2xl font-semibold text-gray-800">Adicionar aula</h2>
+                <button onclick="closeModal('newClassRoom')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x 2="18" y1="6" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="p-6">
+                <form id="classRoomForm" action="{{ route('director.class-room.store', $class->id) }}" method="POST">
+                    @csrf
+
+                    <div class="mb-4">
+                        <label for="id_room" class="block text-sm font-medium text-gray-700">Sala</label>
+                        <select id="id_room" name="id_room" class="form-control mt-1 p-2 border rounded-lg w-full" required>
+                            <option value="">Selecione a sala</option>
+                            @foreach ($rooms as $room)
+                                <option value="{{ $room->id }}">{{ $room->name }} {{ $room->ip_device }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Professor -->
+                    <div class="mb-4">
+                        <label for="id_teacher" class="block text-sm font-medium text-gray-700">Professor</label>
+                        <select id="id_teacher" name="id_teacher" class="form-control mt-1 p-2 border rounded-lg w-full" required>
+                            <option value="">Selecione o professor</option>
+                            @foreach ($teachers as $teacher)
+                                <option value="{{ $teacher->id }}">{{ $teacher->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <!-- Disciplina -->
+                    <div class="mb-4">
+                        <label for="id_discipline" class="block text-sm font-medium text-gray-700">Disciplina</label>
+                        <select id="id_discipline" name="id_discipline" class="form-control mt-1 p-2 border rounded-lg w-full" required>
+                            <option value="">Selecione a disciplina</option>
+                            @foreach ($disciplines as $discipline)
+                                <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="mb-4">
+                        <label for="date" class="block text-sm font-medium text-gray-700">Data</label>
+                        <input type="date" class="form-control mt-1 p-2 border rounded-lg w-full" id="date" name="date" required>
+                    </div>
+
+                    <!-- Número da Aula -->
+                    <div class="mb-4">
+                        <label for="aula_number" class="block text-sm font-medium text-gray-700">Número da Aula</label>
+                        <select id="aula_number" name="aula_number" class="form-control mt-1 p-2 border rounded-lg w-full" required>
+                            <option value="">Selecione o número da aula</option>
+                            <option value="1">Aula 01: 07:00 às 07:50</option>
+                            <option value="2">Aula 02: 07:50 às 08:40</option>
+                            <option value="3">Aula 03: 08:40 às 09:30</option>
+                            <option value="4">Aula 04: 09:50 às 10:40</option>
+                            <option value="5">Aula 05: 10:40 às 11:30</option>
+                            <option value="6">Aula 06: 11:30 às 12:20</option>
+                        </select>
+                    </div>
+
+                    <!-- Botões -->
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" onclick="closeModal('newClassRoom')" 
+                                class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                            Cancelar
+                        </button>
+                        <button type="submit" 
+                                class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+                            Adicionar Aula
+                        </button>
+                    </div>
+                </form>
+            </div>
+    </div>
 
     <script>
         function switchTab(tabId) {
@@ -362,70 +445,7 @@
             &times;
         </button>
 
-        <h2 class="text-xl font-semibold mb-4">Cadastrar Aula</h2>
-
-        <!-- Formulário de Cadastro -->
-        <form id="classRoomForm" action="{{ route('director.class-room.store', $class->id) }}" method="POST">
-            @csrf
-
-            <!-- Sala -->
-            <div class="mb-4">
-                <label for="id_room" class="block text-sm font-medium text-gray-700">Sala</label>
-                <select id="id_room" name="id_room" class="form-control mt-1 p-2 border rounded-lg w-full" required>
-                    <option value="">Selecione a sala</option>
-                    @foreach ($rooms as $room)
-                        <option value="{{ $room->id }}">{{ $room->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Professor -->
-            <div class="mb-4">
-                <label for="id_teacher" class="block text-sm font-medium text-gray-700">Professor</label>
-                <select id="id_teacher" name="id_teacher" class="form-control mt-1 p-2 border rounded-lg w-full" required>
-                    <option value="">Selecione o professor</option>
-                    @foreach ($teachers as $teacher)
-                        <option value="{{ $teacher->user->id }}">{{ $teacher->user->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <!-- Disciplina -->
-            <div class="mb-4">
-                <label for="id_discipline" class="block text-sm font-medium text-gray-700">Disciplina</label>
-                <select id="id_discipline" name="id_discipline" class="form-control mt-1 p-2 border rounded-lg w-full" required>
-                    <option value="">Selecione a disciplina</option>
-                    @foreach ($disciplines as $discipline)
-                        <option value="{{ $discipline->id }}">{{ $discipline->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-
-            <div class="mb-4">
-                <label for="date" class="block text-sm font-medium text-gray-700">Data</label>
-                <input type="date" class="form-control mt-1 p-2 border rounded-lg w-full" id="date" name="date" required>
-            </div>
-
-            <!-- Número da Aula -->
-            <div class="mb-4">
-                <label for="aula_number" class="block text-sm font-medium text-gray-700">Número da Aula</label>
-                <select id="aula_number" name="aula_number" class="form-control mt-1 p-2 border rounded-lg w-full" required>
-                    <option value="">Selecione o número da aula</option>
-                    <option value="1">Aula 01: 07:00 às 07:50</option>
-                    <option value="2">Aula 02: 07:50 às 08:40</option>
-                    <option value="3">Aula 03: 08:40 às 09:30</option>
-                    <option value="4">Aula 04: 09:50 às 10:40</option>
-                    <option value="5">Aula 05: 10:40 às 11:30</option>
-                    <option value="6">Aula 06: 11:30 às 12:20</option>
-                </select>
-            </div>
-
-            <!-- Botões -->
-            <div class="flex justify-between">
-                <button type="button" onclick="closeModal()" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-lg">Cancelar</button>
-                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">Salvar Aula</button>
-            </div>
-        </form>
+        
     </div>
 </div>
 

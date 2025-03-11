@@ -94,6 +94,11 @@ class User extends Authenticatable
                     ->withPivot('status');
     }
 
+    public function studentClasses()
+    {
+        return $this->hasMany(StudentClassModel::class, 'user_id', 'id');
+    }
+
     /**
      * Relacionamento com a tabela intermediária user_organizations
      */

@@ -18,7 +18,7 @@ class RoomController extends Controller
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
-        $rooms = RoomModel::where('organization_id', $org->organization_id)->get();perPage: 
+        $rooms = RoomModel::where('organization_id', $org->organization_id)->get();
 
         return view('director.rooms.index', data: compact('rooms', 'org'));
     }
@@ -58,14 +58,21 @@ class RoomController extends Controller
             ->get()
             ->groupBy('personId');  // Agrupa por personId (ou qualquer campo único para identificar o usuário)
 
+        $uniqueFrequencies = $frequencies->unique('personId');
+
+        // Agrupar as frequências pelo personId e pegar apenas o último registro de cada um
+        $lastFrequencies = $frequencies->last();
+
         // Passar as frequências agrupadas para a view
         return view('director.rooms.show', [
             'room' => $room,
             'org' => $org,
             'frequencies' => $frequencies,
+            'uniqueFrequencies' => $uniqueFrequencies,
+            'lastFrequencie' => $lastFrequencies
         ]);
     }
-
+ 
 
 public function detail($studentId, $roomIp)
 {

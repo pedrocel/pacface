@@ -83,6 +83,8 @@ class ClassController extends Controller
         
         // Buscar a organização do usuário logado
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+        $idOrg = $org->organization_id;
     
         if (!$org) {
             return redirect()->back()->with('error', 'Organização não encontrada!');
@@ -99,19 +101,29 @@ class ClassController extends Controller
     
         // Listar todos os professores da mesma organização
         $teachers = User::whereHas('userPerfis', function ($query) {
-                $query->where('perfil_id', 6)->where('status', 1)->where('is_atual', 1);
-            })
-            ->whereHas('organizations', function ($query) use ($org) {
-                $query->where('organization_id', $org->organization_id);
+                $query->where('perfil_id', 5);
             })
             ->get();
-    
+
         $aulas = ClassRoomModel::where('id_class', $id_class)->get();
         $disciplines = DisciplineModel::where('organization_id', $org->organization_id)->get();
         $rooms = RoomModel::where('organization_id', $org->organization_id)->get();
         $classes = ClassModel::where('organization_id', $org->organization_id)->get();
 
-        return view('director.classes.show', compact('class', 'classes', 'students', 'teachers', 'aulas', 'disciplines', 'rooms'));
+
+
+        $studentsAvailables = User::whereHas('userPerfis', function ($query) {
+            $query->where('perfil_id', 7) // ID do perfil de aluno
+                ->where('status', 1)
+                ->where('is_atual', 1);
+        })
+        ->whereHas('organizations', function ($query) use ($idOrg) {
+            $query->where('organization_id', $idOrg);
+        })
+        ->whereDoesntHave('studentClasses') // Filtra apenas quem não tem vínculo com turmas
+        ->pluck('name', 'id');
+
+        return view('director.classes.show', compact('studentsAvailables', 'class', 'classes', 'students', 'teachers', 'aulas', 'disciplines', 'rooms'));
     }
     
 
@@ -147,14 +159,16 @@ class ClassController extends Controller
         return redirect()->route('director.class.show', $id_class)->with('success', 'Aula criada com sucesso!');
     }
 
-    public function vinculeStudent($user_id, $class_id){
+    public function linkStudent(Request $request){
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
 
         StudentClassModel::create([
-            'user_id' => $user_id,
-            'class_id' => $class_id,
+            'user_id' => $request->student_id,
+            'class_id' => $request->id_class,
             'organization_id' => $org->organization_id
         ]);
+
+        return redirect()->back()->with('success', 'Aluno vinculado à turma com sucesso!');
     }
 } 
