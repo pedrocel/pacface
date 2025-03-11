@@ -69,23 +69,23 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @foreach ($students as $student)
                         <tr>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $student->user->id }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->user->name }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->user->email }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $student->id }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->name }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $student->email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">
-                            @if ($student->user->status == 1)
+                            @if ($student->status == 1)
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
                                         Pendente de Envio
                                     </span>
-                                @elseif ($student->user->status == 2)
+                                @elseif ($student->status == 4)
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">
                                         Enviado para Análise
                                     </span>
-                                @elseif ($student->user->status == 3)
+                                @elseif ($student->status == 3)
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
                                         Biometria Facial Recusada
                                     </span>
-                                @elseif ($student->user->status == 4)
+                                @elseif ($student->status == 2)
                                     <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
                                         Biometria Facial Verificada
                                     </span>
