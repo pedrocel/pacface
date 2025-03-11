@@ -130,7 +130,7 @@
                 <div class="attendance-card bg-white rounded-xl shadow-sm p-6 cursor-pointer" >
                     <div class="flex justify-between items-start mb-4">
                         <div class="flex items-center gap-3">
-                            <img src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" 
+                            <img src="data:image/png;base64,{{ $user->facial_image_base64 }}"
                                 alt="Student" 
                                 class="w-12 h-12 rounded-full">
                             <div>
