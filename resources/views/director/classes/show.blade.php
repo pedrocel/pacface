@@ -47,13 +47,10 @@
                     <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"> {{ count($students) }}</span>
                 </div>
                 <div class="flex space-x-3">
-                    <a href="{{ route('director.students.index') }}" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="12" y1="5" x2="12" y2="19"/>
-                            <line x1="5" y1="12" x2="19" y2="12"/>
-                        </svg>
-                        Adicionar Aluno
-                    </a>
+                    <button onclick="openModal('vinculeStudent')" class="bg-[#00875A] hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all hover:shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+                        <span class="hidden sm:inline">Vincular alunos</span>
+                    </button>
                 </div>
             </div>
 
@@ -195,9 +192,10 @@
             <div class="flex justify-between items-center mb-6">
                 <h2 class="text-xl font-semibold">Horários das Aulas</h2>
                 <div class="modal-header">
-                <button onclick="openModalAula()" class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2">
-                + Cadastrar  aula
-                </button>
+                <button onclick="openModal('newClassRoom')" class="bg-[#00875A] hover:bg-emerald-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all hover:shadow-lg">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><line x1="12" x2="12" y1="5" y2="19"></line><line x1="5" x2="19" y1="12" y2="12"></line></svg>
+                        <span class="hidden sm:inline">+ Adicionar Aula</span>
+                    </button>
                 </div>
             </div>
 
@@ -282,7 +280,63 @@
 
 
 
+    <div id="vinculeStudent" class="fixed inset-0 bg-black bg-opacity-30 modal-backdrop hidden z-50 flex items-center justify-center">
+        <div class="modal-content bg-white rounded-2xl shadow-xl w-full max-w-2xl mx-4">
+            <div class="flex items-center justify-between p-6 border-b">
+                <h2 class="text-2xl font-semibold text-gray-800">Criar Nova Turma</h2>
+                <button onclick="closeModal('vinculeStudent')" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><line x1="18" x2="6" y1="6" y2="18"></line><line x1="6" x 2="18" y1="6" y2="18"></line></svg>
+                </button>
+            </div>
+
+            <div class="p-6">
+            <form  class="space-y-6">
+            @csrf
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Vincular aluno a turma</label>
+                            <input name="name" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500" 
+                                   placeholder="Ex: Primeiro Ano A">
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                            <div class="grid grid-cols-2 gap-4">
+                                <label class="status-radio active">
+                                    <input type="radio" name="status" value="1" class="peer" checked onchange="updateStatusStyle(this)">
+                                    <div class="radio-content flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-emerald-600"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                                        <span class="font-medium">Ativo</span>
+                                    </div>
+                                </label>
+                                <label class="status-radio inactive">
+                                    <input type="radio" name="status" value="0" class="peer" onchange="updateStatusStyle(this)">
+                                    <div class="radio-content flex items-center gap-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-red-600"><circle cx="12" cy="12" r="10"></circle><line x1="15" x2="9" y1="9" y2="15"></line><line x1="9" x2="15" y1="9" y2="15"></line></svg>
+                                        <span class="font-medium">Inativo</span>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="flex justify-end gap-3 mt-6">
+                        <button type="button" onclick="closeModal('vinculeStudent')" 
+                                class="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                            Cancelar
+                        </button>
+                        <button type="submit" 
+                                class="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors">
+                            Criar Turma
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
        
+
     <script>
         function switchTab(tabId) {
             // Hide all tabs
@@ -301,27 +355,10 @@
         }
     </script>
 
-<script>
-    function openModalAula() {
-        document.getElementById('modalAula').classList.remove('hidden');
-        document.getElementById('modalAula').classList.add('flex');
-    }
 
-    function closeModal() {
-        document.getElementById('modalAula').classList.add('hidden');
-        document.getElementById('modalAula').classList.remove('flex');
-    }
-
-    document.addEventListener('click', function(event) {
-        const modal = document.getElementById('modalAula');
-        if (event.target === modal) {
-            closeModal();
-        }
-    });
-</script>
-<div id="modalAula" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+<div id="newClassRoom" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-        <button onclick="closeModal()" class="absolute top-2 right-2 text-gray-600 hover:text-red-500">
+        <button onclick="closeModal('newClassRoom')" class="absolute top-2 right-2 text-gray-600 hover:text-red-500">
             &times;
         </button>
 

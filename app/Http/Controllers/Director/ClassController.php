@@ -7,6 +7,8 @@ use App\Models\ClassModel;
 use App\Models\ClassRoomModel;
 use App\Models\DisciplineModel;
 use App\Models\RoomModel;
+use App\Models\StudentClassModel;
+use App\Models\User;
 use App\Models\UserOrganizationModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +29,7 @@ class ClassController extends Controller
     {
         $user = Auth::user();
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
 
         return view('director.classes.create');
     }
@@ -77,18 +80,42 @@ class ClassController extends Controller
     {
         $class = ClassModel::find($id_class);
         $user = Auth::user();
+        
+        // Buscar a organização do usuário logado
         $org = UserOrganizationModel::where('user_id', $user->id)->first();
-
-        $students = UserOrganizationModel::where('organization_id', $org->organization_id)->get();
-        $teachers = UserOrganizationModel::where('organization_id', $org->organization_id)->get();
-
+    
+        if (!$org) {
+            return redirect()->back()->with('error', 'Organização não encontrada!');
+        }
+    
+        // Listar todos os alunos que possuem o perfil 7 e pertencem à mesma organização
+        $students = User::whereHas('userPerfis', function ($query) {
+                $query->where('perfil_id', 7)->where('status', 1)->where('is_atual', 1);
+            })
+            ->whereHas('organizations', function ($query) use ($org) {
+                $query->where('organization_id', $org->organization_id);
+            })
+            ->get();
+    
+        // Listar todos os professores da mesma organização
+        $teachers = User::whereHas('userPerfis', function ($query) {
+                $query->where('perfil_id', 6)->where('status', 1)->where('is_atual', 1);
+            })
+            ->whereHas('organizations', function ($query) use ($org) {
+                $query->where('organization_id', $org->organization_id);
+            })
+            ->get();
+    
         $aulas = ClassRoomModel::where('id_class', $id_class)->get();
         $disciplines = DisciplineModel::where('organization_id', $org->organization_id)->get();
         $rooms = RoomModel::where('organization_id', $org->organization_id)->get();
         $classes = ClassModel::where('organization_id', $org->organization_id)->get();
 
-        return view('director.classes.show', compact('class','classes', 'students', 'teachers', 'aulas', 'disciplines', 'rooms'));  
+        dd($students);
+    
+        return view('director.classes.show', compact('class', 'classes', 'students', 'teachers', 'aulas', 'disciplines', 'rooms'));
     }
+    
 
     public function storeClassRoom(Request $request, $id_class)
     {
@@ -119,6 +146,17 @@ class ClassController extends Controller
             'aula_number' => $request->aula_number,
         ]);
 
-        return redirect()->route('director.class.show')->with('success', 'Aula criada com sucesso!');
+        return redirect()->route('director.class.show', $id_class)->with('success', 'Aula criada com sucesso!');
     }
-}
+
+    public function vinculeStudent($user_id, $class_id){
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+        StudentClassModel::create([
+            'user_id' => $user_id,
+            'class_id' => $class_id,
+            'organization_id' => $org->organization_id
+        ]);
+    }
+} 
