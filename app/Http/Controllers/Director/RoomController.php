@@ -97,4 +97,37 @@ public function detail($studentId, $roomIp)
 }
 
 
+
+    public function edit($id)
+    {
+        
+        $room = RoomModel::findOrFail($id); // Busca a sala ou retorna 404
+        return view('director.rooms.edit', compact('room'));
+    }
+
+    /**
+     * Atualiza os dados da sala no banco de dados.
+     */
+    public function update(Request $request, $id)
+    {
+        $user = Auth::user();
+        $org = UserOrganizationModel::where('user_id', $user->id)->first();
+
+        $room = RoomModel::findOrFail($id);
+
+        // Validação dos dados recebidos
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'ip_device' => 'required|ip', // Valida como IP válido
+            'status' => 'required|boolean',
+        ]);
+
+        // Atualiza os dados da sala
+        $room->update($validated);
+
+        return redirect()->route('director.room.index')->with('success', 'Sala atualizada com sucesso!');
+    }
+
+
+
 }

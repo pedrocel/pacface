@@ -48,6 +48,9 @@
                         <a href="{{ route('director.room.show', $room->id) }}" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 text-center">
                             Ver Detalhes
                         </a>
+                        <a href="{{ route('director.room.edit', $room->id) }}" class="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition duration-200 text-center">
+                            Editar
+                        </a>
                     </div>
                 </div>
             </div>
