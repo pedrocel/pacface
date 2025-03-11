@@ -50,17 +50,6 @@
                     <span class="text-3xl font-bold text-red-600">{{ $absentStudents }}</span>
                 </div>
             </div>
-            <!-- Tipos de Notificação -->
-            <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100">
-                <div class="flex items-center justify-between mb-4">
-                    <h3 class="text-gray-600 text-sm font-medium">Porcengatem Geral</h3>
-                    <span class="bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Tipos</span>
-                </div>
-                <div class="flex items-center">
-                    <span class="text-3xl font-bold text-gray-900">123</span>
-                    <span class="text-yellow-500 text-sm ml-2">Diversos</span>
-                </div>
-            </div>
         </div>
 
         <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-8">
