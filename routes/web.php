@@ -34,6 +34,7 @@ use App\Http\Controllers\Student\CalendarController;
 use App\Http\Controllers\Student\CourseController;
 use App\Http\Controllers\Student\DocumentController as StudentDocumentController;
 use App\Http\Controllers\Student\ProfileController as StudentProfileController;
+use App\Livewire\Director\Students\PreRegister;
 
 Route::get('/', function () {
     return view('landing');
@@ -136,8 +137,8 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
 
     Route::get('/perfil/detalhes', [ResponsibleProfileController::class, 'index'])->name('director.profile.index');
 
-    Route::get('/pre-cadastro', [DirectorStudentsController::class, 'getPreRegister'])->name('director.pre-register.get');
-    Route::post('/pre-cadastro', [DirectorStudentsController::class, 'postPreRegister'])->name('director.pre-register.post');
+    // Route::get('/pre-cadastro', [DirectorStudentsController::class, 'getPreRegister'])->name('director.pre-register.get');
+    // Route::post('/pre-cadastro', [DirectorStudentsController::class, 'postPreRegister'])->name('director.pre-register.post');
     Route::put('/pre-cadastro/excluir/{id}', [DirectorStudentsController::class, 'deletePreRegister'])->name('director.pre-register.delete');
     Route::post('/upload-cpf', [DirectorStudentsController::class, 'uploadCpf'])->name('upload.cpf');
 
@@ -182,6 +183,8 @@ Route::middleware(['auth', RedirectByProfile::class])->prefix('diretor')->group(
     Route::post('/aluno/criar', [DirectorStudentsController::class, 'store'])->name('director.students.store');
     Route::put('/aluno/{id}', [DirectorStudentsController::class, 'update'])->name('director.students.update');
 
+
+    Route::get('/pre-register', PreRegister::class)->name('director.pre-register.get');
     
 });
 
